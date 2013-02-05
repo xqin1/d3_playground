@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<head>
+		<meta charset="utf-8">
+		<style type="text/css">
+		.g-graphic {
+			margin:10px;
+		}
+		.g-graphic svg {
+			overflow: hidden;
+		}
+
+		.state {
+			stroke: #fff;
+			fill:none;
+			stroke-width: 1px;
+			stroke-linejoin: round;
+		}
+
+		.g-mississippi-state.state {
+			stroke-width: 1px;
+			stroke:#bbb;
+		}
+
+		.g-county {
+			fill:#ddd;
+		}
+
+		.g-no-trace-county {
+			display:none;
+		}
+
+		.circle {
+			fill:#aa0011;
+			fill-opacity: 0.4;
+			stroke:#fff;
+			stroke-width:0.5px;
+		}
+		.label {
+			font-size: 10px;
+			fill:#444;
+			font-family: arial,sans;
+			text-transform: uppercase;
+			text-anchor: middle;
+		}
+
+		.g-legend {
+			font-family: Arial;
+			font-size: 10px;
+		}
+
+		/*bottom part*/
+		.g-anno-cont {
+			border-bottom: 1px solid #CCC;
+			margin: 10px 0;
+			padding: 10px 0;
+		}
+
+		.g-annotations {
+			margin:10px 125px;
+			width:700px;
+		}
+
+		.g-anno-map {
+			width: 300px;
+			float: left;
+			display: inline;
+			margin-right: 30px;
+		}
+
+		.g-annotations {
+			margin:10px 125px;
+			width:700px;
+		}
+
+		.g-anno-map {
+			width: 300px;
+			float: left;
+			display: inline;
+			margin-right: 30px;
+		}
+
+		.g-annotation {
+			font-size: 14px;
+			line-height: 1.4em;
+			width: 352px;
+			float: left;
+			display: inline;
+		}
+
+		.g-annotation strong {
+
+			font-size: 15px;	display:block;
+			font-family:arial;
+			margin-bottom: 6px;
+		}
+
+		.land-boundary {
+			fill:#efefef;
+		}
+
+		/*sad clearfix*/
+
+		.g-clearfix:before,
+		.g-clearfix:after {
+			content: '\0020';
+			display: block;
+			overflow: hidden;
+			visibility: hidden;
+			width: 0;
+			height: 0;
+		}
+
+		.g-clearfix:after {
+			clear: both;
+		}
+
+		.land-boundary2 {
+			stroke-width:1px;
+			fill:none;
+			stroke:#ccc;
+		}
+		.g-trace-county {
+			fill:#aa0011;
+		}
+
+		.storyHeader h1 {
+			margin-top:20px !important;
+			text-align:center !important;
+			font-size:26px !important;
+		}
+
+		.storySummary {
+			text-align:center !important;
+		}
+
+		.g-table {
+			float: left;
+		}
+
+		.g-table  table {
+			font-family:arial,sans;
+			font-size:11px;
+			border-collapse:collapse;
+		}
+
+
+		.g-td {
+			padding:1px 0;
+			border-bottom:1px solid #ccc;
+		}
+
+		.g-state-td {
+
+			width: 100px;
+			text-align: left;
+			padding-left: 3px;
+		}
+
+		.g-guns-td {
+
+		width:80px;
+		text-align:right;
+		padding-right:3px;
+		}
+
+		.g-table th {
+			text-transform:uppercase;
+			font-size:10px;
+			font-weight:normal;
+		}
+
+		.g-table-annotation {
+			float: right;
+			width: 100px;
+			font-weight: bold;
+			font-family: arial;
+			margin-right: 59px;
+		}
+
+		.g-regional-map svg, .g-mississippi-map svg {
+			border:1px solid #ccc;
+		}
+		</style>
+		<!--[if lte IE 8]>
+		  <img src="img/chicago_gun_fallback.png" alt="chart" class="nytg-fallback">
+		<![endif]-->
+		<!--[if gt IE 8]><!-->
+</head>
+<body>
+		<div class="g-graphic">
+		<div class="g-map"></div>
+		<div class="g-annotations g-clearfix">
+		<div class="g-anno-cont g-clearfix">
+		<div class="g-anno-map g-regional-map"> </div>
+		<p class="g-annotation"><strong>Close to Home</strong> Chicago is seen as having some of the most restrictive gun ordinances in the country. Gun shops are banned, and no civilian gun ranges exist. There is a ban on both assault weapons and high-capacity magazines. But more than 15,000 of the guns traced by the police came from just outside the city limits in Cook County and in neighboring towns that permit gun stores.</p>
+		<p class="g-table-annotation">States with the most guns<br>recovered in Chicago </p>
+		<div class="g-table">
+		<table>
+		</table>
+		</div>
+		</div>
+		<div class="g-anno-cont g-clearfix">
+		<div class="g-anno-map g-coverage-map"> </div>
+		<p class="g-annotation"><strong>Guns Came from Every State</strong> The Chicago police traced the origin for more than half of the guns seized since 2001. The guns whose origins were identified came from all 50 states and from more than 60 percent of the nation&rsquo;s counties. Seven guns were traced back to Puerto Rico (5) and Guam (2).</p>
+		</div>
+		<div class="g-anno-cont g-clearfix">
+		<div class="g-anno-map g-mississippi-map"> </div>
+		<p class="g-annotation"><strong>Close Ties to Mississippi</strong>More than 4,000 guns were traced to Mississippi, especially in the rural, western part of the state, more than any outside state other than Indiana. During the migration of families from the South in the 1940s and 1970s, Chicago was a top destination, according to James N. Gregory, a history professor at the University of Washington. In 1970 <a href="http://faculty.washington.edu/gregoryj/2nd%20great%20migration_James%20Gregory.pdf">there were more people from Mississippi</a> living in Illinois than in all other Southern states. Family ties may help explain why many guns bought in Mississippi ended up in Chicago. </p>
+		</div>
+		</div>
+		</div>
+		<script src="http://graphics8.nytimes.com/newsgraphics/2013/01/26/chicago-guns-map/b3d41fc896ad9a786c8a37b11a3caf561477db79/package.js"></script>
+		<script type="text/javascript">
+
+		var w = 970, h = 630;
+
+		var vis = d3.select(".g-map").append("svg")
+			.attr("width",w)
+			.attr("height",h);
+
+		var regionalMap = d3.select(".g-mississippi-map").append("svg")
+			.attr("width",300)
+			.attr("height",300);
+
+		var chiMap = d3.select(".g-regional-map").append("svg")
+			.attr("width",300)
+			.attr("height",400);
+
+		var coverageMap = d3.select(".g-coverage-map").append("svg")
+			.attr("width",300)
+			.attr("height",200)
+
+		var radius = d3.scale.sqrt()
+			.domain([0,5000])
+			.range([0,50])
+
+		var format = d3.format(",")
+
+		var projection = nytAlbersUsa().translate([465, 330]).scale(1300);
+		var path = d3.geo.path().projection(projection);
+
+		var projection2 = nytAlbersUsa().translate([150, 90]).scale(400);
+		var path2 = d3.geo.path().projection(projection2);
+
+		var regionalProjection = nytAlbersUsa().translate([-130, -160]).scale(2900);
+		var regionalpath = d3.geo.path().projection(regionalProjection);
+
+		var chiAreaProjection = nytAlbersUsa().translate([-200, 350]).scale(2900);
+		var chiAreaPath = d3.geo.path().projection(chiAreaProjection);
+
+		// Legend
+		var gunTraceLegend = vis.append("g")
+			.attr("transform", "translate(790,138)")
+			.attr("class", "g-legend");
+
+		gunTraceLegend.append("text")
+			.attr("x", -radius(5000) - 15)
+			.attr("y", -70)
+			.style("font-size", "12px")
+			.style("text-anchor", "end")
+			.style("font-weight", "bold")
+			.text("Successful gun traces, 2001-2012");
+
+		var gunTraceKey = gunTraceLegend.selectAll(".g-key")
+			.data([5000, 1000, 100])
+			.enter().append("g")
+			.attr("class", "g-key");
+
+		gunTraceKey.append("circle")
+			.attr("cy", function(d) { return - radius(d); })
+			.attr("r", radius)
+			.style("fill", "none")
+			.style("stroke", "#666")
+			.style("stroke-dasharray", "2,2")
+
+		gunTraceKey.append("line")
+			.attr("x1", function(d) { return - radius(d)})
+			.attr("y1", function(d) { return - radius(d)})
+			.attr("x2", function(d) { return - radius(5000) - 10})
+			.attr("y2", function(d) { return - radius(d)})
+			.style("stroke", "#ccc")
+			.style("stroke-width", 0.5)
+
+		gunTraceKey.append("text")
+			.attr("x", - radius(5000) - 15)
+			.attr("y", function(d) { return - radius(d) + 5; })
+			.attr("dy", "-.2em")
+			.style("text-anchor", "end")
+			.text(format);
+
+		// Load the data files
+		queue()
+			.defer(d3.json,"data/us-counties-1000px.json")
+			.defer(d3.csv,"data//guns-history3.csv")
+			.defer(d3.json,"data/us-state-labels.json")
+			.await(ready);
+
+		function ready(error, topology, guns,label) {
+
+			guns.forEach(function(d) { d.count3 = parseInt(d.count3); })
+			guns.sort(function(a,b) { return b.count3 - a.count3;})
+
+			var d1 = d3.nest()
+				.key(function(d) {return d.STATE;})
+				.rollup(function(statey) {
+					return {
+						"length": statey.length,
+						"total_guns": d3.sum(statey,function(d) { return d.count3; })
+					}
+				})
+				.sortKeys(d3.ascending)
+				.entries(guns);
+
+			// Creates a dictionary for the results data
+			var resultsById = {};
+			guns.forEach(function(d) {  resultsById[d.FIPS] = +d.count3; });
+
+			// Caching some geo calculations
+			var filteredCounties = topojson.object(topology, topology.objects.counties)
+				.geometries
+				.filter(function(d) {
+					return resultsById[d.id] > 0;
+				})
+				.sort(function(a,b) { return resultsById[b.id] - resultsById[a.id]; });
+
+			var statesMesh = topojson.mesh(topology, topology.objects.states, function(a, b) { return a !== b; })
+			var land = topojson.object(topology, topology.objects.land);
+
+			vis.append("path")
+				.datum(land)
+				.attr("d", path)
+				.attr("class", "land-boundary");
+
+			vis.append("path").datum({type: "GeometryCollection", geometries: filteredCounties})
+				.attr("d", path)
+				.classed("g-county", true);
+
+			var statesMap = vis.append("path")
+				.datum(statesMesh)
+				.attr("d", path)
+				.attr("class", "state");
+
+			var bubblesMap = vis.selectAll(".circle")
+				.data(filteredCounties)
+				.enter()
+				.append("circle")
+
+					.attr("class", "circle")
+					.attr("transform", function(d) {
+						var centroid = path.centroid(d);
+						if (!centroid) {
+							centroid = projection(d.coordinates[0][0])
+						}
+						x = centroid[0];
+						y = centroid[1];
+						return "translate(" + x + "," + y + ")";
+					})
+					.attr("r", function(d) { return radius(resultsById[d.id])  });
+
+			// Draw the state labels
+			var labels = vis.selectAll(".label")
+						.data(label.features)
+					.enter().append("text")
+						.attr("class", "label")
+						.attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
+						.attr("dy", ".35em")
+						.text(function(d) { return d.properties.name; });
+
+			// coverage map  -----------------------------------------
+
+			coverageMap.append("path")
+				.datum(land)
+				.attr("d", path2)
+				.attr("class", "land-boundary2");
+
+			coverageMap.append("path")
+				.datum({type: "GeometryCollection", geometries: filteredCounties})
+				.attr("d", path2)
+				.classed("g-trace-county", true)
+
+			// mississippi map -----------------------------------------
+
+			regionalMap.append("path")
+				.datum(land)
+				.attr("d", regionalpath)
+				.attr("class", "land-boundary");
+
+			regionalMap.append("path")
+				.datum(statesMesh)
+				.attr("d", regionalpath)
+				.attr("class", "g-mississippi-state state");
+
+			regionalMap.selectAll(".circle")
+				.data(filteredCounties).enter()
+				.append("circle")
+					.attr("class", "circle")
+					.attr("transform", function(d) {
+						var centroid = regionalpath.centroid(d);
+						if (!centroid) {
+							centroid = regionalProjection(d.coordinates[0][0])
+						}
+						x = centroid[0];
+						y = centroid[1];
+						return "translate(" + x + "," + y + ")"
+					})
+					.attr("r", function(d) { return radius(resultsById[d.id]); });
+
+			regionalMap.selectAll(".label")
+					.data(label.features)
+				.enter().append("text")
+					.attr("class", "label")
+					.attr("transform", function(d) { return "translate(" + regionalProjection(d.geometry.coordinates) + ")"; })
+					.attr("dy", ".35em")
+					.text(function(d) { return d.properties.name; });
+
+		// chi map -----------------------------------------
+
+		 chiMap.append("path")
+			.datum(land)
+			.attr("d", chiAreaPath)
+			.attr("class", "land-boundary");
+
+			chiMap.append("path")
+				.datum(statesMesh)
+				.attr("d", chiAreaPath)
+				.attr("class", "g-mississippi-state state");
+
+			chiMap.selectAll(".circle")
+				.data(filteredCounties).enter()
+				.append("circle")
+					.attr("class", "circle")
+					.attr("transform", function(d) {
+						var centroid = chiAreaPath.centroid(d);
+						if (!centroid) {
+							centroid = chiAreaProjection(d.coordinates[0][0])
+						}
+						x = centroid[0];
+						y = centroid[1];
+						return "translate(" + x + "," + y + ")"
+					})
+					.attr("r", function(d) { return radius(resultsById[d.id]); });
+
+			chiMap.selectAll(".label")
+					.data(label.features)
+				.enter().append("text")
+					.attr("class", "label")
+					.attr("transform", function(d) { return "translate(" + chiAreaProjection(d.geometry.coordinates) + ")"; })
+					.attr("dy", ".35em")
+					.text(function(d) { return d.properties.name; });
+
+			var formatter = d3.format(",.0f")
+
+			d1.sort(function(a, b) { return b.values.total_guns - a.values.total_guns; })
+
+
+			var tr = d3.select(".g-table table").selectAll(".g-state")
+			.data(d1.slice(0,10)).enter()
+			.append("tr")
+			.classed("g-state", true)
+
+			tr.append("td")
+				.attr("class","g-td g-state-td")
+				.text(function(d) { return d.key; });
+
+			tr.append("td")
+				.attr("class","g-td g-guns-td")
+				.text(function(d) { return formatter(d.values.total_guns); })
+
+		}
+
+		</script>
+</html>

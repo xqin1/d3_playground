@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+ 
+svg {
+  font: 10px sans-serif;
+}
+ 
+.caption {
+  font-weight: bold;
+}
+ 
+.key path {
+  display: none;
+}
+ 
+.key line {
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+ 
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+ 
+var svg = d3.select("body").append("svg")
+    .attr("width", 960)
+    .attr("height", 500);
+ 
+var g1 = svg.append("g")
+    .attr("class", "key")
+    .attr("transform", "translate(260,80)");
+var g2 = svg.append("g")
+    .attr("class", "key")
+    .attr("transform", "translate(260,180)");
+ 
+var a = [.11, .22, .33, .50];
+var b = ["#6e7c5a", "#a0b28f", "#d8b8b3", "#b45554", "#760000"];
+var myLegend = thresholdLegend()
+                  .threshold(a,b)
+                  .legendText("my legend 1");;
+myLegend(g1);
+ 
+ 
+ 
+var a1 = [.11, .22, .33];
+var b1 = ["#6e7c5a", "#a0b28f", "#d8b8b3", "#b45554"];
+myLegend = thresholdLegend()
+                  .threshold(a1,b1)
+                  .legendText("my legend 2");
+myLegend(g2);
+ 
+ 
+function thresholdLegend(){
+ 
+  var threshold = d3.scale.threshold();
+  var legendText,threshNum,numWithPercent;
+ 
+  function legend(g){
+    var formatPercent = d3.format(".0%"),
+    formatNumber = d3.format(".0f");
+     
+    // A position encoding for the key only.
+    var x = d3.scale.linear()
+        .domain([0, 1])
+        .range([0, 240]);
+     
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .tickSize(13)
+        .tickValues(threshold.domain())
+        .tickFormat(function(d) { return d === numWithPercent ? formatPercent(d) : formatNumber(100 * d); });
+     
+ 
+     
+    g.selectAll("rect")
+        .data(threshold.range().map(function(d, i) {
+          return {
+            x0: i ? x(threshold.domain()[i - 1]) : x.range()[0],
+            x1: i < threshNum ? x(threshold.domain()[i]) : x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append("rect")
+        .attr("height", 8)
+        .attr("x", function(d) { return d.x0; })
+        .attr("width", function(d) { return d.x1 - d.x0; })
+        .style("fill", function(d) { return d.z; });
+     
+    g.call(xAxis).append("text")
+        .attr("class", "caption")
+        .attr("y", -6)
+        .text(legendText);
+  }
+ 
+  legend.threshold = function (domain,range){
+    if (!arguments.length) return threshhold;
+    threshold.domain(domain)
+    threshold.range(range);
+    threshNum = range.length -1;
+    numWithPercent = domain[threshNum-1];
+    return legend;
+  }
+ 
+  legend.legendText = function (value){
+    if (!arguments.length) return lengendText;
+    legendText = value;
+    return legend;
+  }
+ 
+  
+  return legend;
+}
+ 
+ 
+</script>

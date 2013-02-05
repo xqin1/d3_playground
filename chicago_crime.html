@@ -1,0 +1,507 @@
+<!-- http://www.nytimes.com/interactive/2013/01/02/us/chicago-killings.html-->
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <style>
+
+/*    @import url(http://typeface.nytimes.com/k/tub6vtu-d.css);
+*/
+    #interactiveFooter {
+      border-top: 1px solid #ddd;
+      margin-top: 10px;
+      padding-top: 12px;
+    }
+
+    .storyHeader h1,
+    .g-graphic {
+      font-family: "nyt-franklin-1", sans-serif;
+    }
+
+    .storyHeader h1 {
+      font-weight: 300;
+      font-size: 32px !important;
+    }
+
+    .g-graphic {
+      margin: 0 10px;
+    }
+
+    .g-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .g-summary {
+      margin-top: 10px;
+      margin-bottom: 40px;
+      max-width: 480px;
+      font-size: 15px;
+      line-height: 1.4em;
+    }
+
+    .g-chart,
+    .g-table {
+      float: left;
+    }
+
+    .g-chart {
+      width: 700px;
+      margin-right: 0px;
+      position: relative;
+    }
+
+    .g-table {
+      width: 230px;
+      margin-right: 20px;
+    }
+
+    .g-chart path {
+      stroke-linejoin: round;
+    }
+
+    .g-district {
+      fill: #eee;
+    }
+
+    .g-district-special {
+      fill: none;
+      stroke: #333;
+      stroke-width: 1.5px;
+    }
+
+    .g-district-outer-boundary {
+      fill: none;
+      stroke: #aaa;
+    }
+
+    .g-district-inner-boundary {
+      fill: none;
+      stroke: #fff;
+    }
+
+    .g-block {
+      fill-opacity: .35;
+    }
+
+    .g-block-boundary {
+      fill: none;
+      stroke: #ccc;
+      stroke-width: .5px;
+    }
+
+    .g-district-label {
+      font-size: 9px;
+      text-anchor: middle;
+      text-transform: uppercase;
+    }
+
+    .g-district-id {
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .g-district-leader {
+      fill: none;
+      stroke: #000;
+      stroke-width: 1px;
+      stroke-opacity: 0.6;
+      shape-rendering: crispEdges;
+    }
+
+    .g-homicide {
+      fill: #E89B00;
+      fill-opacity: 1;
+      stroke: .5px;
+      stroke-width: 1px;
+    }
+
+    .g-legend {
+      font-size: 13px;
+    }
+
+    .g-annoc {
+      position: absolute;
+    }
+
+    .g-annotation-container-austin {
+      left: 65px;
+      top: 255px;
+      width: 150px;
+    }
+
+    .g-annotation-container-lincoln-park {
+      top: 165px;
+      right: 10px;
+      width: 140px;
+    }
+
+    .g-annotation-container-grand-c {
+      left: 65px;
+      top: 540px;
+      width: 190px;
+    }
+
+    .g-annotation-container-hyde {
+      top: 323px;
+      right: 10px;
+      width: 140px;
+    }
+
+    .g-annotation {
+      font-size: 13px;
+      margin-top: 15px;
+      line-height: 1.3em;
+    }
+
+    .g-annotation strong {
+      padding-right: 5px;
+    }
+
+    .g-table table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .g-table thead th {
+      color: #555;
+      font-size: 10px;
+      font-weight: normal;
+      line-height: 1.2em;
+      text-align: center !important;
+      text-transform: uppercase;
+      width: 30%;
+    }
+
+    .g-table tbody th {
+      font-size: 13px;
+      text-align: left;
+      white-space: nowrap;
+      width: 40%;
+    }
+
+    .g-table tbody th,
+    .g-table tbody td {
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
+    }
+
+    .g-table tbody td {
+      font-size: 16px;
+      text-align: right;
+    }
+
+    </style>
+    <!--[if lte IE 8]>
+      <img src="img/chicago_crime_fallback.png" alt="chart" class="nytg-fallback">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+</head>
+<body>
+    <div class="g-graphic">
+    <div class="g-table">
+    <div class="g-summary">A New York Times analysis of homicides and census data in Chicago compared areas near murders to those that were not. Residents living near homicides in the last 12 years were much more likely to be black, earn less money and lack a college degree.</div>
+    <table>
+    <thead>
+    <tr>
+    <td></td>
+    <th>Near<br>homicides</th>
+    <th>Not near<br>homicides</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <th>Population</th>
+    <td>1.3 mil.</td>
+    <td>1.4 mil.</td>
+    </tr>
+    <tr>
+    <th>Income</th>
+    <td>$38,318</td>
+    <td>$61,175</td>
+    </tr>
+    <tr>
+    <th>No high school</th>
+    <td>27%</td>
+    <td>15%</td>
+    </tr>
+    <tr>
+    <th>High school</th>
+    <td>28%</td>
+    <td>20%</td>
+    </tr>
+    <tr>
+    <th>Bachelor&rsquo;s +</th>
+    <td>19%</td>
+    <td>43%</td>
+    </tr>
+    <tr>
+    <th>Pct. white</th>
+    <td>24%</td>
+    <td>61%</td>
+    </tr>
+    <tr>
+    <th>Pct. black</th>
+    <td>55%</td>
+    <td>14%</td>
+    </tr>
+    <tr>
+    <th>Pct. Asian</th>
+    <td>3%</td>
+    <td>8%</td>
+    </tr>
+    <tr>
+    <th>Under age 18</th>
+    <td>28%</td>
+    <td>20%</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <div class="g-chart">
+    <div class="g-annoc g-annotation-container-austin">
+    <div class="g-annotation"><strong>Austin</strong> More than 450 homicides have happened in this neighborhood in Chicago&rsquo;s West Side, one of the city&rsquo;s deadliest places. </div>
+    </div>
+    <div class="g-annoc g-annotation-container-lincoln-park">
+    <div class="g-annotation"><strong>Lincoln Park</strong> A predominantly white neighborhood on Chicago&rsquo;s North Side had about 10 percent the murder rate of neighborhoods to the west.</div>
+    </div>
+    <div class="g-annoc g-annotation-container-grand-c">
+    <div class="g-annotation"><strong>Grand Crossing</strong> A shooting broke out during the funeral for a victim of another shooting in December. Chicago&rsquo;s South Side, in neighborhoods like Englewood, Auburn and Woodlawn, has some of the city&rsquo;s highest concentrations of murders.</div>
+    </div>
+    <div class="g-annoc g-annotation-container-hyde">
+    <div class="g-annotation"><strong>Hyde Park</strong>Less than one homicide per year happened in this affluent neighborhood, which is also home to the University of Chicago.</div>
+    </div>
+    </div>
+    <br clear="all">
+    </div>
+    <script src="http://graphics8.nytimes.com/newsgraphics/2012/12/31/chicago-homicides/acae5cd811293b922d4a1c54968858f8c1a379dc/lib.min.js"></script>
+    <script>(function() {
+
+    var width = 700,
+        height = 868;
+
+    var projection = d3.geo.albers()
+        .rotate([87.73, 0])
+        .center([0, 42.0433])
+        .scale(120000)
+        .translate([width / 2, 0]);
+
+    var hexbin = d3.hexbin()
+        .size([width, height])
+        .radius(6);
+
+    var specials = {
+      "AUSTIN": 1,
+      "GREATER GRAND CROSSING": 1,
+      "HYDE PARK": 1,
+      "LINCOLN PARK": 1
+    };
+
+    var customLabels = {
+      "ARMOUR SQUARE": {offset: [0,-10]},
+      "AUSTIN": {offset: [8,0]},
+      "BEVERLY": {offset: [0, 10]},
+      "BRIDGEPORT": {offset: [0, -5]},
+      "BURNSIDE": {hide: 1},
+      "EAST GARFIELD PARK": {hide: 1},
+      "ENGLEWOOD": {offset: [-20,0]},
+      "FULLER PARK": {hide: 1},
+      "GARFIELD RIDGE": {offset: [0, 10]},
+      "HEGEWISCH": {offset: [-10, 20]},
+      "KENWOOD": {hide: 1},
+      "OHARE": {offset: [-25,-10]},
+      "PULLMAN": {hide: 1},
+      "WEST ENGLEWOOD": {hide: 1},
+      "WEST GARFIELD PARK": {offset: [20,0], name: "GARFIELD PARK"},
+      "WEST PULLMAN": {offset: [0,-5]}
+    };
+
+    var leaderLines = [
+      {label: "austin", d:"M 248 314 L 280 314"},
+      {label: "lincoln", d:"M 504 254 L 554 254"},
+      {label: "grand crossing", d:"M 286 610 L 490 610"},
+      {label: "hyde park", d:"M 583 525 L 623 525 L 623 490"}
+    ];
+
+
+
+    var race = d3.scale.ordinal()
+        .domain(["white", "black", "other"])
+        .range(["#FFCC33", "#33CCFF", "#60B260"].map(function(d) { d = d3.hcl(d); d.c /= 2; return d;}));
+
+    var svg = d3.select(".g-chart").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+      .append("g")
+        .attr("transform", "translate(-25,-30)");
+
+    var path = d3.geo.path()
+        .projection(projection);
+
+    var radius = d3.scale.sqrt()
+        .domain([0, 8])
+        .range([0, 3]);
+
+    queue()
+        .defer(d3.json, "data/chicago.json")
+        .defer(d3.csv, "data/homicides.csv")
+        .defer(d3.tsv, "data/block-groups.tsv")
+        .await(ready);
+
+    function ready(error, chicago, homicides, blocks) {
+      var blocksById = {},
+          blockGroups = topojson.object(chicago, chicago.objects.blockGroups),
+          communityAreas = topojson.object(chicago, chicago.objects.communityAreas);
+
+      blocks.forEach(function(d) { blocksById[d.id] = d; });
+
+      homicides.forEach(function(d) {
+        var p = projection([+d.longitude, +d.latitude]);
+        d[0] = p[0], d[1] = p[1];
+      });
+
+      svg.insert("defs", "*").append("clipPath")
+          .datum(communityAreas)
+          .attr("id", "g-clip-district")
+        .append("path")
+          .attr("d", path);
+
+      svg.append("path")
+          .datum(communityAreas)
+          .attr("class", "g-district")
+          .attr("d", path);
+
+      svg.append("g")
+          .attr("class", "g-block")
+          .attr("clip-path", "url(#g-clip-district)")
+        .selectAll("path")
+          .data(race.domain())
+        .enter().append("path")
+          .datum(function(race) {
+            return {
+              type: "GeometryCollection",
+              properties: {race: race},
+              geometries: blockGroups.geometries.filter(function(d) {
+                return (d = blocksById[d.id]) && d[race] / d.total >= .5
+              })
+            };
+          })
+          .style("fill", function(d) { return race(d.properties.race); })
+          .attr("d", path);
+
+      svg.append("path")
+          .datum(topojson.mesh(chicago, chicago.objects.communityAreas, function(a, b) { return a !== b; }))
+          .attr("class", "g-district-inner-boundary")
+          .attr("d", path);
+
+      svg.append("path")
+          .datum(topojson.mesh(chicago, chicago.objects.communityAreas, function(a, b) { return a === b; }))
+          .attr("class", "g-district-outer-boundary")
+          .attr("d", path);
+
+      svg.append("path")
+          .datum({type: "GeometryCollection", geometries: communityAreas.geometries.filter(function(d) { return d.properties.name in specials; })})
+          .attr("class", "g-district-special")
+          .attr("d", path);
+
+      var homicide = svg.append("g")
+          .attr("class", "g-homicide")
+        .selectAll("circle")
+          .data(hexbin(homicides).sort(function(a, b) { return b.length - a.length; }))
+        .enter().append("circle")
+          .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+          .attr("r", function(d) { return radius(d.length); });
+
+      var districtLabel = svg.selectAll(".g-district-label")
+          .data(communityAreas.geometries.filter(function(d) {
+            var l = customLabels[d.properties.name] || {};
+            d.properties.hide = l.hide || false;
+            d.properties.dx = l.offset ? l.offset[0] : 0;
+            d.properties.dy = l.offset ? l.offset[1] : 0;
+            if (l.name) d.properties.name = l.name;
+            return !d.properties.hide;
+          }))
+        .enter().append("g")
+          .attr("class", "g-district-label")
+          .attr("transform", function(d) {
+            var c = path.centroid(d);
+            return "translate(" + [c[0] + d.properties.dx, c[1] + d.properties.dy] + ")";
+          });
+
+      districtLabel.selectAll("text")
+          .data(function(d) {
+            var words = d.properties.name.split(" ");
+            return words.map(function(d) { return {word: d, count: words.length}; });
+          })
+        .enter().append("text")
+          .attr("class", "g-district-name")
+          .attr("dy", function(d, i) { return (i - d.count / 2 + .7) + "em"; })
+          .text(function(d) { return d.word; });
+
+      svg.selectAll(".g-district-leader")
+        .data(leaderLines).enter().append("path")
+        .attr("class", "g-district-leader")
+        .attr("d", function(d){ return d.d; });
+
+      var homicideLegend = svg.append("g")
+          .attr("transform", "translate(" + (width - 125) + ",58)")
+          .attr("class", "g-legend");
+
+      homicideLegend.append("text")
+          .attr("y", -16)
+          .style("font-weight", "bold")
+          .text("Homicides, 2001-2012");
+
+      var homicideKey = homicideLegend.selectAll(".g-key")
+          .data([30, 10, 1])
+        .enter().append("g")
+          .attr("class", "g-key");
+
+      homicideKey.append("circle")
+          .attr("class", "g-homicide")
+          .attr("cx", function(d) { return radius(d); })
+          .attr("r", radius);
+
+      homicideKey.append("text")
+          .attr("x", function(d) { return 2 * radius(d) + 5; })
+          .attr("dy", ".35em")
+          .text(function(d) { return d; });
+
+      homicideKey.attr("transform", (function() {
+        var x0 = 0;
+        return function(d) {
+          var x1 = x0;
+          x0 += this.getBBox().width + 10;
+          return "translate(" + x1 + ",0)";
+        };
+      })());
+
+      var raceLegend = svg.append("g")
+          .attr("transform", "translate(" + (width - 125) + ",106)")
+          .attr("class", "g-legend");
+
+      raceLegend.append("text")
+          .attr("y", -10)
+          .style("font-weight", "bold")
+          .text("Race");
+
+      var raceKey = raceLegend.selectAll(".g-key")
+          .data(race.domain())
+        .enter().append("g")
+          .attr("class", "g-key")
+          .attr("transform", function(d, i) { return "translate(0," + (i * 19) + ")"; });
+
+      raceKey.append("rect")
+          .attr("class", "g-block")
+          .attr("width", 8)
+          .attr("height", 8)
+          .style("fill", race);
+
+      raceKey.append("text")
+          .attr("x", 16)
+          .attr("y", 4)
+          .attr("dy", ".35em")
+          .text(function(d) { return "Majority " + d; });
+    }
+
+    })()</script>
+</html>
