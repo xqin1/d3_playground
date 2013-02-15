@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <style>
+
+      .g-graphic {
+        margin: 10px 10px 10px 30px;
+        position: relative;
+      }
+
+      #main .storyHeader h1 {
+        font-size: 27px !important;
+        text-align: center;
+        margin-top:20px;
+      }
+
+      #main .storySummary {
+        text-align: center !important;
+        width: 790px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 15px;
+      }
+
+      .storySummary span {
+          font-size: 15px !important;
+      }
+      .g-annotations {
+        width: 320px;
+        float: left;
+      }
+      .g-annotation {
+        font-size: 15px;
+        line-height: 1.4em;
+        margin-bottom:1em;
+      }
+      .g-mention {
+        background: #e3e9e9;
+        padding: 1px 4px;
+        border-radius: 2px;
+        cursor: default;
+        color: #004276;
+        font-weight: normal;
+      }
+      .g-mention.g-active {
+        color: #e81817;
+        background-color: #ece9e9;
+      }
+
+      .g-graphic svg {
+        position: relative;
+        font: 10px sans-serif;
+      }
+
+      .g-graphic h3 {
+        font-family: Helvetica;
+        font-size: 13px;
+        position: relative;
+        top: 7px;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .g-state-highlight {
+        fill: none;
+        pointer-events: none;
+      }
+
+      .g-state-highlight .g-active {
+        stroke: #e81817;
+      }
+
+      .g-state-boundary {
+        fill: none;
+        stroke: #fff;
+        pointer-events: none;
+      }
+
+      .g-state-label {
+        fill-opacity: 0.5;
+        text-anchor: middle;
+        pointer-events: none;
+      }
+
+      .g-state-label .g-invert {
+        fill: #fff;
+      }
+
+      .g-trend-halo {
+        fill: none;
+        stroke-width: 10px;
+        pointer-events: stroke;
+      }
+
+      .g-trend-line {
+        fill: none;
+        stroke: #aaa;
+        stroke-opacity: .5;
+      }
+
+      .g-trend circle {
+        fill: #aaa;
+      }
+
+      .g-trend text {
+        display: none;
+      }
+
+      .g-active text,
+      .g-emphasis text {
+        display: inline;
+      }
+
+      .g-halo {
+        fill: none;
+      }
+
+      .g-trend .g-active text.g-halo {
+        stroke: white;
+        stroke-width: 3px;
+      }
+
+      .g-active text {
+        fill: #e81817;
+      }
+
+      .g-active .g-trend-line,
+      .g-emphasis .g-trend-line {
+        stroke: #000;
+        stroke-opacity: 1;
+        stroke-width: 1.5px;
+      }
+
+      .g-active .g-trend-line {
+        stroke: #e81817;
+      }
+
+      .g-active circle,
+      .g-emphasis circle {
+        fill: #000;
+      }
+
+      .g-active circle {
+        fill: #a81817;
+      }
+
+      .g-axis path,
+      .g-axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+      }
+
+      .g-key {
+        font-family: Arial;
+        font-size: 10px;
+      }
+
+      .g-key.g-axis path {
+        display: none;
+      }
+
+      .g-key .g-caption {
+        font-weight: bold;
+        font-size: 12px;
+      }
+
+      .g-y.g-axis .domain {
+        stroke: none;
+      }
+      .g-related-article {
+        font-family: Georgia;
+        font-weight: bold;
+        font-size: 14px;
+        color: #004276;
+        background-color: #f0f4f5;
+        padding: 8px 4px;
+        margin: 0 auto;
+        display: block;
+        text-align: center;
+      }
+
+    </style>
+</head>
+<!--[if lte IE 8]>
+  <img src="http://graphics8.nytimes.com/newsgraphics/2013/02/13/early-education/79763c52e285f6bccb24295d6f809875009282f9/fallback.png" alt="chart" class="nytg-fallback">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<body>
+    <div class="g-graphic">
+    <div class="g-annotations">
+    <div class="g-annotation">
+    <b data-state="12">Florida</b> passed a constitutional amendment in 2002 requiring prekindergarten access for all of Florida&rsquo;s 4-year-olds. The program began in 2005; in 2010-11 it had the nation&rsquo;s highest rate of attendance.
+    </div>
+    <div class="g-annotation">
+    President Obama singled out <b data-state="13">Georgia</b> and <b data-state="40">Oklahoma</b> in his State of the Union address. They were the first states to offer universal preschool for 4-year-olds and have consistently had among the highest rates of attendance.
+    </div>
+    <div class="g-annotation">
+    <b data-state="04">Arizona</b> had a small state preschool program, but financing was frozen in 2010 because of budget constraints. It is now one of 11 states without a state program. (The others are <span data-state="15">Hawaii</span>, <span data-state="16">Idaho</span>, <span data-state="18">Indiana</span>, <span data-state="28">Mississippi</span>, <span data-state="30">Montana</span>, <span data-state="33">New Hampshire</span>, <span data-state="38">North Dakota</span>, <span data-state="46">South Dakota</span>, <span data-state="49">Utah</span> and <span data-state="56">Wyoming</span>.)
+    </div>
+    <div class="g-annotation">
+    In 2010-11, about 6 percent of <b data-state="01">Alabama</b>&rsquo;s 4-year-olds were enrolled in a state preschool program. Its governor, Robert J. Bentley, a Republican, has called for a large increase in the state&rsquo;s existing preschool budget, with the eventual goal of expanding voluntary access to all 4-year-olds.
+    </div>
+    <a class="g-related-article" href="http://www.nytimes.com/2013/02/14/education/early-education-far-short-of-goal-in-obama-speech.html">Related article &raquo;</a>
+    </div>
+    </div>
+    <script src="http://graphics8.nytimes.com/newsgraphics/2013/02/13/early-education/79763c52e285f6bccb24295d6f809875009282f9/lib/d3.v3.min.js"></script>
+    <script src="http://graphics8.nytimes.com/newsgraphics/2013/02/13/early-education/79763c52e285f6bccb24295d6f809875009282f9/lib/topojson.v0.min.js"></script>
+    <script src="http://graphics8.nytimes.com/newsgraphics/2013/02/13/early-education/79763c52e285f6bccb24295d6f809875009282f9/lib/queue.v1.min.js"></script>
+    <script src="http://graphics8.nytimes.com/newsgraphics/2013/02/13/early-education/79763c52e285f6bccb24295d6f809875009282f9/lib/nyt-albers-usa.js"></script>
+    <script>(function() {
+
+    queue()
+        .defer(d3.json, "data/us-states.json")
+        .defer(d3.tsv, "data/rates.tsv")
+        .defer(d3.json, "data/us-state-labels.json")
+        .await(ready);
+
+    var emphasize = {
+      "Oklahoma": 1,
+      "Florida": 1,
+      "Arizona": 1,
+      "Alabama": 1,
+      "U.S. avg.": 1
+    };
+
+    var formatPercent = d3.format(".0%");
+
+    function ready(error, topology, rates, labels) {
+      var event = d3.dispatch("mouseover", "mouseout"),
+          years = d3.range(2001, 2011),
+          dataByFips = {};
+
+      rates.forEach(function(d) {
+        d.fips = parseInt(d.fips, 10);
+        years.forEach(function(y) { return d[y] = +d[y]; });
+        d.trends = years.map(function(y) { return {value: d["x" + y], year: y}; });
+        dataByFips[d.fips] = d;
+      });
+
+      renderMap();
+      renderLines();
+
+      var mention = d3.selectAll(".g-annotations [data-state]")
+          .datum(function() { return +this.getAttribute("data-state"); })
+          .classed("g-mention", true)
+          .on("mouseover", function(d) { event.mouseover(d); })
+          .on("mouseout", function() { event.mouseout(); });
+
+      event.on("mouseover.mention", function(fips) {
+        mention.classed("g-active", function(d) { return d === fips; });
+      });
+
+      event.on("mouseout.mention", function(fips) {
+        mention.classed("g-active", false);
+      });
+
+      function renderMap() {
+        var states = topojson.object(topology, topology.objects.states).geometries;
+
+        var width = 610,
+            height = 370;
+
+        var projection = nytAlbersUsa()
+            .scale(750)
+            .translate([width / 2, height / 2 + 10]);
+
+        var path = d3.geo.path()
+            .projection(projection);
+
+        var color = d3.scale.threshold()
+            .domain([1e-6, 0.10, 0.40, 0.70])
+            .range(["#f5f0f4", "#dbd1da", "#b19cb0", "#785171", "#3f1132"]);
+
+        d3.select(".g-graphic").append("h3")
+            .text("Percentage of 4-year-olds who are enrolled in state-financed preschools")
+
+        var svg = d3.select(".g-graphic").append("svg")
+            .attr("class", "g-map")
+            .attr("width", width)
+            .attr("height", height);
+
+        svg.append("g")
+            .attr("class", "g-state")
+          .selectAll("path")
+            .data(states)
+          .enter().append("path")
+            .attr("d", path)
+            .style("fill", function(d) {
+              var stateRow = dataByFips[d.id];
+              return stateRow ? color(+stateRow.x2010) : null;
+            })
+            .on("mouseover", function(d) { event.mouseover(d.id); })
+            .on("mouseout", function() { event.mouseout(); });
+
+        svg.append("path")
+            .datum(topojson.mesh(topology, topology.objects.states, function(a, b) { return a !== b; }))
+            .attr("d", path)
+            .attr("class", "g-state-boundary");
+
+        var highlight = svg.append("g")
+            .attr("class", "g-state-highlight")
+          .selectAll("path")
+            .data(states)
+          .enter().append("path")
+            .attr("d", path);
+
+        var label = svg.append("g")
+            .attr("class", "g-state-label")
+          .selectAll("text")
+            .data(labels.features)
+          .enter().append("text")
+            .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
+            .attr("dy", ".35em")
+            .text(function(d) { return d.properties.name; })
+            .classed("g-invert", function(d) { d = dataByFips[d.id]; return d && d.x2010 >= .7; });
+
+        event.on("mouseover.map", function(fips) {
+          highlight.filter(function(d) { return d.id === fips; })
+              .classed("g-active", true);
+        });
+
+        event.on("mouseout.map", function(fips) {
+          svg.selectAll(".g-active")
+              .classed("g-active", false);
+        });
+
+        renderKey();
+
+        function renderKey() {
+          var formatNumber = d3.format(".0f");
+
+          var x = d3.scale.linear()
+              .domain([-.1, 1])
+              .range([0, 160]);
+
+          var xAxis = d3.svg.axis()
+              .scale(x)
+              .orient("bottom")
+              .tickSize(13)
+              .tickValues(color.domain())
+              .tickFormat(function(d) { return d === .7 ? formatPercent(d) : formatNumber(100 * d); });
+
+          var g = svg.append("g")
+              .attr("class", "g-key g-axis")
+              .attr("transform", "translate(240, 10)");
+
+          g.selectAll("rect")
+              .data(color.range().map(function(d, i) {
+                return {
+                  x0: i ? x(color.domain()[i - 1]) : x.range()[0],
+                  x1: i < color.domain().length - 1 ? x(color.domain()[i]) : x.range()[1],
+                  z: d
+                };
+              }))
+            .enter().append("rect")
+              .attr("height", 8)
+              .attr("x", function(d) { return d.x0; })
+              .attr("width", function(d) { return d.x1 - d.x0; })
+              .style("fill", function(d) { return d.z; });
+
+          g.call(xAxis)
+        }
+      }
+
+      function renderLines() {
+        var margin = {top: 20, right: 80, bottom: 30, left: 120},
+            width = 530 - margin.left - margin.right,
+            height = 300 - margin.top - margin.bottom;
+
+        var x = d3.scale.linear()
+            .domain([2001, 2010])
+            .range([0, width]);
+
+        var y = d3.scale.linear()
+            .domain([0, 0.8])
+            .range([height, 0]);
+
+        var line = d3.svg.line()
+            .x(function(d) { return x(d.year); })
+            .y(function(d) { return y(d.value); });
+
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom")
+            .tickFormat(function(d) { return d; });
+
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left")
+            .ticks(5)
+            .tickSize(6)
+            .tickFormat(formatPercent);
+
+        var svg = d3.select(".g-graphic").append("svg")
+            .attr("class", "g-line-chart")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+            .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+        svg.append("g")
+            .attr("class", "g-trend-halo")
+          .selectAll("path")
+            .data(rates)
+          .enter().append("path")
+            .attr("d", function(d) { return line(d.trends); })
+            .on("mouseover", function(d) { event.mouseover(d.fips); })
+            .on("mouseout", function() { event.mouseout(); });
+
+        var trend = svg.append("g")
+            .attr("class", "g-trend")
+          .selectAll("g")
+            .data(rates.sort(function(a, b) { return (a.state in emphasize) - (b.state in emphasize); }))
+          .enter().append("g")
+            .classed("g-emphasis", function(d) { return d.state in emphasize; })
+            .on("mouseover", function(d) { event.mouseover(d.fips); })
+            .on("mouseout", function() { event.mouseout(); });
+
+        trend.append("path")
+            .attr("class", "g-trend-line")
+            .attr("d", function(d) { return line(d.trends); });
+
+        var end = trend.append("g")
+            .attr("transform", function(d) { return "translate(" + width + "," + y(d.trends[d.trends.length - 1].value) + ")"; })
+
+        end.append("text")
+            .attr("x", 6)
+            .attr("dy", ".35em")
+            .attr("class", "g-halo")
+            .text(function(d) { return d.state + " " + formatPercent(d.trends[d.trends.length - 1].value); });
+
+        end.append("text")
+            .attr("x", 6)
+            .attr("dy", ".35em")
+            .text(function(d) { return d.state + " " + formatPercent(d.trends[d.trends.length - 1].value); });
+
+        end.append("circle")
+            .attr("r", 2);
+
+        svg.append("g")
+            .attr("class", "g-y g-axis")
+            .call(yAxis);
+
+        svg.append("g")
+            .attr("class", "g-x g-axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        event.on("mouseover.line", function(fips) {
+          trend.filter(function(d) { return d.fips === fips; })
+              .classed("g-active", true)
+              .each(function() { this.parentNode.appendChild(this); });
+        });
+
+        event.on("mouseout.line", function(fips) {
+          trend.classed("g-active", false).order();
+        });
+      }
+    }
+
+    })();
+    </script>
+</html>

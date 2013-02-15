@@ -18,6 +18,30 @@ svg {
   stroke: #000;
   shape-rendering: crispEdges;
 }
+
+.axis {
+    font-size: 12px;
+    font-family: sans-serif;
+  }
+ 
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+    opacity: 1;
+  }
+ 
+  .circleKey line {
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+ 
+  .circleKey circle {
+    stroke: #ccc;
+    stroke-dasharray: 4, 2;
+    fill: none;
+  }
  
 </style>
 <body>
@@ -27,13 +51,13 @@ svg {
 var svg = d3.select("body").append("svg")
     .attr("width", 960)
     .attr("height", 500);
- 
+//threshold legend 
 var g1 = svg.append("g")
     .attr("class", "key")
-    .attr("transform", "translate(260,80)");
+    .attr("transform", "translate(50,80)");
 var g2 = svg.append("g")
     .attr("class", "key")
-    .attr("transform", "translate(260,180)");
+    .attr("transform", "translate(50,180)");
  
 var a = [.11, .22, .33, .50];
 var b = ["#6e7c5a", "#a0b28f", "#d8b8b3", "#b45554", "#760000"];
@@ -42,16 +66,55 @@ var myLegend = thresholdLegend()
                   .legendText("my legend 1");;
 myLegend(g1);
  
- 
- 
 var a1 = [.11, .22, .33];
 var b1 = ["#6e7c5a", "#a0b28f", "#d8b8b3", "#b45554"];
 myLegend = thresholdLegend()
                   .threshold(a1,b1)
                   .legendText("my legend 2");
 myLegend(g2);
- 
- 
+
+//circle key legend
+var scale = d3.scale.sqrt()
+            .domain([0, 1000000])
+            .range([0, 100])
+var c1 = svg.append('g')
+        .attr('transform', 'translate(500,250)')
+myLegend = scaleKeyCircle()
+              .scale(scale) 
+myLegend(c1);
+
+scale.domain([1000,1000000]);
+var formatSI = d3.format('s');
+var formatCurrencySI = function(d) { return '$' + formatSI(d) };
+var c2 = svg.append('g')
+        .attr('transform', 'translate(500,500)');
+myLegend = scaleKeyCircle()
+            .scale(scale)
+            .tickValues([10000, 100000, 500000, 1000000])
+            .tickFormat(formatCurrencySI)
+            .tickPadding(10)
+            .orient("left"); //default
+myLegend(c2);
+
+scale.domain([0,100]);
+var c3 = svg.append('g')
+        .attr('transform', 'translate(750,250)');
+myLegend = scaleKeyCircle()
+            .scale(scale)
+            .orient("right"); //default
+myLegend(c3);
+
+scale.domain([0,10000])
+      .range([0, 50]);
+var c4 = svg.append('g')
+        .attr('transform', 'translate(750,500)');
+myLegend = scaleKeyCircle()
+        .scale(scale)
+        .tickValues([100, 1000, 5000, 10000])
+        //.tickExtend(15)
+        .orient("right");
+myLegend(c4);
+
 function thresholdLegend(){
  
   var threshold = d3.scale.threshold();
@@ -112,6 +175,123 @@ function thresholdLegend(){
  
   
   return legend;
+}
+
+function scaleKeyCircle() {
+  var scale,
+      orient = "left",
+      tickPadding = 3,
+      tickExtend = 5,
+      tickArguments_ = [5],
+      tickValues = null,
+      tickFormat_
+ 
+ 
+  function key(g) {
+    g.each(function() {
+      var g = d3.select(this);
+ 
+      // Ticks, or domain values for ordinal scales.
+      var ticks = tickValues == null ? (scale.ticks ? scale.ticks.apply(scale, tickArguments_) : scale.domain()) : tickValues,
+          tickFormat = tickFormat_ == null ? (scale.tickFormat ? scale.tickFormat.apply(scale, tickArguments_) : String) : tickFormat_;
+ 
+      ticks = ticks.slice().reverse()
+ 
+      ticks.forEach(function(tick) {
+        var gg = g.append('g')
+          .attr('class', 'circleKey')
+          .attr('transform', 'translate(0,' + - scale(tick) + ')' )
+ 
+        gg.append('circle')
+          .attr('cx', 0)
+          .attr('cy', 0)
+          .attr('r', scale(tick))
+ 
+        var x1 = scale(tick),
+            x2 = tickExtend + scale(ticks[0]),
+            tx = x2 + tickPadding,
+            textAnchor = "start"
+ 
+        if ("left" == orient) {
+          x1 = -x1
+          x2 = -x2
+          tx = -tx
+          textAnchor = "end"
+        }
+ 
+        gg.append('line')
+          .attr('x1', x1)
+          .attr('x2', x2)
+          .attr('y1', 0)
+          .attr('y2', 0)
+          .attr('stroke', '#000')
+          .text(tick)
+ 
+        gg.append('text')
+          .attr('transform', 'translate('+ tx +', 0)' )
+          .attr('dy', '.35em')
+          .style('text-anchor', textAnchor)
+          .text(tickFormat(tick))
+      })
+ 
+    })
+  }
+ 
+  key.scale = function(value) {
+    if (!arguments.length) return scale;
+    scale = value;
+    return key;
+  };
+ 
+  key.orient = function(value) {
+    if (!arguments.length) return orient;
+    orient = value;
+    return key;
+  };
+ 
+  key.ticks = function() {
+    if (!arguments.length) return tickArguments_;
+    tickArguments_ = arguments;
+    return key;
+  };
+ 
+  key.tickFormat = function(x) {
+    if (!arguments.length) return tickFormat_;
+    tickFormat_ = x;
+    return key;
+  };
+ 
+  key.tickValues = function(x) {
+    if (!arguments.length) return tickValues;
+    tickValues = x;
+    return key;
+  };
+ 
+  key.tickPadding = function(x) {
+    if (!arguments.length) return tickPadding;
+    tickPadding = +x;
+    return key;
+  };
+ 
+  key.tickExtend = function(x) {
+    if (!arguments.length) return tickExtend;
+    tickExtend = +x;
+    return key;
+  };
+ 
+  key.width = function(value) {
+    if (!arguments.length) return width;
+    width = value;
+    return key;
+  };
+ 
+  key.height = function(value) {
+    if (!arguments.length) return height;
+    height = value;
+    return key;
+  };
+ 
+  return key;
 }
  
  
