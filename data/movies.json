@@ -1,0 +1,2216 @@
+[
+  {
+    "slug": "silver_linings_playbook",
+    "name": "Silver Linings Playbook",
+    "key_frame": 93,
+    "youtube": "tFvMk983Il8",
+    "intro": "“Silver Linings Playbook” follows the standard model for trailers, according to <a href='http://www.billwoolery.com/'>Bill Woolery</a>, a trailer specialist in Los Angeles who once worked on trailers for movies like “The Usual Suspects” and “E.T. the Extra-Terrestrial.” While introducing the movie’s story and its characters, the trailer largely follows the order of the film itself.",
+    "annotations": [
+      {
+        "trailer_ms": 6500,
+        "width": 280,
+        "offset": -40,
+        "movie_ms": 6890055,
+        "text": "The trailer’s opening shot — an image of the family’s home — appears near the end of the film, but there are similar shots near the beginning of the movie."
+      },
+      {
+        "trailer_ms": 105081,
+        "width": 210,
+        "offset": -140,
+        "movie_ms": -1,
+        "text": "A handful of very short shots are never seen in the film, although most are shown from alternate camera angles."
+      },
+      {
+        "trailer_ms": 129600,
+        "width": 150,
+        "offset": -40,
+        "movie_ms": 6187879,
+        "text": "Shots that accompany the main actors’ names are also shown out of order."
+      }
+    ],
+    "fps": 29.97002997002997,
+    "movie_length_frames": 175620,
+    "movie_length_ms": 7324826,
+    "search_bounds": [
+      0,
+      167083
+    ],
+    "bounds_ms": [
+      15812,
+      6967778
+    ],
+    "trailer": {
+      "thumb_width": 266,
+      "trailer_length_frames": 3793,
+      "trailer_length_ms": 151235,
+      "shots": [
+        {
+          "start_ms": 0,
+          "match_ms": 7036009,
+          "suppress": true
+        },
+        {
+          "start_ms": 6000,
+          "match_ms": 6890055
+        },
+        {
+          "start_ms": 7042,
+          "match_ms": 351705
+        },
+        {
+          "start_ms": 8583,
+          "match_ms": 357311
+        },
+        {
+          "start_ms": 10167,
+          "match_ms": 392949
+        },
+        {
+          "start_ms": 11792,
+          "match_ms": 394417
+        },
+        {
+          "start_ms": 13375,
+          "match_ms": 996158
+        },
+        {
+          "start_ms": 14561,
+          "match_ms": 997922
+        },
+        {
+          "start_ms": 15875,
+          "match_ms": 999724
+        },
+        {
+          "start_ms": 16959,
+          "match_ms": -1,
+          "suppress": true
+        },
+        {
+          "start_ms": 17917,
+          "match_ms": 759937
+        },
+        {
+          "start_ms": 19167,
+          "match_ms": 1102199
+        },
+        {
+          "start_ms": 20917,
+          "match_ms": 534832
+        },
+        {
+          "start_ms": 21500,
+          "match_ms": 539237
+        },
+        {
+          "start_ms": 22500,
+          "match_ms": 540405
+        },
+        {
+          "start_ms": 22917,
+          "match_ms": 543942
+        },
+        {
+          "start_ms": 23436,
+          "match_ms": 544276
+        },
+        {
+          "start_ms": 23937,
+          "match_ms": 545567
+        },
+        {
+          "start_ms": 24395,
+          "match_ms": 545775
+        },
+        {
+          "start_ms": 26417,
+          "match_ms": 558191
+        },
+        {
+          "start_ms": 30167,
+          "match_ms": 604606
+        },
+        {
+          "start_ms": 31208,
+          "match_ms": 609177
+        },
+        {
+          "start_ms": 34417,
+          "match_ms": 613282
+        },
+        {
+          "start_ms": 36208,
+          "match_ms": 615184
+        },
+        {
+          "start_ms": 38292,
+          "match_ms": 1026218
+        },
+        {
+          "start_ms": 39667,
+          "match_ms": 2292591
+        },
+        {
+          "start_ms": 40667,
+          "match_ms": 2310045
+        },
+        {
+          "start_ms": 41959,
+          "match_ms": 1028054
+        },
+        {
+          "start_ms": 43250,
+          "match_ms": 1471690
+        },
+        {
+          "start_ms": 44042,
+          "match_ms": 1478130
+        },
+        {
+          "start_ms": 46000,
+          "match_ms": 1481600
+        },
+        {
+          "start_ms": 47792,
+          "match_ms": 1486072
+        },
+        {
+          "start_ms": 49750,
+          "match_ms": 1490076
+        },
+        {
+          "start_ms": 52167,
+          "match_ms": 1501087
+        },
+        {
+          "start_ms": 53042,
+          "match_ms": 1502756
+        },
+        {
+          "start_ms": 53834,
+          "match_ms": 1518372
+        },
+        {
+          "start_ms": 54667,
+          "match_ms": 1519874
+        },
+        {
+          "start_ms": 56084,
+          "match_ms": 1779849
+        },
+        {
+          "start_ms": 57501,
+          "match_ms": 1670033
+        },
+        {
+          "start_ms": 58937,
+          "match_ms": 1676828
+        },
+        {
+          "start_ms": 60209,
+          "match_ms": 1694892
+        },
+        {
+          "start_ms": 61520,
+          "match_ms": 1682582
+        },
+        {
+          "start_ms": 62043,
+          "match_ms": 1685115
+        },
+        {
+          "start_ms": 62959,
+          "match_ms": 1701566
+        },
+        {
+          "start_ms": 63668,
+          "match_ms": 1731531
+        },
+        {
+          "start_ms": 64876,
+          "match_ms": 1713612
+        },
+        {
+          "start_ms": 66042,
+          "match_ms": 1721421
+        },
+        {
+          "start_ms": 68334,
+          "match_ms": 1724791
+        },
+        {
+          "start_ms": 70834,
+          "match_ms": 1719619
+        },
+        {
+          "start_ms": 71667,
+          "match_ms": 2315015
+        },
+        {
+          "start_ms": 72500,
+          "match_ms": 2168211
+        },
+        {
+          "start_ms": 74125,
+          "match_ms": 2182508
+        },
+        {
+          "start_ms": 75084,
+          "match_ms": 2314515
+        },
+        {
+          "start_ms": 75708,
+          "match_ms": 2190167
+        },
+        {
+          "start_ms": 76583,
+          "match_ms": 2201662
+        },
+        {
+          "start_ms": 78333,
+          "match_ms": 2447088
+        },
+        {
+          "start_ms": 79625,
+          "match_ms": 2466242
+        },
+        {
+          "start_ms": 81000,
+          "match_ms": 2468211
+        },
+        {
+          "start_ms": 83541,
+          "match_ms": 2474250
+        },
+        {
+          "start_ms": 86791,
+          "match_ms": 2519265
+        },
+        {
+          "start_ms": 88376,
+          "match_ms": 2534614
+        },
+        {
+          "start_ms": 89999,
+          "match_ms": 2554068
+        },
+        {
+          "start_ms": 90916,
+          "match_ms": 2688444
+        },
+        {
+          "start_ms": 93041,
+          "match_ms": 2812775
+        },
+        {
+          "start_ms": 94791,
+          "match_ms": 2683705
+        },
+        {
+          "start_ms": 96624,
+          "match_ms": 2698221
+        },
+        {
+          "start_ms": 99790,
+          "match_ms": 1767996
+        },
+        {
+          "start_ms": 101082,
+          "match_ms": 1777280
+        },
+        {
+          "start_ms": 102582,
+          "match_ms": 3581822
+        },
+        {
+          "start_ms": 103707,
+          "match_ms": 3583724
+        },
+        {
+          "start_ms": 104581,
+          "match_ms": 3585718,
+          "modified": true,
+          "missing": true
+        },
+        {
+          "start_ms": 106081,
+          "match_ms": 1838244
+        },
+        {
+          "start_ms": 107122,
+          "match_ms": 1833865
+        },
+        {
+          "start_ms": 108081,
+          "match_ms": 1841147
+        },
+        {
+          "start_ms": 109957,
+          "match_ms": 4188631
+        },
+        {
+          "start_ms": 111706,
+          "match_ms": 3430462
+        },
+        {
+          "start_ms": 113081,
+          "match_ms": 3433398
+        },
+        {
+          "start_ms": 114081,
+          "match_ms": 3906107,
+          "missing": true
+        },
+        {
+          "start_ms": 115373,
+          "match_ms": 4090964
+        },
+        {
+          "start_ms": 117747,
+          "match_ms": 4278259
+        },
+        {
+          "start_ms": 118289,
+          "match_ms": 4295277
+        },
+        {
+          "start_ms": 122914,
+          "match_ms": 3216969
+        },
+        {
+          "start_ms": 123955,
+          "match_ms": 3219038
+        },
+        {
+          "start_ms": 124872,
+          "match_ms": 4503034
+        },
+        {
+          "start_ms": 126080,
+          "match_ms": 4533187
+        },
+        {
+          "start_ms": 127664,
+          "match_ms": 3506876
+        },
+        {
+          "start_ms": 129081,
+          "match_ms": 6187879
+        },
+        {
+          "start_ms": 129997,
+          "match_ms": 1549014
+        },
+        {
+          "start_ms": 131164,
+          "match_ms": 4586084
+        },
+        {
+          "start_ms": 132372,
+          "match_ms": 3531259
+        },
+        {
+          "start_ms": 133581,
+          "match_ms": 6715404
+        },
+        {
+          "start_ms": 134748,
+          "match_ms": 6717406
+        },
+        {
+          "start_ms": 135956,
+          "match_ms": 4139278,
+          "modified": true,
+          "missing": true
+        },
+        {
+          "start_ms": 136998,
+          "match_ms": 3956285
+        },
+        {
+          "start_ms": 137831,
+          "match_ms": 5052778
+        },
+        {
+          "start_ms": 138539,
+          "match_ms": 5034300
+        },
+        {
+          "start_ms": 139039,
+          "match_ms": 3213661
+        },
+        {
+          "start_ms": 139582,
+          "match_ms": 978601
+        },
+        {
+          "start_ms": 140164,
+          "match_ms": 1314056
+        },
+        {
+          "start_ms": 141373,
+          "match_ms": 6395975
+        },
+        {
+          "start_ms": 141748,
+          "match_ms": 6396441
+        },
+        {
+          "start_ms": 142374,
+          "match_ms": 6569649
+        },
+        {
+          "start_ms": 143040,
+          "match_ms": 6435258
+        },
+        {
+          "start_ms": 145166,
+          "match_ms": 4396350
+        },
+        {
+          "start_ms": 147046,
+          "match_ms": 0,
+          "suppress": true
+        },
+        {
+          "start_ms": 148697,
+          "match_ms": 0,
+          "suppress": true
+        }
+      ]
+    }
+  },
+  {
+    "slug": "lincoln",
+    "name": "Lincoln",
+    "key_frame": 72,
+    "youtube": "qiSAbAuLhqs",
+    "intro": "The “Lincoln” trailer is more like the typical teaser than a trailer, according to Stephen Garrett, who owns <a href='http://jumpcutcreative.com/latest.html'>Jump Cut</a>, a trailer house that specializes in foreign, independent and documentary films. While trailers often focus on plot or character descriptions, teasers establish the mood and tone of a film. Teasers “don’t have to be chronological,” Mr. Garrett said.",
+    "annotations": [
+      {
+        "trailer_ms": 84833,
+        "width": 325,
+        "offset": -80,
+        "movie_ms": -1,
+        "text": "The timing of the “blackouts” makes the progression of the trailer feel “stately” or “profound,” according to Mr. Woolery. But “quick blackouts can work the opposite way,” he said."
+      },
+      {
+        "trailer_ms": 20000,
+        "width": 300,
+        "offset": -80,
+        "movie_ms": 347857,
+        "text": "Mr. Garrett noted that Lincoln is shown only from behind or in profile during the first 40 seconds of the trailer. This decision, he said, helps “set up Lincoln as an icon.”"
+      }
+    ],
+    "fps": 23.976023976023978,
+    "movie_length_frames": 215462,
+    "movie_length_ms": 8986553,
+    "search_bounds": [
+      0,
+      1000000000
+    ],
+    "bounds_ms": [
+      73480,
+      8473930
+    ],
+    "trailer": {
+      "thumb_width": 266,
+      "trailer_length_frames": 3372,
+      "trailer_length_ms": 141077,
+      "shots": [
+        {
+          "start_ms": 0,
+          "match_ms": 8882873,
+          "suppress": true
+        },
+        {
+          "start_ms": 4870,
+          "match_ms": 0,
+          "suppress": true
+        },
+        {
+          "start_ms": 7507,
+          "match_ms": 4300377
+        },
+        {
+          "start_ms": 9772,
+          "match_ms": 93093,
+          "suppress": true
+        },
+        {
+          "start_ms": 11368,
+          "match_ms": 93187
+        },
+        {
+          "start_ms": 12673,
+          "match_ms": 103229,
+          "suppress": true
+        },
+        {
+          "start_ms": 13639,
+          "match_ms": 103270
+        },
+        {
+          "start_ms": 14341,
+          "match_ms": 104396,
+          "suppress": true
+        },
+        {
+          "start_ms": 15013,
+          "match_ms": 104349
+        },
+        {
+          "start_ms": 16071,
+          "match_ms": 349685,
+          "suppress": true
+        },
+        {
+          "start_ms": 17583,
+          "match_ms": 347857
+        },
+        {
+          "start_ms": 21982,
+          "match_ms": 366494
+        },
+        {
+          "start_ms": 26161,
+          "match_ms": 8976509,
+          "suppress": true
+        },
+        {
+          "start_ms": 28279,
+          "match_ms": 8983433,
+          "suppress": true
+        },
+        {
+          "start_ms": 29297,
+          "match_ms": 0,
+          "suppress": true
+        },
+        {
+          "start_ms": 30472,
+          "match_ms": 7753985
+        },
+        {
+          "start_ms": 33244,
+          "match_ms": 7241969
+        },
+        {
+          "start_ms": 34875,
+          "match_ms": 1352029,
+          "suppress": true
+        },
+        {
+          "start_ms": 36093,
+          "match_ms": 1349061
+        },
+        {
+          "start_ms": 37323,
+          "match_ms": 2754986
+        },
+        {
+          "start_ms": 39360,
+          "match_ms": 4315226
+        },
+        {
+          "start_ms": 41302,
+          "match_ms": 2914480
+        },
+        {
+          "start_ms": 42586,
+          "match_ms": 5473519
+        },
+        {
+          "start_ms": 43704,
+          "match_ms": 7679159,
+          "suppress": true
+        },
+        {
+          "start_ms": 44502,
+          "match_ms": 7671396
+        },
+        {
+          "start_ms": 45354,
+          "match_ms": 117785
+        },
+        {
+          "start_ms": 46228,
+          "match_ms": 3871779,
+          "suppress": true
+        },
+        {
+          "start_ms": 47236,
+          "match_ms": 3873384
+        },
+        {
+          "start_ms": 47661,
+          "match_ms": 2295356
+        },
+        {
+          "start_ms": 48555,
+          "match_ms": 2298984
+        },
+        {
+          "start_ms": 49679,
+          "match_ms": 4998206
+        },
+        {
+          "start_ms": 50567,
+          "match_ms": 6254640,
+          "suppress": true
+        },
+        {
+          "start_ms": 51491,
+          "match_ms": 6254180
+        },
+        {
+          "start_ms": 51662,
+          "match_ms": 6359621
+        },
+        {
+          "start_ms": 52692,
+          "match_ms": 8427998,
+          "suppress": true
+        },
+        {
+          "start_ms": 53700,
+          "match_ms": 8427775
+        },
+        {
+          "start_ms": 54943,
+          "match_ms": 2880571,
+          "suppress": true
+        },
+        {
+          "start_ms": 56035,
+          "match_ms": 2880550
+        },
+        {
+          "start_ms": 56902,
+          "match_ms": 654202
+        },
+        {
+          "start_ms": 59380,
+          "match_ms": 6302146,
+          "suppress": true
+        },
+        {
+          "start_ms": 60010,
+          "match_ms": 6302359
+        },
+        {
+          "start_ms": 62117,
+          "match_ms": 6303439
+        },
+        {
+          "start_ms": 64415,
+          "match_ms": 6289592
+        },
+        {
+          "start_ms": 65409,
+          "match_ms": 6357619
+        },
+        {
+          "start_ms": 66695,
+          "match_ms": 0,
+          "suppress": true
+        },
+        {
+          "start_ms": 69458,
+          "match_ms": 7266326
+        },
+        {
+          "start_ms": 69756,
+          "match_ms": 7273667
+        },
+        {
+          "start_ms": 71227,
+          "match_ms": 2046813,
+          "suppress": true
+        },
+        {
+          "start_ms": 72613,
+          "match_ms": 2046741
+        },
+        {
+          "start_ms": 72845,
+          "match_ms": 4829411
+        },
+        {
+          "start_ms": 74241,
+          "match_ms": 8015582
+        },
+        {
+          "start_ms": 75665,
+          "match_ms": 3756162,
+          "suppress": true
+        },
+        {
+          "start_ms": 76589,
+          "match_ms": 3756871
+        },
+        {
+          "start_ms": 76934,
+          "match_ms": 3753826
+        },
+        {
+          "start_ms": 78228,
+          "match_ms": 551764,
+          "suppress": true
+        },
+        {
+          "start_ms": 79614,
+          "match_ms": 552807
+        },
+        {
+          "start_ms": 80287,
+          "match_ms": 3824898,
+          "suppress": true
+        },
+        {
+          "start_ms": 81169,
+          "match_ms": 3828906
+        },
+        {
+          "start_ms": 82021,
+          "match_ms": 7809708,
+          "suppress": true
+        },
+        {
+          "start_ms": 83113,
+          "match_ms": 7809473
+        },
+        {
+          "start_ms": 84133,
+          "match_ms": 0,
+          "suppress": true
+        },
+        {
+          "start_ms": 86722,
+          "match_ms": 2356292
+        },
+        {
+          "start_ms": 87899,
+          "match_ms": 2952810
+        },
+        {
+          "start_ms": 89407,
+          "match_ms": 7499019
+        },
+        {
+          "start_ms": 91067,
+          "match_ms": 7502356
+        },
+        {
+          "start_ms": 92545,
+          "match_ms": 6949340,
+          "suppress": true
+        },
+        {
+          "start_ms": 93595,
+          "match_ms": 6949172
+        },
+        {
+          "start_ms": 94453,
+          "match_ms": 6944919
+        },
+        {
+          "start_ms": 95792,
+          "match_ms": 4552757,
+          "suppress": true
+        },
+        {
+          "start_ms": 97094,
+          "match_ms": 4551806
+        },
+        {
+          "start_ms": 97795,
+          "match_ms": 4555760
+        },
+        {
+          "start_ms": 100446,
+          "match_ms": 7891499,
+          "suppress": true
+        },
+        {
+          "start_ms": 101454,
+          "match_ms": 7891499
+        },
+        {
+          "start_ms": 103401,
+          "match_ms": 3321265,
+          "suppress": true
+        },
+        {
+          "start_ms": 104577,
+          "match_ms": 3321265
+        },
+        {
+          "start_ms": 106563,
+          "match_ms": 7364676,
+          "suppress": true
+        },
+        {
+          "start_ms": 107529,
+          "match_ms": 7364676
+        },
+        {
+          "start_ms": 108665,
+          "match_ms": 7360922
+        },
+        {
+          "start_ms": 110087,
+          "match_ms": 4189641
+        },
+        {
+          "start_ms": 111707,
+          "match_ms": 7804244
+        },
+        {
+          "start_ms": 113239,
+          "match_ms": 6452089
+        },
+        {
+          "start_ms": 115144,
+          "match_ms": 2843450
+        },
+        {
+          "start_ms": 116581,
+          "match_ms": 2822471
+        },
+        {
+          "start_ms": 118160,
+          "match_ms": 7295523
+        },
+        {
+          "start_ms": 119751,
+          "match_ms": 7153671
+        },
+        {
+          "start_ms": 122421,
+          "match_ms": 7155548,
+          "suppress": true
+        },
+        {
+          "start_ms": 123617,
+          "match_ms": 7743307
+        },
+        {
+          "start_ms": 128404,
+          "match_ms": 0,
+          "suppress": true
+        },
+        {
+          "start_ms": 130179,
+          "match_ms": 8833407,
+          "suppress": true
+        },
+        {
+          "start_ms": 132363,
+          "match_ms": -1,
+          "suppress": true
+        },
+        {
+          "start_ms": 134211,
+          "match_ms": -1,
+          "suppress": true
+        },
+        {
+          "start_ms": 135975,
+          "match_ms": -1,
+          "suppress": true
+        },
+        {
+          "start_ms": 137655,
+          "match_ms": -1,
+          "suppress": true
+        },
+        {
+          "start_ms": 139251,
+          "match_ms": -1,
+          "suppress": true
+        },
+        {
+          "start_ms": 139965,
+          "match_ms": -1,
+          "suppress": true
+        }
+      ]
+    }
+  },
+  {
+    "slug": "amour",
+    "name": "Amour",
+    "key_frame": 15,
+    "youtube": "_DUBxf8ilQs",
+    "intro": "The only foreign film among the best picture nominees, it uses significantly longer shots than the other trailers. Mr. Woolery characterized the final 20 seconds of the trailer, where a man sits in silence, as “very brave” to use in a pitch for an American audience, but said that the final shot was powerful because of the uncertainty it creates.",
+    "annotations": [
+      {
+        "trailer_ms": 90856,
+        "width": 350,
+        "offset": -140,
+        "movie_ms": 4535156,
+        "text": "Mr. Garrett said the way a piano recording is used in the final seconds means you “cannot trust what you’re seeing to tell you what the story is. It leaves you with a smart sense of intrigue.”"
+      }
+    ],
+    "movie_length_ms": 7650251,
+    "movie_length_frames": 183431,
+    "fps": 59.94005994005994,
+    "search_bounds": [
+      0,
+      252855
+    ],
+    "trailer": {
+      "trailer_length_frames": 2878,
+      "trailer_length_ms": 120043,
+      "shots": [
+        {
+          "suppress": true,
+          "match_ms": 7547778,
+          "start_ms": 0
+        },
+        {
+          "suppress": true,
+          "match_ms": 3792824,
+          "start_ms": 5098
+        },
+        {
+          "suppress": true,
+          "match_ms": 7514747,
+          "start_ms": 8482
+        },
+        {
+          "match_ms": 3386270,
+          "start_ms": 13153
+        },
+        {
+          "match_ms": 81077,
+          "start_ms": 22846
+        },
+        {
+          "match_ms": 7424661,
+          "start_ms": 23616
+        },
+        {
+          "match_ms": 96092,
+          "start_ms": 27452
+        },
+        {
+          "match_ms": 7458401,
+          "start_ms": 28903
+        },
+        {
+          "match_ms": 7483634,
+          "start_ms": 32490
+        },
+        {
+          "match_ms": 111398,
+          "start_ms": 34044
+        },
+        {
+          "match_ms": 1258199,
+          "start_ms": 38960
+        },
+        {
+          "suppress": true,
+          "match_ms": 7605333,
+          "start_ms": 40914
+        },
+        {
+          "match_ms": 3421637,
+          "start_ms": 44367
+        },
+        {
+          "suppress": true,
+          "match_ms": 45460,
+          "start_ms": 46770
+        },
+        {
+          "match_ms": 59432,
+          "start_ms": 48865,
+          "suppress": true
+        },
+        {
+          "match_ms": 615003,
+          "start_ms": 50881
+        },
+        {
+          "match_ms": 616090,
+          "start_ms": 51697
+        },
+        {
+          "suppress": true,
+          "match_ms": 52925,
+          "start_ms": 53607
+        },
+        {
+          "match_ms": 4300850,
+          "start_ms": 55696
+        },
+        {
+          "match_ms": 4302810,
+          "start_ms": 57599
+        },
+        {
+          "match_ms": 4304603,
+          "start_ms": 59687
+        },
+        {
+          "suppress": true,
+          "match_ms": 68315,
+          "start_ms": 63055
+        },
+        {
+          "match_ms": 7286363,
+          "start_ms": 65643
+        },
+        {
+          "match_ms": 2104694,
+          "start_ms": 72795
+        },
+        {
+          "match_ms": 2111650,
+          "start_ms": 74296
+        },
+        {
+          "match_ms": 4410287,
+          "start_ms": 76969
+        },
+        {
+          "match_ms": 5790061,
+          "start_ms": 78856
+        },
+        {
+          "suppress": true,
+          "match_ms": 157400,
+          "start_ms": 82054
+        },
+        {
+          "match_ms": 4499164,
+          "start_ms": 85518
+        },
+        {
+          "match_ms": 4535156,
+          "start_ms": 88856
+        },
+        {
+          "suppress": true,
+          "match_ms": 7611255,
+          "start_ms": 114377
+        },
+        {
+          "suppress": true,
+          "match_ms": 7532764,
+          "start_ms": 116420
+        }
+      ],
+      "thumb_width": 198
+    },
+    "bounds_ms": [
+      24255,
+      7510669
+    ]
+  },
+  {
+    "slug": "argo",
+    "name": "Argo",
+    "key_frame": 158,
+    "youtube": "T29kIOXpj6o",
+    "intro": "The trailer for “Argo” balances two different tones, according to Mr. Garrett: thriller and Hollywood satire. “Thrillers have a very fast cutting style,” he said.  “It’s a way of ratcheting up attention.” Shots are longer, on average, when the trailer turns to satire.",
+    "annotations": [
+      {
+        "trailer_ms": 11200,
+        "width": 280,
+        "offset": -80,
+        "movie_ms": 2477925,
+        "text": "Bryan Cranston‘s character watches President Carter give an address on television; In the film, the television shows an address by an Iranian spokeswoman."
+      },
+      {
+        "trailer_ms": 67800,
+        "width": 250,
+        "offset": -90,
+        "movie_ms": 1655203,
+        "text": "The Hollywood sign appears about halfway through the trailer. While intact in the trailer, the sign is shown in the disrepair of the 1970s in the film."
+      },
+      {
+        "trailer_ms": 124000,
+        "width": 240,
+        "offset": -110,
+        "movie_ms": 4150146,
+        "text": "A scene showing the Americans surrounded by a crowd is bookended with shots from an earlier scene showing a much larger crowd."
+      }
+    ],
+    "fps": 19.982238010657195,
+    "movie_length_frames": 145415,
+    "movie_length_ms": 7277245,
+    "search_bounds": [
+      0,
+      145415
+    ],
+    "bounds_ms": [
+      75374,
+      6751971
+    ],
+    "trailer": {
+      "thumb_width": 265,
+      "trailer_length_frames": 3609,
+      "trailer_length_ms": 152110,
+      "shots": [
+        {
+          "start_ms": 0,
+          "match_ms": 6981307,
+          "suppress": true
+        },
+        {
+          "start_ms": 4290,
+          "match_ms": 0,
+          "suppress": true
+        },
+        {
+          "start_ms": 5794,
+          "match_ms": 0,
+          "suppress": true
+        },
+        {
+          "start_ms": 6436,
+          "match_ms": 5499894,
+          "suppress": true
+        },
+        {
+          "start_ms": 7880,
+          "match_ms": 320737
+        },
+        {
+          "start_ms": 8763,
+          "match_ms": 349932
+        },
+        {
+          "start_ms": 9327,
+          "match_ms": 246479
+        },
+        {
+          "start_ms": 10192,
+          "match_ms": 226210,
+          "modified": true
+        },
+        {
+          "start_ms": 10725,
+          "match_ms": 2477925,
+          "modified": true
+        },
+        {
+          "start_ms": 11857,
+          "match_ms": 356522
+        },
+        {
+          "start_ms": 12291,
+          "match_ms": 356935
+        },
+        {
+          "start_ms": 13011,
+          "match_ms": 620202
+        },
+        {
+          "start_ms": 13685,
+          "match_ms": 402777
+        },
+        {
+          "start_ms": 14236,
+          "match_ms": 600182
+        },
+        {
+          "start_ms": 14816,
+          "match_ms": 425600
+        },
+        {
+          "start_ms": 15151,
+          "match_ms": 486636
+        },
+        {
+          "start_ms": 15541,
+          "match_ms": 385585
+        },
+        {
+          "start_ms": 16264,
+          "match_ms": 366616
+        },
+        {
+          "start_ms": 16897,
+          "match_ms": 573031
+        },
+        {
+          "start_ms": 17501,
+          "match_ms": 655221
+        },
+        {
+          "start_ms": 18302,
+          "match_ms": 416509
+        },
+        {
+          "start_ms": 19138,
+          "match_ms": 474599
+        },
+        {
+          "start_ms": 19696,
+          "match_ms": 467517
+        },
+        {
+          "start_ms": 20221,
+          "match_ms": 542525
+        },
+        {
+          "start_ms": 20917,
+          "match_ms": 701150
+        },
+        {
+          "start_ms": 21515,
+          "match_ms": 575200
+        },
+        {
+          "start_ms": 22122,
+          "match_ms": 520799,
+          "modified": true
+        },
+        {
+          "start_ms": 22689,
+          "match_ms": 519151
+        },
+        {
+          "start_ms": 23105,
+          "match_ms": 519444
+        },
+        {
+          "start_ms": 23573,
+          "match_ms": 627026
+        },
+        {
+          "start_ms": 24112,
+          "match_ms": 668042
+        },
+        {
+          "start_ms": 24525,
+          "match_ms": 533158
+        },
+        {
+          "start_ms": 25113,
+          "match_ms": 703027
+        },
+        {
+          "start_ms": 25755,
+          "match_ms": 3342372,
+          "suppress": true
+        },
+        {
+          "start_ms": 27355,
+          "match_ms": 881973,
+          "modified": true
+        },
+        {
+          "start_ms": 28776,
+          "match_ms": 902643
+        },
+        {
+          "start_ms": 29399,
+          "match_ms": 920653
+        },
+        {
+          "start_ms": 30903,
+          "match_ms": 687770
+        },
+        {
+          "start_ms": 31419,
+          "match_ms": 711035
+        },
+        {
+          "start_ms": 32945,
+          "match_ms": 739157
+        },
+        {
+          "start_ms": 34989,
+          "match_ms": 3267314
+        },
+        {
+          "start_ms": 35521,
+          "match_ms": 936502
+        },
+        {
+          "start_ms": 36187,
+          "match_ms": 2949287
+        },
+        {
+          "start_ms": 37004,
+          "match_ms": 2964698
+        },
+        {
+          "start_ms": 39055,
+          "match_ms": 963662
+        },
+        {
+          "start_ms": 39683,
+          "match_ms": 993242
+        },
+        {
+          "start_ms": 40628,
+          "match_ms": 1328402
+        },
+        {
+          "start_ms": 41359,
+          "match_ms": 1331669
+        },
+        {
+          "start_ms": 41778,
+          "match_ms": 1333481
+        },
+        {
+          "start_ms": 42076,
+          "match_ms": 1338253
+        },
+        {
+          "start_ms": 42467,
+          "match_ms": 1338818
+        },
+        {
+          "start_ms": 44408,
+          "match_ms": 1062174,
+          "modified": true
+        },
+        {
+          "start_ms": 44700,
+          "match_ms": 1070178
+        },
+        {
+          "start_ms": 46482,
+          "match_ms": 1072855
+        },
+        {
+          "start_ms": 47498,
+          "match_ms": 1084470
+        },
+        {
+          "start_ms": 48303,
+          "match_ms": 1098716,
+          "modified": true
+        },
+        {
+          "start_ms": 49222,
+          "match_ms": 1066874
+        },
+        {
+          "start_ms": 52724,
+          "match_ms": 5951745,
+          "missing": true
+        },
+        {
+          "start_ms": 55003,
+          "match_ms": 2164145,
+          "suppress": true
+        },
+        {
+          "start_ms": 56799,
+          "match_ms": 1406845,
+          "missing": true
+        },
+        {
+          "start_ms": 57722,
+          "match_ms": 1409987,
+          "modified": true
+        },
+        {
+          "start_ms": 58908,
+          "match_ms": 1406571
+        },
+        {
+          "start_ms": 59678,
+          "match_ms": 1408120,
+          "modified": true
+        },
+        {
+          "start_ms": 60374,
+          "match_ms": 1389854,
+          "modified": true
+        },
+        {
+          "start_ms": 61408,
+          "match_ms": 887469
+        },
+        {
+          "start_ms": 62067,
+          "match_ms": 1453706,
+          "missing": true
+        },
+        {
+          "start_ms": 62920,
+          "match_ms": 1454252
+        },
+        {
+          "start_ms": 63956,
+          "match_ms": 1457572
+        },
+        {
+          "start_ms": 65147,
+          "match_ms": 1479478
+        },
+        {
+          "start_ms": 67322,
+          "match_ms": 1655203,
+          "modified": true
+        },
+        {
+          "start_ms": 68417,
+          "match_ms": 1715413
+        },
+        {
+          "start_ms": 69679,
+          "match_ms": 1725340
+        },
+        {
+          "start_ms": 70441,
+          "match_ms": 2370534
+        },
+        {
+          "start_ms": 71427,
+          "match_ms": 2376457
+        },
+        {
+          "start_ms": 72461,
+          "match_ms": 2172670
+        },
+        {
+          "start_ms": 73028,
+          "match_ms": 1954535
+        },
+        {
+          "start_ms": 73153,
+          "match_ms": 2488819
+        },
+        {
+          "start_ms": 73353,
+          "match_ms": 1606304
+        },
+        {
+          "start_ms": 73512,
+          "match_ms": 1594926
+        },
+        {
+          "start_ms": 74205,
+          "match_ms": 1727642
+        },
+        {
+          "start_ms": 74774,
+          "match_ms": 1723671
+        },
+        {
+          "start_ms": 76242,
+          "match_ms": 1662143
+        },
+        {
+          "start_ms": 76842,
+          "match_ms": 1765980
+        },
+        {
+          "start_ms": 77499,
+          "match_ms": 3678157
+        },
+        {
+          "start_ms": 78360,
+          "match_ms": 2020818
+        },
+        {
+          "start_ms": 78961,
+          "match_ms": 2026574
+        },
+        {
+          "start_ms": 79627,
+          "match_ms": 176960,
+          "missing": true,
+          "verified": true
+        },
+        {
+          "start_ms": 80225,
+          "match_ms": 4925587
+        },
+        {
+          "start_ms": 80698,
+          "match_ms": 3843739,
+          "missing": true,
+          "verified": true
+        },
+        {
+          "start_ms": 81273,
+          "match_ms": 3056807,
+          "modified": true
+        },
+        {
+          "start_ms": 82099,
+          "match_ms": 2978592
+        },
+        {
+          "start_ms": 82857,
+          "match_ms": 2348547
+        },
+        {
+          "start_ms": 84006,
+          "match_ms": 1970335
+        },
+        {
+          "start_ms": 85542,
+          "match_ms": 2506303
+        },
+        {
+          "start_ms": 86759,
+          "match_ms": 5464763
+        },
+        {
+          "start_ms": 88362,
+          "match_ms": 2700948
+        },
+        {
+          "start_ms": 89137,
+          "match_ms": 2668999
+        },
+        {
+          "start_ms": 90166,
+          "match_ms": 2703617
+        },
+        {
+          "start_ms": 91104,
+          "match_ms": 2708789
+        },
+        {
+          "start_ms": 91567,
+          "match_ms": 2710324
+        },
+        {
+          "start_ms": 92162,
+          "match_ms": 2706003
+        },
+        {
+          "start_ms": 92912,
+          "match_ms": 584050,
+          "suppress": true
+        },
+        {
+          "start_ms": 95679,
+          "match_ms": 3151638,
+          "modified": true
+        },
+        {
+          "start_ms": 96905,
+          "match_ms": 1981446
+        },
+        {
+          "start_ms": 97734,
+          "match_ms": 3760156
+        },
+        {
+          "start_ms": 98592,
+          "match_ms": 3173053
+        },
+        {
+          "start_ms": 99769,
+          "match_ms": 7106849,
+          "missing": true
+        },
+        {
+          "start_ms": 100132,
+          "match_ms": 3459923
+        },
+        {
+          "start_ms": 101148,
+          "match_ms": 3466663
+        },
+        {
+          "start_ms": 102297,
+          "match_ms": 3518982
+        },
+        {
+          "start_ms": 103677,
+          "match_ms": 3541854
+        },
+        {
+          "start_ms": 104651,
+          "match_ms": 7241984,
+          "suppress": true
+        },
+        {
+          "start_ms": 106179,
+          "match_ms": 3236700,
+          "modified": true
+        },
+        {
+          "start_ms": 107002,
+          "match_ms": 3536349
+        },
+        {
+          "start_ms": 108094,
+          "match_ms": 4015011
+        },
+        {
+          "start_ms": 108929,
+          "match_ms": 5524919
+        },
+        {
+          "start_ms": 109749,
+          "match_ms": 5525770
+        },
+        {
+          "start_ms": 110762,
+          "match_ms": 4314767,
+          "modified": true
+        },
+        {
+          "start_ms": 111691,
+          "match_ms": 4274853,
+          "modified": true
+        },
+        {
+          "start_ms": 112134,
+          "match_ms": 5403031
+        },
+        {
+          "start_ms": 112926,
+          "match_ms": 5404282
+        },
+        {
+          "start_ms": 114395,
+          "match_ms": 3126323
+        },
+        {
+          "start_ms": 115132,
+          "match_ms": 4679767,
+          "modified": true
+        },
+        {
+          "start_ms": 115774,
+          "match_ms": 5083495
+        },
+        {
+          "start_ms": 116447,
+          "match_ms": 7188064,
+          "suppress": true
+        },
+        {
+          "start_ms": 118335,
+          "match_ms": 3844032
+        },
+        {
+          "start_ms": 118909,
+          "match_ms": 5870740
+        },
+        {
+          "start_ms": 119429,
+          "match_ms": 2562811
+        },
+        {
+          "start_ms": 120263,
+          "match_ms": 4683045
+        },
+        {
+          "start_ms": 120980,
+          "match_ms": 4724386
+        },
+        {
+          "start_ms": 121732,
+          "match_ms": 248398
+        },
+        {
+          "start_ms": 122593,
+          "match_ms": 4131844
+        },
+        {
+          "start_ms": 123613,
+          "match_ms": 4150146
+        },
+        {
+          "start_ms": 124212,
+          "match_ms": 4156535
+        },
+        {
+          "start_ms": 124856,
+          "match_ms": 4158187
+        },
+        {
+          "start_ms": 125372,
+          "match_ms": 4145124
+        },
+        {
+          "start_ms": 126007,
+          "match_ms": 234567
+        },
+        {
+          "start_ms": 126807,
+          "match_ms": 6017502
+        },
+        {
+          "start_ms": 127731,
+          "match_ms": 4584980,
+          "missing": true
+        },
+        {
+          "start_ms": 128419,
+          "match_ms": 6088716
+        },
+        {
+          "start_ms": 129191,
+          "match_ms": 6099545,
+          "modified": true
+        },
+        {
+          "start_ms": 129893,
+          "match_ms": 4172117
+        },
+        {
+          "start_ms": 130343,
+          "match_ms": 5994154
+        },
+        {
+          "start_ms": 131366,
+          "match_ms": 5036498
+        },
+        {
+          "start_ms": 132001,
+          "match_ms": 409695
+        },
+        {
+          "start_ms": 132494,
+          "match_ms": 4546291
+        },
+        {
+          "start_ms": 132800,
+          "match_ms": 608774
+        },
+        {
+          "start_ms": 133206,
+          "match_ms": 5940384
+        },
+        {
+          "start_ms": 133543,
+          "match_ms": 6270647
+        },
+        {
+          "start_ms": 134268,
+          "match_ms": 6042753
+        },
+        {
+          "start_ms": 134636,
+          "match_ms": 545411
+        },
+        {
+          "start_ms": 134964,
+          "match_ms": 6138238
+        },
+        {
+          "start_ms": 135353,
+          "match_ms": 5173651
+        },
+        {
+          "start_ms": 135735,
+          "match_ms": 3948027
+        },
+        {
+          "start_ms": 136122,
+          "match_ms": 2574138
+        },
+        {
+          "start_ms": 137936,
+          "match_ms": 25141,
+          "suppress": true
+        },
+        {
+          "start_ms": 140538,
+          "match_ms": 4609571
+        },
+        {
+          "start_ms": 142527,
+          "match_ms": 414564
+        },
+        {
+          "start_ms": 143029,
+          "match_ms": 4614276
+        },
+        {
+          "start_ms": 145664,
+          "match_ms": 7217093,
+          "suppress": true
+        },
+        {
+          "start_ms": 147680,
+          "match_ms": -1,
+          "suppress": true
+        },
+        {
+          "start_ms": 148604,
+          "match_ms": -1,
+          "suppress": true
+        },
+        {
+          "start_ms": 149486,
+          "match_ms": -1,
+          "suppress": true
+        }
+      ]
+    }
+  },
+  {
+    "slug": "beasts_of_the_southern_wild",
+    "name": "Beasts of the Southern Wild",
+    "key_frame": 76,
+    "youtube": "pvqZzSMIZa0",
+    "intro": "The “poetry” of the world in the film is mentioned by one of several reviews shown in the trailer. “It’s a license to not worry about story,” Mr. Garrett said. Asked about open-ended questions in the trailer, Larry Baldauf, executive vice president of marketing for Fox Searchlight, cited discussions about how, and to what extent, to reveal the mythical beasts in the film.",
+    "annotations": [
+      {
+        "trailer_ms": 105000,
+        "width": 250,
+        "offset": -80,
+        "movie_ms": 4885580,
+        "text": "One of the places the beasts, known as aurochs, appear is near the end of the trailer."
+      }
+    ],
+    "movie_length_ms": 5600445,
+    "movie_length_frames": 134295,
+    "fps": 59.94005994005994,
+    "search_bounds": [
+      0,
+      134295
+    ],
+    "trailer": {
+      "trailer_length_frames": 2844,
+      "trailer_length_ms": 119119,
+      "shots": [
+        {
+          "suppress": true,
+          "match_ms": 5370622,
+          "start_ms": 0
+        },
+        {
+          "suppress": true,
+          "match_ms": 22728,
+          "start_ms": 3949
+        },
+        {
+          "suppress": true,
+          "match_ms": 0,
+          "start_ms": 6198
+        },
+        {
+          "suppress": true,
+          "match_ms": 5588393,
+          "start_ms": 7292
+        },
+        {
+          "suppress": true,
+          "match_ms": 244419,
+          "start_ms": 9745
+        },
+        {
+          "match_ms": 246212,
+          "start_ms": 14217
+        },
+        {
+          "match_ms": 281827,
+          "start_ms": 15921
+        },
+        {
+          "match_ms": 158888,
+          "start_ms": 17891
+        },
+        {
+          "match_ms": 120645,
+          "start_ms": 19703
+        },
+        {
+          "match_ms": 1291653,
+          "start_ms": 21866
+        },
+        {
+          "match_ms": 4243444,
+          "start_ms": 23449
+        },
+        {
+          "match_ms": 1162834,
+          "start_ms": 26296
+        },
+        {
+          "match_ms": 1190691,
+          "start_ms": 27397
+        },
+        {
+          "match_ms": 1165962,
+          "start_ms": 28377
+        },
+        {
+          "match_ms": 1176554,
+          "start_ms": 29430
+        },
+        {
+          "match_ms": 1298534,
+          "start_ms": 30226
+        },
+        {
+          "suppress": true,
+          "match_ms": 5393267,
+          "start_ms": 32397
+        },
+        {
+          "match_ms": 1083391,
+          "start_ms": 33586
+        },
+        {
+          "match_ms": 526245,
+          "start_ms": 35416
+        },
+        {
+          "match_ms": 534335,
+          "start_ms": 36404
+        },
+        {
+          "match_ms": 575037,
+          "start_ms": 37410
+        },
+        {
+          "match_ms": 590758,
+          "start_ms": 38674
+        },
+        {
+          "match_ms": 1341154,
+          "start_ms": 39900
+        },
+        {
+          "match_ms": 1233895,
+          "start_ms": 41058
+        },
+        {
+          "match_ms": 3128442,
+          "start_ms": 42349
+        },
+        {
+          "match_ms": 1616975,
+          "start_ms": 43567
+        },
+        {
+          "match_ms": 1476729,
+          "start_ms": 44354
+        },
+        {
+          "match_ms": 1623981,
+          "start_ms": 44970
+        },
+        {
+          "match_ms": 1545747,
+          "start_ms": 45532
+        },
+        {
+          "match_ms": 1540132,
+          "start_ms": 46105
+        },
+        {
+          "match_ms": 1512677,
+          "start_ms": 47582
+        },
+        {
+          "match_ms": 1517806,
+          "start_ms": 49292
+        },
+        {
+          "match_ms": 1641705,
+          "start_ms": 50149
+        },
+        {
+          "match_ms": 1627984,
+          "start_ms": 51230
+        },
+        {
+          "match_ms": 1662338,
+          "start_ms": 52101
+        },
+        {
+          "match_ms": -1,
+          "start_ms": 54809,
+          "suppress": true
+        },
+        {
+          "match_ms": 1671564,
+          "start_ms": 58447
+        },
+        {
+          "match_ms": 1795754,
+          "start_ms": 59464
+        },
+        {
+          "match_ms": 4523018,
+          "start_ms": 62278
+        },
+        {
+          "match_ms": 388876,
+          "start_ms": 63875
+        },
+        {
+          "match_ms": 2483638,
+          "start_ms": 64578
+        },
+        {
+          "match_ms": 2473045,
+          "start_ms": 65715
+        },
+        {
+          "match_ms": 2510411,
+          "start_ms": 66665
+        },
+        {
+          "match_ms": 4524936,
+          "start_ms": 67584
+        },
+        {
+          "match_ms": 2131543,
+          "start_ms": 68994
+        },
+        {
+          "match_ms": 5235256,
+          "start_ms": 70387
+        },
+        {
+          "match_ms": 4399912,
+          "start_ms": 71650
+        },
+        {
+          "match_ms": 2660373,
+          "start_ms": 72799
+        },
+        {
+          "match_ms": 3186284,
+          "start_ms": 74310
+        },
+        {
+          "match_ms": 321943,
+          "start_ms": 75449
+        },
+        {
+          "match_ms": 376699,
+          "start_ms": 76388
+        },
+        {
+          "match_ms": 309975,
+          "start_ms": 77493
+        },
+        {
+          "match_ms": 320400,
+          "start_ms": 78357
+        },
+        {
+          "match_ms": 313979,
+          "start_ms": 79109
+        },
+        {
+          "match_ms": 478036,
+          "start_ms": 80163
+        },
+        {
+          "match_ms": 3611608,
+          "start_ms": 81615
+        },
+        {
+          "suppress": true,
+          "match_ms": 5588393,
+          "start_ms": 83002
+        },
+        {
+          "match_ms": 2539477,
+          "start_ms": 85063
+        },
+        {
+          "match_ms": 2556158,
+          "start_ms": 86690
+        },
+        {
+          "match_ms": 265270,
+          "start_ms": 87898
+        },
+        {
+          "suppress": true,
+          "match_ms": 5344808,
+          "start_ms": 88939
+        },
+        {
+          "match_ms": 4256038,
+          "start_ms": 90981
+        },
+        {
+          "match_ms": 2241346,
+          "start_ms": 93290
+        },
+        {
+          "match_ms": 2832062,
+          "start_ms": 94628
+        },
+        {
+          "match_ms": 4828781,
+          "start_ms": 95986
+        },
+        {
+          "match_ms": 4795294,
+          "start_ms": 96960
+        },
+        {
+          "match_ms": 1020336,
+          "start_ms": 97891
+        },
+        {
+          "match_ms": 1055283,
+          "start_ms": 99052
+        },
+        {
+          "match_ms": 466527,
+          "start_ms": 99824
+        },
+        {
+          "match_ms": 440754,
+          "start_ms": 101265
+        },
+        {
+          "match_ms": 445634,
+          "start_ms": 102070
+        },
+        {
+          "match_ms": 4346741,
+          "start_ms": 103096
+        },
+        {
+          "match_ms": 4885580,
+          "start_ms": 104591
+        },
+        {
+          "suppress": true,
+          "match_ms": 489713,
+          "start_ms": 105955
+        },
+        {
+          "match_ms": 3492715,
+          "start_ms": 108051
+        },
+        {
+          "match_ms": 3499011,
+          "start_ms": 109454
+        },
+        {
+          "match_ms": 3500304,
+          "start_ms": 110337
+        },
+        {
+          "suppress": true,
+          "match_ms": 5229459,
+          "start_ms": 112142
+        },
+        {
+          "match_ms": 5229459,
+          "start_ms": 114952,
+          "suppress": true
+        }
+      ],
+      "thumb_width": 204
+    },
+    "bounds_ms": [
+      40892,
+      5272977
+    ]
+  }
+]
