@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+path {
+  stroke-linejoin: round;
+}
+
+.land {
+  fill: #ddd;
+}
+
+.states {
+  fill: none;
+  stroke: #fff;
+}
+
+.voronoi {
+  fill: none;
+  stroke: brown;
+  stroke-width: .5px;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script src="http://d3js.org/topojson.v0.min.js"></script>
+<script>
+
+var width = 960,
+    height = 500;
+
+var projection = d3.geo.albers();
+
+var path = d3.geo.path()
+    .projection(projection)
+    .pointRadius(1.5);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+queue()
+    .defer(d3.json, "data/us.json")
+    .defer(d3.json, "data/airport.topojson")
+    .await(ready);
+var airportGeo;
+
+function ready(error, us, airports) {
+  airportGeo = topojson.object(airports, airports.objects.airports);
+  svg.append("path")
+      .datum(topojson.object(us, us.objects.land))
+      .attr("class", "land")
+      .attr("d", path);
+
+  svg.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a.id !== b.id; }))
+      .attr("class", "states")
+      .attr("d", path);
+
+  svg.append("path")
+      //.datum(topojson.object(airports, airports.objects.airports))
+            .datum(airportGeo)
+
+      .attr("class", "points")
+      .attr("d", path);
+
+  svg.append("path")
+      .datum(d3.geom.voronoi(airportGeo.coordinates.map(projection)))
+      .attr("class", "voronoi")
+      .attr("d", function(d) { return "M" + d.map(function(d) { return d.join("L"); }).join("ZM") + "Z"; });
+
+}
+
+</script>

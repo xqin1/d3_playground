@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  #g-graphic{
+    font-family: Arial;
+    border-top: solid 1px #dedede;
+    border-bottom: solid 1px #dedede;
+    margin: 20px 10px 10px;
+    padding: 0 0 20px 0;
+  }
+
+  .storyHeader h1{
+    text-align: center;
+    font-size: 28px !important;
+    margin-top:20px;
+
+  }
+  .storySummary, #main .storySummary {
+    text-align: center;
+    width: 500px;
+    margin: 0px auto;
+  }
+
+  #main .summary {
+    font-size:15px !important;
+}
+
+  .g-article h3 {
+    font-family: Arial;
+    font-size: 15px;
+    margin: 20px 0 25px;
+    text-align: center;
+  }
+
+  .legend text,
+  .legend tspan {
+    /*alignment-baseline: baseline;*/
+  }
+
+  .legend rect {
+    fill: #ddd;
+  }
+
+  .state {
+    fill: #e6e6e6;
+  }
+
+  .county-mesh {
+    stroke: #fff;
+    fill: none;
+    stroke-width: 1px;
+  }
+
+  .county {
+    stroke: #fff;
+    stroke-width: 0.5px;
+    fill: #ddd;
+    fill-opacity: 0.5;
+  }
+
+  .county-path {
+    stroke: none;
+    stroke-width: 0.5;
+    fill: #ddd;
+  }
+
+  .county-path.selected {
+    fill: #aaa;
+  }
+
+  .county-hover {
+    fill-opacity: 0;
+    stroke: none;
+  }
+
+  .county-hover text {
+    display: none;
+    font-weight: normal;
+    stroke: none;
+    font-size: 10px;
+  }
+
+  .hover.county-hover {
+    stroke: #000;
+    stroke-width: 1px;
+  }
+
+  .hover.county-hover text{
+    fill-opacity: 1;
+    display: block;
+    text-anchor: middle;
+  }
+
+  .county .label {
+    display: none;
+    fill: #000;
+    font-size: 9px;
+    stroke: none;
+    text-anchor: middle;
+  }
+
+  .hover .label {
+    display: block;
+  }
+
+  .year-info {
+    display: inline-block;
+    border-right: solid 1px #dedede;
+  }
+
+  .year-info h3 {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .year-info h3 span {
+    font-weight:normal;
+    font-size:12px;
+  }
+
+  .year-info:last-child {
+    border-right: none;
+  }
+
+  .g-table {
+    border-collapse:collapse;
+  }
+
+  .g-table td {
+    padding:3px 0;
+    border-top:1px solid #dedede;
+  }
+
+  .g-demo-group {
+    width:75px;
+    padding-left:10px !important;
+  }
+
+  .g-demo-val {
+    text-align:right;
+    padding-right:10px !important;
+  }
+
+  .g-table-container {
+    margin-left:0px;
+  }
+
+  .g-highlight td {
+    color: white;
+    font-weight: bold;
+  }
+
+  .g-article {
+    width: 500px;
+    margin: 30px auto;
+  }
+
+  .g-article p,
+  .storySummary {
+    font-size: 15px;
+    line-height: 1.5em;
+  }
+
+  .city {
+    opacity: 0.5;
+  }
+
+  .city text {
+    alignment-baseline: middle;
+  }
+
+  .article-refer {
+    font-family: Georgia;
+    font-weight: bold;
+    font-size: 14px;
+    color: #004276;
+    background-color: #f0f4f5;
+    padding: 8px 4px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+  }
+
+  #trend-charts {
+    font-family:arial;
+  }
+
+  /*line chart*/
+  .county-trend {
+    fill: none;
+    stroke: #ccc;
+    stroke-opacity: 0.5;
+    stroke-width: 0.3;
+  }
+
+  .sline {
+    fill: none;
+    stroke: orange;
+    stroke-opacity: 0.9;
+    stroke-width: 3;
+  }
+
+  .county-trend.hover {
+    stroke: red;
+    stroke-opacity: 1;
+  }
+
+  .g-fiftypct {
+    fill:none;
+    stroke:#000;
+    stroke-width:1;
+  }
+
+  .axis path, .axis line {
+    fill: none;
+    stroke: #666;
+    shape-rendering: crispEdges;
+  }
+
+  .y.axis .domain {
+    display: none;
+  }
+
+  .y.axis .tick {
+    stroke: #666;
+    stroke-dasharray: 2 4;
+    opacity: 0.5;
+  }
+
+  .y text {
+    fill: #999;
+    font-weight: normal;
+  }
+
+  .y.axis :last-of-type text {
+    display: none;
+  }
+
+  .y.axis .tick.minor text {
+    display: none;
+  }
+
+  .x.axis .tick {
+    stroke: #ccc;
+  }
+
+  .x.axis .domain {
+    stroke: #aaa;
+  }
+
+  .x.axis text {
+    fill: #666;
+    display: none;
+  }
+
+  .x.axis :first-of-type text{
+    display: block;
+  }
+
+  .x.axis :last-of-type text {
+    display: block;
+  }
+
+  .trend-container {
+    position:relative;
+    margin: 30px 0;
+  }
+
+  .g-charthed {
+    font-size:13px;
+  }
+
+  .race-charts-subhed {
+     font-size: 14px;
+    font-weight: bold;
+  }
+
+  .highlight text {
+    display: none;
+  }
+
+  .highlight.hover text {
+    display: block;
+  }
+
+  .highlight .hover-target {
+    opacity: 0.0001;
+  }
+  #main #interactiveFooter {
+    width: 500px;
+    margin: 0 auto 20px;
+    border-top: solid 1px #ddd;
+    padding-top: 20px;
+  }
+
+</style>
+<!--[if lte IE 8]>
+  <img src="http://graphics8.nytimes.com/newsgraphics/2013/02/05/california/d21e3892ac14de0356f3a0d8e4f82c59a3500908/fallback.png" alt="chart" class="nytg-fallback">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<div id="g-graphic"></div>
+<div class="g-article">
+<p>A <a href="http://www.dof.ca.gov/research/demographic/reports/projections/"> report published in January</a> by the state of California projects that Hispanics will become the state's largest demographic group early next year and will represent nearly half of all residents by 2060.</p>
+<p>Most of the growth among Hispanics has been in Southern California and the Central Valley, while Asians now make up one in four residents in many counties in the Bay Area. The northern part of the state, which is the least populous area, has remained predominantly white.</p>
+<div class = "trend-container">
+<h3>Percent Hispanic By Region, 1980 to 2020</h3>
+<div id="trend-charts">
+</div>
+</div>
+<p>These changes have affected the state's politics. A Mexican-American is the mayor of Los Angeles, and another is the leader of the State Assembly. Nearly all of the 15 California Republicans in Congress represent districts where at least a quarter of the residents are Latino. As the state becomes more Hispanic, its attitudes toward immigration are likely to continue to soften.</p>
+<a class="article-refer" href="http://www.nytimes.com/2013/02/17/us/california-eases-its-tone-as-latinos-make-gains.html">Read Related Article &raquo;</a>
+</div>
+<script src="http://graphics8.nytimes.com/newsgraphics/2013/02/05/california/d21e3892ac14de0356f3a0d8e4f82c59a3500908/lib/d3.v3.min.js"></script>
+<script src="http://graphics8.nytimes.com/newsgraphics/2013/02/05/california/d21e3892ac14de0356f3a0d8e4f82c59a3500908/lib/topojson.v0.min.js"></script>
+<script src="http://graphics8.nytimes.com/newsgraphics/2013/02/05/california/d21e3892ac14de0356f3a0d8e4f82c59a3500908/lib/queue.v1.min.js"></script>
+<script>
+
+(function() {
+var margin = { top: 30, right: 20, bottom: 0, left: 20 },
+    width = 960 - margin.left - margin.right,
+    height = 240 - margin.top - margin.bottom;
+
+var numColumns = 5,
+    mapWidth = width / numColumns,
+    mapHeight = 350;
+
+var formatAsPercentage = d3.format(".1%");
+
+var svg = d3.select("#g-graphic").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.select("#g-graphic").append("div")
+    .classed("g-table-container", true)
+    .style("margin-left", margin.left + "px")
+    .style("margin-top", margin.top + "px");
+
+var pctFormat = d3.format(".1%"),
+    format = d3.format(",f0");
+
+var cities = [
+  {
+    name: "S.F.",
+    lat: 37.775,
+    lon: -122.418,
+    offset: -10,
+    fips: 6075
+  },
+  {
+    name: "L.A.",
+    lat: 34.052,
+    lon: -118.242,
+    offset: -10,
+    fips: 6037
+  },
+  {
+    name: "Sacramento",
+    lat: 38.581,
+    lon: -121.493,
+    offset: 40,
+    fips: 6067
+  },
+  {
+    name: "Fresno",
+    lat: 36.7478,
+    lon: -119.7714,
+    offset: -50,
+    fips: 6019
+  }
+];
+
+var races = [
+  {
+    key: "hispanic",
+    label: "Hispanic",
+    highlight: "hsl(42, 90%, 56%)"
+  },
+  {
+    key: "white",
+    label: "White",
+    highlight: "hsl(120, 34%, 54%)"
+  },
+  {
+    key: "black",
+    label: "Black",
+    highlight: "hsl(200, 75%, 64%)"
+  },
+  {
+    key: "asian",
+    label: "Asian",
+    highlight: "hsl(7, 70%, 56%)"
+  },
+  {
+    key: "other",
+    label: "Other",
+    highlight: "hsl(274, 40%, 67%)"
+  }
+];
+
+var breaks = [0.25, 0.5],
+    legendData = [
+      { label: "50% or greater", value: 0.5 },
+      { label: "25 - 50%", value: 0.4 },
+      { label: "Less than 25%", value: 0 },
+    ];
+
+races.forEach(function(r) {
+  r.color = d3.scale.threshold()
+      .domain(breaks)
+      .range([0, .3, 1].map(d3.interpolateLab("#d9d9d9", r.highlight)));
+});
+
+var legend = svg.append("g")
+    .classed("legend", true)
+    .attr("transform", "translate(840," + 5 + ")");
+
+legend.append("text")
+    .classed("legend-title", true)
+    .attr("y", 8)
+    .text("Percent ")
+    .style("font-weight", "bold")
+      .append("tspan");
+
+var legendRows = legend.selectAll("legend-row")
+    .data(legendData)
+  .enter().append("g")
+    .attr("transform", function(d, i) { return "translate(0, " + (15 + i * 15) + ")"; })
+    .text("test");
+
+legendRows.append("rect")
+    .attr("width", 10)
+    .attr("height", 10);
+
+legendRows.append("text")
+    .text(function(d) { return d.label; })
+    .attr("transform", "translate(15, 8)");
+
+queue()
+    .defer(d3.json, "data/ca-small.json")
+    .defer(d3.tsv, "data/merged-multirace.tsv")
+    .await(ready);
+
+function ready(error, ca, csv) {
+
+  csv.forEach(function(d) {
+    d.totalpop = +d.totalpop;
+    d.pctamind = +d.pctamind;
+    d.year = +d.year;
+    races.forEach(function(r) { d["pct" + r.key] = +d["pct" + r.key]; });
+    d.pctother = d.pctother + d.pctamind;
+  });
+
+  csv = csv
+      .filter(function(d) { return d.year < 2030 && d.year !== 1970; })
+      .sort(function(a, b) { return a.year - b.year; });
+
+  var dataByYearAndFips = d3.nest()
+      .key(function(d) { return d.year; })
+      .key(function(d) { return d.fips; })
+      .rollup(function(values) { return values[0]; })
+      .map(csv);
+
+  var populationByYear = {};
+  d3.entries(dataByYearAndFips).forEach(function(dataByFips) {
+    populationByYear[dataByFips.key] = d3.sum(d3.values(dataByFips.value), function(d) { return d.totalpop; });
+  });
+
+  var projection = d3.geo.albers().translate([mapWidth / 2 - 20, mapHeight / 2 - 80]).parallels([34, 40.5]).rotate([120, 0]).scale(1300),
+      path = d3.geo.path().projection(projection);
+
+  var locatorProjection = d3.geo.albers().translate([50 / 2, 70 / 2]).parallels([34, 40.5]).rotate([120, 0]).scale(400),
+      locatorPath = d3.geo.path().projection(locatorProjection);
+
+  var stateGeometry = topojson.object(ca, ca.objects.states),
+      countyGeometries = topojson.object(ca, ca.objects.counties).geometries,
+      countyBoundaries = topojson.mesh(ca, ca.objects.counties, function(a, b) { return a !== b; });
+
+  var fipsByName = {};
+  csv.forEach(function(d) { fipsByName[d.county] = d.fips; });
+
+  var countyGeometriesByFips = {};
+  countyGeometries.forEach(function(d) { countyGeometriesByFips[d.id] = d; });
+
+  var years = svg.selectAll(".year")
+      .data(d3.entries(dataByYearAndFips))
+    .enter().append("g")
+      .classed("year", true)
+      .attr("transform", function(d, i) { return "translate(" + ((i % numColumns) * mapWidth) + "," + Math.floor(i / numColumns) * mapHeight + ")"; } );
+
+  years.each(function(d, i) {
+    var year = d3.select(this),
+        dataByFips = d.value,
+        data = d3.values(dataByFips);
+
+    // Compute array of name-value pairs.
+    var raceRatios = races.map(function(race) {
+      var pct = "pct" + race.key;
+      return {
+        race: race,
+        proportion: d3.sum(data, function(d) { return d[pct] * d.totalpop; }) / populationByYear[d.key]
+      };
+    });
+
+    raceRatios.sort(function(a, b) { return b.proportion - a.proportion; });
+
+    year.append("path")
+        .data(stateGeometry)
+        .attr("d", path)
+        .attr("class", "state");
+
+    year.selectAll(".county-path")
+        .data(countyGeometries)
+      .enter().append("path")
+        .classed("county-path", true)
+        .attr("d", path);
+
+    year.append("path")
+        .datum(countyBoundaries)
+        .attr("d", path)
+        .attr("class", "county-mesh");
+
+    var countyHover = year.selectAll(".county-hover")
+        .data(countyGeometries)
+      .enter().append("g")
+        .attr("class", function(d) { return "county-hover c" + d.id; })
+        .on("mouseover", function(d) { d3.selectAll(".c" + d.id).classed("hover", true); })
+        .on("mouseout", function(d) { d3.selectAll(".c" + d.id).classed("hover", false); });
+
+    countyHover.append("path")
+        .attr("d", path);
+
+    var text = countyHover.append("g")
+        .attr("transform", function(d) {
+          var c = path.bounds(d);
+          return "translate(" + ((c[0][0] + c[1][0]) / 2) + "," + (c[0][1] - 5) + ")"
+        });
+
+    text.append("text")
+      .text(function(d) { return dataByFips[d.id].county; })
+      .attr("y", -12);
+
+    text.append("text")
+      .text(function(d) { return pctFormat(dataByFips[d.id].pcthispanic); })
+
+    // append divs and tables for overall numbers
+    var tc  = d3.select(".g-table-container").append("div")
+        .classed("year-info",true)
+        .style("width", mapWidth - 60 + "px")
+        .style("padding", "0px 30px");
+
+    tc.append("h3").html(d.key != 2020 ? d.key : d.key + " <span>(projected)</span>");
+
+    var table = tc.append("table")
+        .classed("g-table",true);
+
+    var row = table.selectAll(".row")
+        .data(function(d) {return raceRatios})
+      .enter().append("tr")
+        .attr("class", function(d) { return "row g-" + d.race.key; }, true);
+
+    row.append("td")
+        .text(function(d) { return d.race.label; })
+        .classed("g-demo-group",true);
+
+    row.append("td")
+        .classed("g-demo-val",true)
+        .text(function(d) { return formatAsPercentage(d.proportion); })
+
+    row.selectAll("td")
+        .on("mouseover", function(d){
+          highlightRace(d.race)
+        })
+        .on("mouseout", function(d){
+          highlightRace(races[0])
+        });
+  });
+
+  var city = years.selectAll(".city")
+      .data(cities)
+    .enter().insert("g", ".county-hover")
+      .classed("city", true)
+      .attr("transform", function(d) {
+        var c = projection([d.lon, d.lat]);
+        return "translate(" + c[0] + "," + c[1] + ")";
+      });
+
+  city.append("circle")
+      .attr("r", 1.8);
+
+  var firstYear = svg.select(".year").selectAll(".city");
+
+  firstYear.append("line")
+      .style("stroke", "#333")
+      .style("stroke-dashArray", "2 1")
+      .style("stroke-opacity", 0.7)
+      .attr("x2", function(d) { return d.offset; })
+
+  firstYear.append("text")
+      .text(function(d) { return d.name; })
+      .style("text-anchor", function(d) { return (d.offset > 0) ? "start" : "end"; })
+      .attr("x", function(d) { return d.offset; })
+      .on("mouseover", function(d) { d3.selectAll(".c" + d.fips).classed("hover", true); })
+      .on("mouseout", function(d) { d3.selectAll(".c" + d.fips).classed("hover", false); });
+
+  highlightRace(races[0]);
+
+  function highlightRace(race) {
+
+    d3.select(".legend-title tspan").text(race.label);
+
+    d3.selectAll("table .g-highlight")
+        .classed("g-highlight", false)
+        .style("background-color", "white");
+
+    d3.selectAll("table .g-" + race.key)
+        .classed("g-highlight", true)
+        .style("background-color", race.color(0.7));
+
+    d3.selectAll(".legend rect")
+        .style("fill", function(d) {
+          return race.color(d.value);
+        });
+
+    years.each(function(d){
+      var year = d3.select(this),
+          dataByFips = d.value;
+
+      year.selectAll(".county-path")
+          .style("fill", function(c) {
+            return race.color(dataByFips[c.id]["pct" + race.key])
+          });
+    });
+  }
+
+  // line chart
+  var regions = [
+    {
+      "label": "Los Angeles",
+      "counties": ["Los Angeles"]
+    },
+    {
+      "label": "Central Valley",
+      "counties": ["Fresno", "Kern", "Kings", "Madera", "Mariposa", "Merced", "San Joaquin", "Stanislaus", "Tulare", "Tuolumne"]
+    },
+    {
+      "label": "Bay Area",
+      "counties": ["San Francisco", "Sonoma", "Napa", "Solano", "Contra Costa", "Napa", "Alameda", "San Mateo", "Santa Clara"]
+    },
+    {
+      "label": "Northern",
+      "counties": ["Butte", "Colusa", "Del Norte", "Glenn", "Humboldt", "Lake", "Lassen", "Mendocino", "Modoc", "Nevada", "Plumas", "Shasta", "Sierra", "Siskiyou", "Sutter", "Tehama", "Trinity", "Yuba"]
+    }
+  ];
+
+  regions.forEach(function(region) {
+    region.countyGeometries = {
+      type: "GeometryCollection",
+      geometries: region.counties.map(function(countyName) {
+        return countyGeometriesByFips[fipsByName[countyName]];
+      })
+    };
+
+    region.trends = d3.nest()
+        .key(function(d) { return d.year; })
+        .rollup(function(values) {
+          return d3.sum(values, function(d) { return d.totalpop * d.pcthispanic; }) / d3.sum(values, function(d) { return d.totalpop; });
+        })
+        .entries(csv.filter(function(d) {
+          return region.counties.indexOf(d.county) >= 0;
+        }));
+  });
+
+  var trendmargin = { top: 5, right: 40, bottom: 30, left: 18 },
+      trendWidth = 690 - trendmargin.left - trendmargin.right,
+      trendHeight = 250 - trendmargin.top - trendmargin.bottom;
+
+  var geo_chart_buffer = 30;
+
+  var x0 = d3.scale.ordinal()
+      .domain(d3.range(regions.length))
+      .rangeBands([0, trendWidth], 0.27, 0);
+
+  var x = d3.scale.linear()
+      .domain([1980, 2020])
+      .range([0, x0.rangeBand() ]);
+
+  var y = d3.scale.linear()
+      .domain([0, .65])
+      .range([trendHeight, 0]);
+
+  var line = d3.svg.line()
+      .x(function(d) { return x(d.key); })
+      .y(function(d) { return y(d.values); });
+
+  var tickformatter = d3.format("%");
+
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .ticks(5)
+      .tickSize(-x0())
+      .tickFormat(function(d) {
+        if (d == 0 || d == 0.5 || d == 0.6) { return ""; }
+        else if (d == 0.4) { return tickformatter(d); }
+        else { return d * 100; }
+
+      })
+      .orient("left");
+
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .tickFormat(function(d) {return d})
+      .ticks(6)
+      .orient("bottom");
+
+  var geo_selection_charts = d3.select("#trend-charts")
+      .append("svg")
+      .style("margin-left", "-85px")
+      .attr("width",trendWidth + trendmargin.left + trendmargin.right)
+      .attr("height",trendHeight+ trendmargin.top + trendmargin.bottom  )
+    .append("g")
+      .classed("trends", true)
+      .attr("transform", "translate(" + trendmargin.left + "," + trendmargin.top + ")")
+
+  window.regions = regions;
+
+  var geo_group = geo_selection_charts.selectAll(".g-geo-chart")
+      .data(regions)
+    .enter().append("g")
+      .attr("class", "g-geo-chart")
+      .attr("transform", function(d, i) { return "translate(" + x0(i) + ",0)"; });
+
+  geo_group.append("text")
+      .classed("g-charthed", true)
+      .text(function(d) {return d.label})
+      .attr("transform","translate(0,40)")
+      .attr("x", 40)
+      .attr("y", -margin.top);
+
+  geo_group.append("g")
+      .attr("class", "y axis")
+      .attr("transform", "translate("+ 0 +",0)")
+      .call(yAxis);
+
+  geo_group.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + trendHeight + ")")
+      .call(xAxis);
+
+  axistext = geo_group.selectAll(".y.axis text")
+      .attr("transform","translate(5,-10)")
+      .style("text-anchor", "start")
+
+  geo_group.append("path")
+      .attr("class", "line sline")
+      .attr("d", function(d) { return line(d.trends); })
+      .attr("stroke", races[0].color(1));
+
+  var locator = geo_group.append("g")
+      .classed("locator", true)
+      .attr("transform", "translate(-5, -10)");
+
+  locator.append("path")
+      .datum(stateGeometry)
+      .attr("class", "county-path")
+      .attr("d", locatorPath);
+
+  locator.append("path")
+      .datum(function(d) { return d.countyGeometries; })
+      .attr("class", "selected county-path")
+      .attr("d", locatorPath);
+
+  var end = geo_group.selectAll(".highlight")
+      .data(function(d) { return d.trends; })
+    .enter().append("g")
+      .attr("class", function(d, i) { return "highlight h-" + i; })
+      .classed("hover", function(d, i) { return i == 4;})
+      .attr("transform", function(d) { return "translate(" + x(d.key) + "," + y(d.values) + ")"})
+      .on("mouseover", function(d, i) {
+        d3.selectAll(".hover").classed("hover", false);
+        d3.selectAll(".h-" + i).classed("hover", true);
+      })
+      .on("mouseout", function(d, i) {
+        d3.selectAll(".hover").classed("hover", false);
+        d3.selectAll(".h-" + 4).classed("hover", true);
+
+      })
+
+  end.append("rect")
+      .classed("hover-target", true)
+      .attr("y", function(d) { return -y(d.values); })
+      .attr("x", -18)
+      .attr("width", 36)
+      .attr("height", trendHeight);
+
+  end.append("circle")
+      .attr("r", 3)
+      .attr("fill", races[0].color(1));
+
+  end.append("text")
+      .text(function(d) { return pctFormat(d.values); })
+      .attr("y", -10)
+      .style("font-weight", "bold")
+      .style("text-anchor", "middle")
+      .style("font-size", "12px");
+
+}
+
+
+
+})();
+</script>
