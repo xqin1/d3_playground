@@ -212,7 +212,6 @@
 
     <script src="js/nyt-albers-usa.js"></script>
     <script>//(function() {
- var years, dataByFips,trend,data,end;
 
     queue()
         .defer(d3.json, "data/us-states.json")
@@ -228,13 +227,11 @@
       "U.S. avg.": 1
     };
 
-   
-
     var formatPercent = d3.format(".0%");
 
     function ready(error, topology, rates, labels) {
-       var event = d3.dispatch("mouseover", "mouseout");
-          years = d3.range(2001, 2011);
+      var event = d3.dispatch("mouseover", "mouseout"),
+          years = d3.range(2001, 2011),
           dataByFips = {};
 
       rates.forEach(function(d) {
@@ -243,7 +240,6 @@
         d.trends = years.map(function(y) { return {value: d["x" + y], year: y}; });
         dataByFips[d.fips] = d;
       });
-      data = rates;
 
       renderMap();
       renderLines();
@@ -415,7 +411,7 @@
             .on("mouseover", function(d) { event.mouseover(d.fips); })
             .on("mouseout", function() { event.mouseout(); });
 
-         trend = svg.append("g")
+        var trend = svg.append("g")
             .attr("class", "g-trend")
           .selectAll("g")
             .data(rates.sort(function(a, b) { return (a.state in emphasize) - (b.state in emphasize); }))
@@ -423,13 +419,12 @@
             .classed("g-emphasis", function(d) { return d.state in emphasize; })
             .on("mouseover", function(d) { event.mouseover(d.fips); })
             .on("mouseout", function() { event.mouseout(); });
-           // console.log(trend);
 
         trend.append("path")
             .attr("class", "g-trend-line")
             .attr("d", function(d) { return line(d.trends); });
 
-         end = trend.append("g")
+        var end = trend.append("g")
             .attr("transform", function(d) { return "translate(" + width + "," + y(d.trends[d.trends.length - 1].value) + ")"; })
 
         end.append("text")

@@ -58,6 +58,10 @@ var g1 = svg.append("g")
 var g2 = svg.append("g")
     .attr("class", "key")
     .attr("transform", "translate(50,180)");
+//nyt school example
+var g3 = svg.append("g")
+    .attr("class", "key")
+    .attr("transform", "translate(50,280)");
  
 var a = [.11, .22, .33, .50];
 var b = ["#6e7c5a", "#a0b28f", "#d8b8b3", "#b45554", "#760000"];
@@ -72,6 +76,14 @@ myLegend = thresholdLegend()
                   .threshold(a1,b1)
                   .legendText("my legend 2");
 myLegend(g2);
+
+var a2 = [1e-6, 0.10, 0.40, 0.70];
+var b2 = ["#f5f0f4", "#dbd1da", "#b19cb0", "#785171", "#3f1132"];
+myLegend = thresholdLegend()
+                  .threshold(a2,b2)
+                  .legendText("my legend 3");
+myLegend(g3);
+
 
 //circle key legend
 var scale = d3.scale.sqrt()
