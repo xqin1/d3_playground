@@ -15,19 +15,12 @@ path {
   stroke-linejoin: round;
 }
 
-.land-glow {
-  fill: #000;
-  fill-opacity: .1;
-  filter: url(#glow);
-}
-
-.land-fill {
-  fill: #fff;
-}
 
 .state-boundary {
-  stroke: #ccc;
-  stroke-width: .70px;
+        fill: none;
+        stroke: #fff;
+        stroke-width:1px;
+        pointer-events: none;
 }
 
 .land-fill,
@@ -47,11 +40,17 @@ path {
 
 var width = 800,
     height = 500;
+var counties, rateByFips;
+var dataDate = "dec2012";
 
 var projection = albersUsa();
 
 var path = d3.geo.path()
     .projection(projection);
+
+var color = d3.scale.threshold()
+    .domain([-0.1,1e-6, 0.1, 0.3, 0.5, 0.75, 0.9])
+    .range(["#C51B7D", "#DE77AE", "#F1B6DA", "#FDE0EF", "#E6F5D0", "#B8E186", "#7FBC41", "#4D9221"]);
 
 var svg = d3.select("body").append("svg")
    // .attr("viewBox", "0 0 " + width + " " + height)
@@ -70,31 +69,44 @@ queue()
     .await(ready);
 
 function ready(error, us, rates, labels) {
-  // svg.append("path") // translucent outer glow
-  //     .datum(topojson.object(us, us.objects.land))
-  //     .attr("d", path)
-  //     .attr("class", "land-glow");
-    svg.selectAll("path")
-      .data(topojson.object(us, us.objects.states))
+  rate = rates;
+  counties = topojson.object(us, us.objects.counties).geometries;
+  rates.forEach(function(d) {
+        d.fips = parseInt(d.fips, 10);
+      });
+  rateByFips= d3.nest()
+                .key(function(d){return d.fips})
+                .map(rates);
+  svg.append("g")
+      .attr("class", "g-county")
+    .selectAll("path")
+      .data(counties)
     .enter().append("path")
       .attr("d", path)
-      .attr("class", "state-boundary");
+      .style("fill", function(d) {
+        //return "red"
+          if (typeof rateByFips[d.id]!= "undefined"){  
+            var countyRateRow = rateByFips[d.id][0];
+            return countyRateRow ? color(+countyRateRow[dataDate]) : "#F2F0F7";
+          }else{
+            return "#F2F0F7";
+          }
 
-  svg.append("path") // solid white fill
-      .datum(topojson.object(us, us.objects.land))
-      .attr("d", path)
-      .attr("class", "land-fill");
+      })
+     .on("mouseover", function(d) {console.log(d.id + " " +rateByFips[d.id][0][dataDate]); })
+    //  .on("mouseout", function() { event.mouseout(); });
+
+    svg.append("path")
+            .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+            .attr("d", path)
+            .attr("class", "state-boundary");
 
 
-  svg.append("path") // thin grey stroke for internal county boundaries
-      .datum(topojson.mesh(us, us.objects.counties, function(a, b) { return a.id !== b.id && (a.id / 1000 | 0) === (b.id / 1000 | 0); }))
-      .attr("d", path)
-      .attr("class", "county-boundary");
+  // svg.append("path") // thin grey stroke for internal county boundaries
+  //     .datum(topojson.mesh(us, us.objects.counties, function(a, b) { return a.id !== b.id && (a.id / 1000 | 0) === (b.id / 1000 | 0); }))
+  //     .attr("d", path)
+  //     .attr("class", "county-boundary");
 
-  svg.append("path") // thick grey stroke for internal state boundaries
-      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a.id !== b.id; }))
-      .attr("d", path)
-      .attr("class", "state-boundary");
 };
 
 </script>
