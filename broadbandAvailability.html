@@ -15,7 +15,11 @@ path {
   stroke-linejoin: round;
 }
 
-
+.state {
+  fill: #ccc;
+  fill-opacity:0;
+  cursor:pointer;
+}
 .state-boundary {
         fill: none;
         stroke: #fff;
@@ -23,17 +27,51 @@ path {
         pointer-events: none;
 }
 
-.land-fill,
-.county-boundary {
-  stroke: #ccc;
-  stroke-width: .7px;
+.county {
+  stroke: #fff;
+  stroke-width: 0.2px;
 }
+
+.county-hover {
+    fill-opacity: 0;
+    stroke: #ccc;
+}
+
+.county-hover text {
+    display: none;
+    font-weight: normal;
+    stroke: none;
+    font-size: 10px;
+}
+
+.hover.county-hover {
+    stroke: #000;
+    stroke-width: 1px;
+}
+
+.hover.county-hover text{
+    fill-opacity: 1;
+    display: block;
+    text-anchor: middle;
+  }
+.county .label {
+    display: none;
+    fill: #000;
+    font-size: 9px;
+    stroke: none;
+    text-anchor: middle;
+  }
+
+  .hover .label {
+    display: block;
+  }
 
 </style>
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="http://d3js.org/topojson.v0.min.js"></script>
 <script src="js/albers-usa.js"></script>
+<script src="js/jquery-1.6.2.min.js"></script>
 <script src="http://d3js.org/queue.v1.min.js"></script>
 
 <script>
@@ -42,9 +80,11 @@ var width = 800,
     height = 500;
 var counties, rateByFips;
 var dataDate = "dec2012";
+var countyPath,stateBoundaryPath,countyHover;
+var currentSelected = "";
 
-var projection = albersUsa();
-
+//var projection = albersUsa();
+var projection = d3.geo.albersUsa();
 var path = d3.geo.path()
     .projection(projection);
 
@@ -57,56 +97,90 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-svg.append("filter")
-    .attr("id", "glow")
-  .append("feGaussianBlur")
-    .attr("stdDeviation", 5);
 
 queue()
-    .defer(d3.json, "data/us.json")
+    .defer(d3.json, "data/statecounty_5e6.json")
     .defer(d3.tsv, "data/bb_avai_county.tsv")
     .defer(d3.json, "data/us-state-labels.json")
     .await(ready);
 
 function ready(error, us, rates, labels) {
   rate = rates;
-  counties = topojson.object(us, us.objects.counties).geometries;
-  rates.forEach(function(d) {
-        d.fips = parseInt(d.fips, 10);
-      });
+  counties = topojson.object(us, us.objects.county).geometries;
+  state = topojson.object(us, us.objects.state).geometries;
+  // rates.forEach(function(d) {
+  //       d.fips = parseInt(d.fips, 10);
+  //     });
   rateByFips= d3.nest()
                 .key(function(d){return d.fips})
                 .map(rates);
-  svg.append("g")
-      .attr("class", "g-county")
-    .selectAll("path")
-      .data(counties)
-    .enter().append("path")
-      .attr("d", path)
-      .style("fill", function(d) {
-        //return "red"
-          if (typeof rateByFips[d.id]!= "undefined"){  
-            var countyRateRow = rateByFips[d.id][0];
-            return countyRateRow ? color(+countyRateRow[dataDate]) : "#F2F0F7";
-          }else{
-            return "#F2F0F7";
-          }
-
-      })
-     .on("mouseover", function(d) {console.log(d.id + " " +rateByFips[d.id][0][dataDate]); })
-    //  .on("mouseout", function() { event.mouseout(); });
-
-    svg.append("path")
-            .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-            .attr("d", path)
-            .attr("class", "state-boundary");
 
 
-  // svg.append("path") // thin grey stroke for internal county boundaries
-  //     .datum(topojson.mesh(us, us.objects.counties, function(a, b) { return a.id !== b.id && (a.id / 1000 | 0) === (b.id / 1000 | 0); }))
+  // countyPath = svg.append("g")
+  //     .attr("class", "county")
+  //   .selectAll("path")
+  //     .data(counties)
+  //   .enter().append("path")
   //     .attr("d", path)
-  //     .attr("class", "county-boundary");
+  //     .style("fill", function(d) {
+  //       //return "red"
+  //         if (typeof rateByFips[d.id]!= "undefined"){  
+  //           var countyRateRow = rateByFips[d.id][0];
+  //           return countyRateRow ? color(+countyRateRow[dataDate]) : "#F2F0F7";
+  //         }else{
+  //           return "#F2F0F7";
+  //         }
+  //     })
+  //     //.attr("class", function(d) { return "county-hover c" + d.id; })
+
+  //    //.on("mouseover", function(d,i) {return highlightCounty(d,i,this)})
+  //    //.on("mouseout", function(d,i) {return unhightlightCounty(d,i,this)})
+  //    //.on("mouseover", function(d) {console.log(d.id + " " +rateByFips[d.id][0][dataDate]); })
+  //    //.on("mouseout", function() { event.mouseout(); });
+  //   // .on("click", zoomToState)
+
+  // stateBoundaryPath = svg.append("path")
+  //       .datum(topojson.mesh(us, us.objects.state, function(a, b) { return a !== b; }))
+  //       .attr("d", path)
+  //       .attr("class", "state-boundary");
+
+  countyHover = svg.selectAll(".county-hover")
+        .data(counties)
+      .enter().append("g")
+        .attr("class", function(d) { return "county-hover c" + d.id; })
+        .on("mouseover", function(d) { d3.selectAll(".c" + d.id).classed("hover", true); })
+        .on("mouseout", function(d) { d3.selectAll(".c" + d.id).classed("hover", false); })
+        .on("click", zoomToState)
+  countyHover.append("path")
+        .attr("d", path);
+
+function zoomToState(d){
+  console.log("click");
+  if (currentSelected === d.id.substring(0,2)) return reset();
+
+  currentSelected = d.id.substring(0,2);
+   stateZoom = state.filter(function(s){return s.id == d.id.substring(0,2)})[0]
+   b = path.bounds(stateZoom);
+
+  countyPath.transition().duration(750).attr("transform",
+      "translate(" + projection.translate() + ")"
+      + "scale(" + .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height) + ")"
+      + "translate(" + -(b[1][0] + b[0][0]) / 2 + "," + -(b[1][1] + b[0][1]) / 2 + ")");
+  stateBoundaryPath.transition().duration(750).attr("transform",
+      "translate(" + projection.translate() + ")"
+      + "scale(" + .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height) + ")"
+      + "translate(" + -(b[1][0] + b[0][0]) / 2 + "," + -(b[1][1] + b[0][1]) / 2 + ")");
+
+}
+
+function reset() {
+  currentSelected = "";
+  countyPath.transition().duration(750).attr("transform", "");
+  stateBoundaryPath.transition().duration(750).attr("transform", "");
+
+}
 
 };
+
 
 </script>

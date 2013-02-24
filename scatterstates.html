@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<title>2012 US Presidential Race: County-based Results</title>
+<meta charset="utf-8">
+<style>
+
+body {
+ font-family: Gill Sans;
+}
+
+.counties {
+  stroke: #fff;
+  stroke-width: .5px;
+  stroke-opacity: .5;
+}
+
+.states {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.map {fill:rgb(200,255,200)}
+.q0 {fill:rgb(178, 24, 43)}
+.q1 {fill:rgb(214, 96, 77)}
+.q2 {fill:rgb(244, 165, 130)}
+.q3 {fill:rgb(253, 219, 199)}
+.q4 {fill:rgb(227, 227, 227)}
+.q5 {fill:rgb(209, 229, 240)}
+.q6 {fill:rgb(146, 197, 222)}
+.q7 {fill:rgb(67, 147, 195)}
+.q8 {fill:rgb(33, 102, 172)}
+
+circle {
+   fill:#333;
+   fill-opacity: .8;
+}
+
+.highlighted {
+  stroke: #f00;
+}
+
+.selecting {
+  fill-opacity: .2;
+}
+
+.selecting > circle {
+  fill-opacity: .2;
+}
+
+circle.selected {
+  stroke:rgb(0,100,0);
+  stroke-width: 1px;
+  fill-opacity: .8;
+}
+
+path.selected {
+  stroke:rgb(0,100,0);
+  stroke-width: 1px;
+  fill-opacity: 1;
+}
+
+.brush .extent {
+  stroke: #fff;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
+.hidden {
+ display:none;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.dot {
+  stroke: #000;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script src="http://d3js.org/topojson.v0.min.js"></script>
+<script src="js/scatterstates.js"></script>
+<p>
+  <!-- Not working -->
+<!-- <input id='brushing' type="checkbox" onclick="brushingClick()" checked=true>Brushing</a> -->
+<!-- </p> -->
+<p>
+I had an impulse to visualize the (pretty obvious) observation that progressive politics is correlated with population density. <br/>
+Each circle in the scatterplot is a county; size represents population.<br/>
+The x-axis of the scatterplot is the population density (people/km<sup>2</sup>) on a log scale.<br/>
+The y-axis is % of the vote that went to Obama in the 2012 presidential election.<br/>
+
+Try selecting a region in the scatterplot or map.
+
+<p>
+
+<p>
+Made with <a href="http://d3js.org/">D3</a> by <a href="http://hyperphor.com">Mike Travers</a>. 
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-345282-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+</body>
