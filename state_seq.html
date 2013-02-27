@@ -207,7 +207,7 @@
 
 		<script type="text/javascript">
 
-		var w = 970, h = 630;
+		var w = 1000, h = 630;
 
 		var vis = d3.select(".g-map").append("svg")
 			.attr("width",w)
@@ -233,6 +233,9 @@
 
 		var subCatMoney = ["teachers_schools","cleanair_water", "military_readiness", "law_enforcement", "job_search_assistance","vaccines_children","public_health","stop_violence_against_women", "nutrition_assistance"];
 
+		var subCatLegend = vis.append("g")
+						.attr("transform", "translate(850,300)")
+						.style("display", "none");
 		// Legend
 		var gunTraceLegend = vis.append("g")
 			.attr("transform", "translate(790,138)")
@@ -340,6 +343,9 @@
 	  						     .remove();
 
 	  			chartIsVisible=true;
+	  			updateLegend(pieData);
+	  			subCatLegend.style("display","block");
+
 
     		}
     		function hidePieChart(){
@@ -348,7 +354,42 @@
 						pieChart.transition().duration(1000).style("opacity",0);  
 						pTextg.style("opacity",0);  	
 						chartIsVisible = false;
+						subCatLegend.style("display","none");
 					};	
+			}
+
+			function createLegend(){
+				subCatLegend.selectAll("circle").data(subCatMoney).enter()
+					.append("circle")
+					.attr("cx",8)
+					.attr("cy",function(d,i){return i*20+120;})
+					.attr("r", 6)
+				    .attr("fill",  function(d,i) { return color(i); })
+				    .attr("stroke-width", 1)
+				    .attr("stroke",  function(d,i) { return color(i); })
+				    .style("fill-opacity", 0.7)
+			}
+			function updateLegend(d){
+				var subCatLegendText = subCatLegend.selectAll("text").data(d);
+				var lEnter = subCatLegendText.enter()
+						.append("text")
+						.attr("text-anchor", "left")
+			            .attr("x", 20)
+			            .attr("y", function(d, i) { return i*20+120})
+			              .attr("dx", 0)
+			              .attr("dy", "0.3em") // Controls padding to place text above bars
+			              .text(function(d,i) { return subCatMoney[i] + " " + format(d);})
+			              .style("fill", function(d,i) { return color(i); });
+			    var lUpdate = d3.transition(subCatLegendText)
+			    		//.append("text")
+						.attr("text-anchor", "left")
+			            .attr("x", 20)
+			            .attr("y", function(d, i) { return i*20+120})
+			              .attr("dx", 0)
+			              .attr("dy", "0.3em") // Controls padding to place text above bars
+			              .text(function(d,i) { return subCatMoney[i] + " " + format(d);})
+			              .style("fill", function(d,i) { return color(i); });
+			    var lExit = d3.transition(subCatLegendText.exit()).remove();
 			}
 		// Load the data files
 		queue()
@@ -398,6 +439,7 @@
 						.text(function(d) { return d.properties.name; });
 
 			pieChart = vis.append("g");
+			createLegend();
 
 		}
 

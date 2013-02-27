@@ -115,6 +115,34 @@ function ready(error, us, rates, labels) {
                 .key(function(d){return d.fips})
                 .map(rates);
 
+  countyPaths = svg.append("g")
+              .attr("id","countyPath");  
+  var p = countyPaths.selectAll("path")
+            .data(counties)
+            .attr("d",path);
+
+  p.enter().append("path")
+            .data(counties)
+            .attr("d",path)
+            .style("fill", function(d) {
+                    if (typeof rateByFips[d.id]!= "undefined"){  
+                      var countyRateRow = rateByFips[d.id][0];
+                      return countyRateRow ? color(+countyRateRow[dataDate]) : "#F2F0F7";
+                    }else{
+                      return "#F2F0F7";
+                    }
+            });
+  p.append("svg:title")
+        .text(function(d) { 
+          console.log(d)
+                  if (typeof rateByFips[d.id]!= "undefined"){  
+                      var countyRateRow = rateByFips[d.id][0];
+                      return countyRateRow ? d.properties.name + "/" + countyRateRow[dataDate] : "N/A";
+                    }else{
+                      return "N/A";
+                    }
+        });  
+  p.exit().remove();
 
   // countyPath = svg.append("g")
   //     .attr("class", "county")
@@ -131,28 +159,27 @@ function ready(error, us, rates, labels) {
   //           return "#F2F0F7";
   //         }
   //     })
-  //     //.attr("class", function(d) { return "county-hover c" + d.id; })
 
-  //    //.on("mouseover", function(d,i) {return highlightCounty(d,i,this)})
-  //    //.on("mouseout", function(d,i) {return unhightlightCounty(d,i,this)})
-  //    //.on("mouseover", function(d) {console.log(d.id + " " +rateByFips[d.id][0][dataDate]); })
-  //    //.on("mouseout", function() { event.mouseout(); });
-  //   // .on("click", zoomToState)
+     //.on("mouseover", function(d,i) {return highlightCounty(d,i,this)})
+     //.on("mouseout", function(d,i) {return unhightlightCounty(d,i,this)})
+     //.on("mouseover", function(d) {console.log(d.id + " " +rateByFips[d.id][0][dataDate]); })
+     //.on("mouseout", function() { event.mouseout(); });
+    // .on("click", zoomToState);
 
-  // stateBoundaryPath = svg.append("path")
-  //       .datum(topojson.mesh(us, us.objects.state, function(a, b) { return a !== b; }))
-  //       .attr("d", path)
-  //       .attr("class", "state-boundary");
+  stateBoundaryPath = svg.append("path")
+        .datum(topojson.mesh(us, us.objects.state, function(a, b) { return a !== b; }))
+        .attr("d", path)
+        .attr("class", "state-boundary");
 
-  countyHover = svg.selectAll(".county-hover")
-        .data(counties)
-      .enter().append("g")
-        .attr("class", function(d) { return "county-hover c" + d.id; })
-        .on("mouseover", function(d) { d3.selectAll(".c" + d.id).classed("hover", true); })
-        .on("mouseout", function(d) { d3.selectAll(".c" + d.id).classed("hover", false); })
-        .on("click", zoomToState)
-  countyHover.append("path")
-        .attr("d", path);
+  // countyHover = svg.selectAll(".county-hover")
+  //       .data(counties)
+  //     .enter().append("g")
+  //       .attr("class", "county")// function(d) { return "county-hover c" + d.id; })
+  //       .on("mouseover", function(d) { d3.selectAll(".c" + d.id).classed("hover", true); })
+  //       .on("mouseout", function(d) { d3.selectAll(".c" + d.id).classed("hover", false); })
+  //       .on("click", zoomToState)
+  // countyHover.append("path")
+  //       .attr("d", path);
 
 function zoomToState(d){
   console.log("click");
