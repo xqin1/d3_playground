@@ -192,10 +192,6 @@
 			border:1px solid #ccc;
 		}
 		</style>
-		<!--[if lte IE 8]>
-		  <img src="img/chicago_gun_fallback.png" alt="chart" class="nytg-fallback">
-		<![endif]-->
-		<!--[if gt IE 8]><!-->
 </head>
 <body>
 		<div class="g-graphic">
@@ -370,10 +366,6 @@
 				.attr("d", path)
 				.attr("class", "land-boundary")
 				.on("click", hidePieChart)
-
-			// vis.append("path").datum({type: "GeometryCollection", geometries: filteredCounties})
-			// 	.attr("d", path)
-			// 	.classed("g-county", true);
 
 			var statesMap = vis.append("path")
 				.datum(statesMesh)
