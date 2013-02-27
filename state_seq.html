@@ -207,7 +207,7 @@
 
 		<script type="text/javascript">
 
-		var w = 1000, h = 630;
+		var w = 1200, h = 630;
 
 		var vis = d3.select(".g-map").append("svg")
 			.attr("width",w)
@@ -237,11 +237,11 @@
 						.attr("transform", "translate(850,300)")
 						.style("display", "none");
 		// Legend
-		var gunTraceLegend = vis.append("g")
+		var  circleLegend = vis.append("g")
 			.attr("transform", "translate(790,138)")
 			.attr("class", "g-legend");
 
-		gunTraceLegend.append("text")
+		circleLegend.append("text")
 			.attr("x", -radius(700000000) - 15)
 			.attr("y", -70)
 			.style("font-size", "12px")
@@ -249,19 +249,19 @@
 			.style("font-weight", "bold")
 			.text("Sequestration Impact By State");
 
-		var gunTraceKey = gunTraceLegend.selectAll(".g-key")
+		var circleKey = circleLegend.selectAll(".g-key")
 			.data([700000000, 400000000, 100000000])
 			.enter().append("g")
 			.attr("class", "g-key");
 
-		gunTraceKey.append("circle")
+		circleKey.append("circle")
 			.attr("cy", function(d) { return - radius(d); })
 			.attr("r", radius)
 			.style("fill", "none")
 			.style("stroke", "#666")
 			.style("stroke-dasharray", "2,2")
 
-		gunTraceKey.append("line")
+		circleKey.append("line")
 			.attr("x1", function(d) { return - radius(d)})
 			.attr("y1", function(d) { return - radius(d)})
 			.attr("x2", function(d) { return - radius(700000000) - 10})
@@ -269,7 +269,7 @@
 			.style("stroke", "#ccc")
 			.style("stroke-width", 0.5)
 
-		gunTraceKey.append("text")
+		circleKey.append("text")
 			.attr("x", - radius(700000000) - 15)
 			.attr("y", function(d) { return - radius(d) + 5; })
 			.attr("dy", "-.2em")
