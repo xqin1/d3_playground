@@ -9,10 +9,12 @@ path {
 
 </style>
 <body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>    
+<script src="http://d3js.org/topojson.v0.min.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
 <script>
 
-var width = 1200,
+var width = 1000,
     height = 800;
 
 var projection = d3.geo.albers()
@@ -21,21 +23,37 @@ var projection = d3.geo.albers()
     .translate([width , height/2])
     .scale(2700);
 
+var projection1 = d3.geo.albers()
+   // .origin([-120, 37.7])
+   .center([0,38.9])
+   .translate([-52900,6200])
+   .scale(190000);
+
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-d3.json("data/california.json", function(error,polygon) {
-  var coordinates0 = polygon.coordinates[0].map(projection),
+queue()
+      .defer(d3.json,"data/california.json")
+      .defer(d3.json,"data/dc.geojson")
+     // .defer(d3.json, "data/state_seq.geojson")
+      .await(ready);
+
+function ready(error, ca,dc) {
+   coordinates0 = ca.coordinates[0].map(projection),
       coordinates1 = circle(coordinates0),
-            coordinates2 = heart(coordinates0);
+      coordinates2 = heart(coordinates0),
+      coordinates3=dc.features[0].geometry.coordinates[0].map(projection1);
+      coordinates4=circle(coordinates3);
 
       path = svg.append("path"),
       d0 = "M" + coordinates0.join("L") + "Z",
       d1 = "M" + coordinates1.join("L") + "Z",
       d2 = "M" + coordinates2.join("L") + "Z";
+      d3 = "M" + coordinates3.join("L") + "Z";
+      d4 = "M" + coordinates4.join("L") + "Z";
 
-  loop();
+    loop();
 
   function loop() {
     path
@@ -49,10 +67,19 @@ d3.json("data/california.json", function(error,polygon) {
         .attr("d", d2)
       .transition()
         .delay(10000)
+        .duration(5000)
+        .attr("d", d3)
+      // .transition()
+      //   .delay(15000)
+      //   .duration(5000)
+      //   .attr("d", d4)
+      .transition()
+        .delay(15000)
+        .duration(5000)
         .attr("d", d0)
         .each("end", loop);
   }
-});
+};
 
 function circle(coordinates) {
   var circle = [],
@@ -133,6 +160,5 @@ function heart(coordinates) {
 
   return circle;
 }
-
 
 </script>
