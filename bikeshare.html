@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+ 
+path { fill-opacity:0.7; }
+ 
+path.line { }
+ 
+circle {
+  fill: #fff;
+  stroke: #fff;
+}
+ 
+.existing {
+    fill:#7B16FF;
+    background:#7B16FF;
+}
+.proposed {
+    fill:#ffa500;
+    background:#ffa500;
+}
+ 
+#legend, #attribution {
+    position:absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index:999;
+    background: #fff;
+    padding:10px;
+}
+ 
+#attribution {
+    right:20px;
+    left:auto;
+}
+ 
+.dot {
+    display:inline-block;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+}
+ 
+ 
+body {
+  margin: 0;
+  font:normal 14px/20px 'Helvetica Neue';
+}
+ 
+.map {
+  position: relative;
+  overflow: hidden;
+}
+ 
+svg {
+  position: absolute;
+  top:0;
+  left:0;
+}
+ 
+#toggles {
+    position:absolute;
+    top:10px;
+    left:10px;
+    z-index:99;
+}
+ 
+.tile {
+  position: absolute;
+  width: 256px;
+  height: 256px;
+}
+ 
+.tip {
+  position: absolute;
+  background:#fff;
+  opacity:0.7;
+  bottom:10px;
+  right:10px;
+  padding:10px;
+  z-index:999;
+  -webkit-transition: opacity 100ms linear;
+}
+ 
+.hide {
+    opacity: 0;
+}
+ 
+.layer {
+  position: absolute;
+}
+</style>
+<body>
+    <div id='toggles'>
+        <button id='toggle-new'>Show New Stations</button>
+        <button id='toggle-lines'>Hide Popular Trips</button>
+    </div>
+    <div id='legend'>
+        <div><div class='dot existing'></div> existing stations</div>
+        <div><div class='dot proposed'></div> proposed stations</div>
+    </div>
+    <div id='attribution'>
+        <a href='http://mapbox.com/'>&copy; MapBox / &copy; OSM Contributors</a>
+        <a href='https://www.capitalbikeshare.com/news/2012/12/17/ddot-releases-new-capital-bikeshare-locations'>Data from DDOT</a>
+    </div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/d3.geo.tile.v0.min.js"></script>
+<script>
+ 
+d3.json('data/vectors.json', function(err, vectors) {
+d3.json('data/stations.geojson', function(err, stations) {
+ 
+function matrix3d(scale, translate) {
+  var k = scale / 256, r = scale % 1 ? Number : Math.round;
+  return "matrix3d(" + [k, 0, 0, 0, 0, k, 0, 0, 0, 0, k, 0, r(translate[0] * scale), r(translate[1] * scale), 0, 1 ] + ")";
+}
+ 
+function prefixMatch(p) {
+  var i = -1, n = p.length, s = document.body.style;
+  while (++i < n) if (p[i] + "Transform" in s) return "-" + p[i].toLowerCase() + "-";
+  return "";
+}
+ 
+var prefix = prefixMatch(["webkit", "ms", "Moz", "O"]);
+ 
+var color = d3.interpolateLab('hsl(62,100%,90%)', 'hsl(228,30%,20%)');
+var linecolor = d3.interpolateLab('steelblue', 'brown');
+var width = window.innerWidth,
+    height = window.innerHeight;
+ 
+var tile = d3.geo.tile()
+    .size([width, height]);
+ 
+// zoom = d3.behavior.zoom()
+//     .scale(4194304)
+//     .scaleExtent([2 << 8, 2 << 23]) //23 is zoom level 15
+//     .translate([898135.4357906517, 493023.96518590726])
+//     .on("zoom", zoomed);
+ zoom = d3.behavior.zoom()
+    //.scale(4194304)
+    .scale(1<<22)
+    .scaleExtent([2 << 9, 2 << 26])
+    .translate([898135.4357906517, 493023.96518590726])
+    .on("zoom", zoomed);
+ 
+var map = d3.select("body").append("div")
+    .attr("class", "map")
+    .style("width", width + "px")
+    .style("height", height + "px")
+    .call(zoom);
+ 
+var proj = d3.geo.mercator();
+ 
+var existing = stations.features.filter(function(f) {
+    return f.properties.styleHash == '-4d17a58d';
+});
+ 
+var proposed = stations.features.filter(function(f) {
+    return f.properties.styleHash == '35b289e9';
+});
+ 
+var linescale = d3.scale.linear()
+    .domain(d3.extent(vectors, function(d) { return d.properties.n; }))
+    .range([1, 20]);
+ 
+var linecolorscale = d3.scale.linear()
+    .domain(d3.extent(vectors, function(d) { return d.properties.n; }))
+    .range([0, 1]);
+ 
+var layer = map.append("div")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("class", 'layer');
+ 
+var tip = map.append("div")
+    .attr("class", 'tip');
+ 
+var svg = map.append("svg")
+    .attr("width", width)
+    .attr("height", height);
+ 
+var path = svg.append("g").selectAll("path");
+ 
+var lineg = svg.append("g")
+    .attr('class', 'lines');
+ 
+var circles = svg.append("g")
+    .attr('class', 'circles');
+ 
+svg.on('mouseover', function() {
+    var sel = d3.select(d3.event.target);
+    if (sel.data() && sel.data()[0] && sel.data()[0].properties) {
+        tip
+            .classed('hide', false)
+            .text(sel.data()[0].properties.name);
+    } else {
+        tip.classed('hide', true);
+    }
+});
+ 
+var geoarea = d3.geo.path();
+var geopath = d3.geo.path().projection(proj);
+ 
+var new_stations = false;
+var popular_trips = true;
+ 
+d3.select('#toggle-new').on('click', function() {
+    new_stations = !new_stations;
+    d3.select(this).text(new_stations ?
+        'Hide New Stations' :
+        'Show New Stations');
+    zoomed();
+});
+ 
+d3.select('#toggle-lines').on('click', function() {
+    popular_trips = !popular_trips;
+    d3.select(this).text(popular_trips ?
+        'Hide Popular Trips' :
+        'Show Popular Trips');
+    zoomed();
+});
+ 
+function zoomed() {
+  proj.translate(zoom.translate()).scale(zoom.scale());
+ 
+  function r() {
+      return zoom.scale() / 1500000;
+  }
+ 
+  var ecircles = circles.selectAll("circle.existing")
+        .data(existing);
+  ecircles.enter().append("circle")
+      .attr('class', 'existing');
+  ecircles.attr("transform", function(d) { return "translate(" + proj(d.geometry.coordinates) + ")"; })
+        .attr("r", r);
+ 
+  var prop = circles.selectAll("circle.proposed")
+        .data(proposed);
+  prop.enter().append("circle")
+      .attr('class', 'proposed');
+  prop.attr("transform", function(d) { return "translate(" + proj(d.geometry.coordinates) + ")"; })
+        .attr("r", r);
+ 
+  // if (popular_trips) {
+  // var lines = lineg.selectAll("path.line")
+  //     .data(vectors);
+ 
+  // lines.enter().append("path")
+  //     .attr('stroke-width', function(d) {
+  //         return linescale(d.properties.n);
+  //     })
+  //     .attr('stroke', function(d) {
+  //         return linecolor(linecolorscale(d.properties.n));
+  //     })
+  //     .attr('class', 'line');
+ 
+  // lines.attr("d", function(d) {
+  //     return geopath(d.geometry);
+  // });
+  // } else {
+  //   lineg.selectAll("path.line").remove();
+  // }
+ 
+  function gjcoords(f) {
+      return proj(f.geometry.coordinates);
+  }
+ 
+  var vertices = existing.map(gjcoords);
+ 
+  if (new_stations) {
+      vertices = vertices.concat(proposed.map(gjcoords));
+  }
+ 
+  var voronois = d3.geom.voronoi(vertices);
+  var vertexsizes = voronois.map(function(d) {
+  var a = geoarea.area({
+      type: 'Polygon',
+      coordinates: [d.map(function(p) {
+          return proj.invert(p);
+      })]
+  });
+  return a;
+  });
+ 
+  var sizescale = d3.scale.linear().domain([0, 0.03]);
+ 
+  // path = path.data(voronois.map(function(d) {
+  //     return "M" + d.join("L") + "Z";
+  // }), String);
+  // path.exit().remove();
+  // path.enter()
+  //     .append("path")
+  //     .attr("fill", function(d, i) {  return color(sizescale(vertexsizes[i])); }).attr("d", String);
+  // path.order();
+ 
+  var tiles = tile
+      .scale(zoom.scale())
+      .translate(zoom.translate())
+      ();
+ 
+  var image = layer
+      .style(prefix + "transform", matrix3d(tiles.scale, tiles.translate))
+    .selectAll(".tile")
+      .data(tiles, function(d) { return d; });
+ 
+  image.exit()
+      .remove();
+ 
+  image.enter().append("img")
+      .attr("class", "tile")
+      //.attr("src", function(d) { return "http://" + ["a", "b", "c", "d"][Math.random() * 4 | 0] + ".tiles.mapbox.com/v3/tmcw.map-gd6ae561/" + d[2] + "/" + d[0] + "/" + d[1] + ".png"; })
+      .attr("src", function(d) { return "http://" + ["a", "b", "c", "d"][Math.random() * 4 | 0] + ".tiles.mapbox.com/v3/herwig.map-onzoztaf/" + d[2] + "/" + d[0] + "/" + d[1] + ".png"; })
+
+      .style("left", function(d) { return (d[0] << 8) + "px"; })
+      .style("top", function(d) { return (d[1] << 8) + "px"; });
+}
+ 
+zoomed();
+});
+});
+</script>

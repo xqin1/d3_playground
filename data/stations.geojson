@@ -1,0 +1,3445 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.025902,
+                    38.917198,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "10th & U St NW",
+                "styleUrl": "#style10",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.000626,
+                    38.919487,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "4th St & Rhode Island Ave NE",
+                "styleUrl": "#style106",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.022202,
+                    38.9249,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Georgia Ave and Fairmont St NW",
+                "styleUrl": "#style45",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.023438,
+                    38.928158,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Columbia Rd & Georgia Ave NW",
+                "styleUrl": "#style206",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.012459,
+                    38.928741,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1st & Washington Hospital Center NW",
+                "styleUrl": "#style55",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.027824,
+                    38.929462,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "11th & Kenyon St NW",
+                "styleUrl": "#style196",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.992889,
+                    38.932514,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "10th & Monroe St NE",
+                "styleUrl": "#style62",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.991013,
+                    38.933666,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "12th & Newton St NE",
+                "styleUrl": "#style8",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.995499,
+                    38.934601,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "John McCormack Dr & Michigan Ave NE",
+                "styleUrl": "#style80",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.024651,
+                    38.936043,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Georgia & New Hampshire Ave NW",
+                "styleUrl": "#style33",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.025101,
+                    38.941799,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "9th & Upshur St NW",
+                "styleUrl": "#style4",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.034439,
+                    38.909851,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "15th & P St NW",
+                "styleUrl": "#style90",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.044403,
+                    38.910099,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Massachusetts Ave & Dupont Circle NW",
+                "styleUrl": "#style68",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.038696,
+                    38.912102,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "17th & Corcoran St NW",
+                "styleUrl": "#style114",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.031677,
+                    38.912682,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "14th & R St NW",
+                "styleUrl": "#style133",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.044601,
+                    38.915401,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "20th St & Florida Ave NW",
+                "styleUrl": "#style46",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.038177,
+                    38.915539,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "New Hampshire Ave & T St NW [formerly 16th & U St NW]",
+                "styleUrl": "#style41",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.068199,
+                    38.916443,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "34th St & Wisconsin Ave NW",
+                "styleUrl": "#style153",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.032097,
+                    38.917599,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "14th & V St NW",
+                "styleUrl": "#style118",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.040619,
+                    38.917763,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "California St & Florida Ave NW",
+                "styleUrl": "#style148",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.043678,
+                    38.92067,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Columbia Rd & Belmont St NW",
+                "styleUrl": "#style26",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.070335,
+                    38.922581,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "36th & Calvert St NW / Glover Park",
+                "styleUrl": "#style136",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.077271,
+                    38.922649,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "39th & Calvert St NW / Stoddert",
+                "styleUrl": "#style152",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.04258,
+                    38.922924,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Adams Mill & Columbia Rd NW",
+                "styleUrl": "#style210",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.050102,
+                    38.923599,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Calvert St & Woodley Pl NW",
+                "styleUrl": "#style188",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.036537,
+                    38.926086,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "16th & Harvard St NW",
+                "styleUrl": "#style42",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.032204,
+                    38.9268,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "14th & Harvard St NW",
+                "styleUrl": "#style156",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.043358,
+                    38.927872,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Harvard St & Adams Mill Rd NW",
+                "styleUrl": "#style30",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.055595,
+                    38.930283,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "3000 Connecticut Ave NW / National Zoo",
+                "styleUrl": "#style48",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.031502,
+                    38.930801,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Park Rd & Holmead Pl NW",
+                "styleUrl": "#style207",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.038803,
+                    38.9319,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Lamont & Mt Pleasant NW",
+                "styleUrl": "#style134",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.057976,
+                    38.934265,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Connecticut Ave & Newark St NW / Cleveland Park",
+                "styleUrl": "#style23",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.074646,
+                    38.93475,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Idaho Ave & Newark St NW [on 2nd District patio]",
+                "styleUrl": "#style109",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.032799,
+                    38.9375,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "14th St & Spring Rd NW",
+                "styleUrl": "#style95",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.087173,
+                    38.938736,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Ward Circle / American University",
+                "styleUrl": "#style47",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.063896,
+                    38.94455,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Van Ness Metro / UDC",
+                "styleUrl": "#style29",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.079384,
+                    38.947605,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Tenleytown / Wisconsin Ave & Albemarle St NW",
+                "styleUrl": "#style160",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.032822,
+                    38.947773,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "14th St Heights / 14th & Crittenden St NW",
+                "styleUrl": "#style132",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.044998,
+                    38.896301,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "20th & E St NW",
+                "styleUrl": "#style198",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.031822,
+                    38.898067,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "14th & G St NW",
+                "styleUrl": "#style86",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.033699,
+                    38.899101,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "New York Ave & 15th St NW",
+                "styleUrl": "#style149",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.032005,
+                    38.899639,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "McPherson Square - 14th & H St NW",
+                "styleUrl": "#style76",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.041542,
+                    38.899681,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "18th St & Pennsylvania Ave NW",
+                "styleUrl": "#style187",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.029823,
+                    38.900284,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "13th St & New York Ave NW",
+                "styleUrl": "#style32",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.0429,
+                    38.900299,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "19th St & Pennsylvania Ave NW",
+                "styleUrl": "#style58",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.046997,
+                    38.900799,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "21st & I St NW",
+                "styleUrl": "#style66",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.048912,
+                    38.900879,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "22nd & I St NW / Foggy Bottom",
+                "styleUrl": "#style51",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.046562,
+                    38.901539,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "21st St & Pennsylvania Ave NW",
+                "styleUrl": "#style18",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.033531,
+                    38.902,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "15th & K St NW",
+                "styleUrl": "#style13",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.038322,
+                    38.902061,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "17th & K St NW / Farragut Square",
+                "styleUrl": "#style77",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.043373,
+                    38.902203,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "19th & K St NW",
+                "styleUrl": "#style126",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.059219,
+                    38.902222,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Georgetown Harbor / 30th St NW",
+                "styleUrl": "#style110",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.038628,
+                    38.90276,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "17th & K St NW [formerly 17th & L St NW]",
+                "styleUrl": "#style183",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.043648,
+                    38.903408,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "19th & L St NW",
+                "styleUrl": "#style89",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.044792,
+                    38.903584,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "20th & L St NW",
+                "styleUrl": "#style174",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.062691,
+                    38.903751,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "C & O Canal & Wisconsin Ave NW",
+                "styleUrl": "#style65",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.028397,
+                    38.90382,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "12th & L St NW",
+                "styleUrl": "#style103",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.053482,
+                    38.903828,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "25th St & Pennsylvania Ave NW",
+                "styleUrl": "#style137",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.041603,
+                    38.904743,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "18th & M St NW",
+                "styleUrl": "#style82",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.056885,
+                    38.905125,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "M St & Pennsylvania Ave NW",
+                "styleUrl": "#style64",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.047096,
+                    38.905399,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "21st & M St NW",
+                "styleUrl": "#style154",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.032501,
+                    38.905899,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Thomas Circle",
+                "styleUrl": "#style155",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.038788,
+                    38.906601,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "17th & Rhode Island Ave NW",
+                "styleUrl": "#style131",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.051521,
+                    38.906601,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "24th & N St NW",
+                "styleUrl": "#style7",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.071655,
+                    38.907742,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "37th & O St NW / Georgetown University",
+                "styleUrl": "#style93",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.032303,
+                    38.9086,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "14th & Rhode Island Ave NW",
+                "styleUrl": "#style96",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.044777,
+                    38.908905,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "20th & O St NW / Dupont South",
+                "styleUrl": "#style145",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.04657,
+                    38.884121,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Ohio Dr & West Basin Dr SW / MLK & FDR Memorials",
+                "styleUrl": "#style212",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.028229,
+                    38.887238,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "USDA / 12th & Independence Ave SW",
+                "styleUrl": "#style2",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.049423,
+                    38.888252,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Lincoln Memorial",
+                "styleUrl": "#style61",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.032433,
+                    38.888554,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Jefferson Dr & 14th St SW",
+                "styleUrl": "#style139",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.02858,
+                    38.888767,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Smithsonian / Jefferson Dr & 12th St SW",
+                "styleUrl": "#style87",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.043602,
+                    38.8923,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "19th St & Constitution Ave NW",
+                "styleUrl": "#style184",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.031616,
+                    38.894512,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "14th & D St NW / Ronald Reagan Building",
+                "styleUrl": "#style138",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.046585,
+                    38.89492,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "US Dept of State / Virginia Ave & 21st St NW",
+                "styleUrl": "#style140",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.054848,
+                    38.895184,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Kennedy Center",
+                "styleUrl": "#style125",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.043602,
+                    38.895199,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "19th & E Street NW",
+                "styleUrl": "#style197",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.02787,
+                    38.898365,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Metro Center / 12th & G St NW",
+                "styleUrl": "#style204",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.026062,
+                    38.895912,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "10th & E St NW",
+                "styleUrl": "#style83",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.026016,
+                    38.893028,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "10th St & Constitution Ave NW",
+                "styleUrl": "#style129",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.024017,
+                    38.878925,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "7th & Water St SW / SW Waterfront",
+                "styleUrl": "#style112",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.023087,
+                    38.8997,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "8th & H St NW",
+                "styleUrl": "#style209",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.022995,
+                    38.897003,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "8th & F St NW / National Portrait Gallery",
+                "styleUrl": "#style211",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.022263,
+                    38.90572,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Convention Center / 7th & M St NW",
+                "styleUrl": "#style88",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.02224,
+                    38.886265,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "L'Enfant Plaza / 7th & C St SW",
+                "styleUrl": "#style117",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.022202,
+                    38.915501,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "7th & T St NW",
+                "styleUrl": "#style199",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.022156,
+                    38.91272,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "7th & R St NW / Shaw Library",
+                "styleUrl": "#style101",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.019348,
+                    38.897221,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "5th & F St NW",
+                "styleUrl": "#style75",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.019028,
+                    38.903042,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "5th St & K St NW",
+                "styleUrl": "#style194",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.018936,
+                    38.887299,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Maryland & Independence Ave SW",
+                "styleUrl": "#style85",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.017799,
+                    38.876701,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "4th & M St SW",
+                "styleUrl": "#style35",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.017448,
+                    38.884121,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "4th & E St SW",
+                "styleUrl": "#style74",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.016106,
+                    38.895344,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "4th & D St NW / Judiciary Square",
+                "styleUrl": "#style180",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.015999,
+                    38.900299,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "4th St & Massachusetts Ave NW",
+                "styleUrl": "#style49",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.013496,
+                    38.912601,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Florida Ave & R St NW",
+                "styleUrl": "#style119",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.012291,
+                    38.915417,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1st & Rhode Island Ave NW",
+                "styleUrl": "#style17",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.009888,
+                    38.897446,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "North Capitol St & F St NW",
+                "styleUrl": "#style215",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.006004,
+                    38.878609,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1st & K St SE",
+                "styleUrl": "#style121",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.005699,
+                    38.874298,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1st & N St  SE",
+                "styleUrl": "#style158",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.0056,
+                    38.905701,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1st & M St NE",
+                "styleUrl": "#style27",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.004951,
+                    38.910973,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Eckington Pl & Q St NE",
+                "styleUrl": "#style71",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.004929,
+                    38.896961,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Columbus Circle / Union Station",
+                "styleUrl": "#style22",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.0037,
+                    38.876301,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "M St & New Jersey Ave SE",
+                "styleUrl": "#style191",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.002296,
+                    38.885101,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "3rd & D St SE",
+                "styleUrl": "#style142",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.001968,
+                    38.900017,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "3rd & H St NE",
+                "styleUrl": "#style171",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.001831,
+                    38.881184,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "3rd & G St SE",
+                "styleUrl": "#style130",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.000351,
+                    38.889954,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "4th & East Capitol St NE",
+                "styleUrl": "#style176",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.998306,
+                    38.900383,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "6th & H St NE",
+                "styleUrl": "#style3",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.997116,
+                    38.894756,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "D St & Maryland Ave NE",
+                "styleUrl": "#style181",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.996803,
+                    38.886951,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Eastern Market / 7th & North Carolina Ave SE",
+                "styleUrl": "#style28",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.995399,
+                    38.883999,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Eastern Market Metro / Pennsylvania Ave & 7th St SE",
+                "styleUrl": "#style59",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.9953,
+                    38.8792,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "8th & Eye St SE / Barracks Row",
+                "styleUrl": "#style25",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.994904,
+                    38.8624,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Anacostia Metro",
+                "styleUrl": "#style159",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.994102,
+                    38.90509,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Gallaudet / 8th St & Florida Ave NE",
+                "styleUrl": "#style79",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.991386,
+                    38.899982,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "11th & H St NE",
+                "styleUrl": "#style34",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.988358,
+                    38.890461,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Lincoln Park / 13th & East Capitol St NE",
+                "styleUrl": "#style97",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.988197,
+                    38.900299,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "13th & H St NE",
+                "styleUrl": "#style115",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.988037,
+                    38.867374,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Good Hope Rd & MLK Ave SE",
+                "styleUrl": "#style178",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.987823,
+                    38.844711,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Congress Heights Metro",
+                "styleUrl": "#style124",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.987633,
+                    38.894833,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "13th & D St NE",
+                "styleUrl": "#style53",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.986198,
+                    38.880299,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Potomac & Pennsylvania Ave SE",
+                "styleUrl": "#style6",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.986099,
+                    38.883999,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "14th & D St SE",
+                "styleUrl": "#style141",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.985237,
+                    38.866611,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Good Hope Rd & 14th St SE",
+                "styleUrl": "#style166",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.983566,
+                    38.887321,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "15th St & Massachusetts Ave SE",
+                "styleUrl": "#style214",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.982872,
+                    38.900414,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Bladensburg Rd & Benning Rd NE",
+                "styleUrl": "#style16",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.978401,
+                    38.865784,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Anacostia Library",
+                "styleUrl": "#style169",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.976898,
+                    38.889599,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "19th & East Capitol St SE",
+                "styleUrl": "#style15",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.971016,
+                    38.873058,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Pennsylvania & Minnesota Ave SE",
+                "styleUrl": "#style57",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.967201,
+                    38.8601,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Good Hope & Naylor Rd SE",
+                "styleUrl": "#style94",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.960701,
+                    38.877998,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Randle Circle & Minnesota Ave NE",
+                "styleUrl": "#style20",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.960121,
+                    38.896545,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Anacostia Ave & Benning Rd NE / River Terrace",
+                "styleUrl": "#style128",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.9599,
+                    38.869202,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Branch & Pennsylvania Ave SE",
+                "styleUrl": "#style168",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.952103,
+                    38.865589,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Fairfax Village",
+                "styleUrl": "#style72",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.947975,
+                    38.894001,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Benning Branch Library",
+                "styleUrl": "#style203",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.947449,
+                    38.897064,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Minnesota Ave Metro/DOES",
+                "styleUrl": "#style107",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.937233,
+                    38.889935,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Benning Rd & East Capitol St NE / Benning Rd Metro",
+                "styleUrl": "#style157",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.037415,
+                    38.879818,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Jefferson Memorial",
+                "styleUrl": "#style31",
+                "styleHash": "-4d17a58d"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.02697,
+                    38.921009,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "11th and Florida",
+                "styleUrl": "#style177",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.02681,
+                    38.90263,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "11th and K",
+                "styleUrl": "#style81",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.027313,
+                    38.90556,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "11th and M",
+                "styleUrl": "#style179",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.032143,
+                    38.922192,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "14th and Clifton/ Boys and Girls Club",
+                "styleUrl": "#style63",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.03511,
+                    38.923382,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "15th and Euclid",
+                "styleUrl": "#style67",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.038353,
+                    38.908192,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "17th and Massachusetts",
+                "styleUrl": "#style108",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.04155,
+                    38.918308,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "18th and Wyoming",
+                "styleUrl": "#style163",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.04509,
+                    38.894772,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "20th and VA",
+                "styleUrl": "#style91",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.018677,
+                    38.900909,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "5th and Massachusetts",
+                "styleUrl": "#style1",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.023209,
+                    38.89484,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "8th and D",
+                "styleUrl": "#style14",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.047981,
+                    38.92318,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Ellington Bridge, SE corner",
+                "styleUrl": "#style173",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.015793,
+                    38.91766,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Elm and 2nd",
+                "styleUrl": "#style200",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.034843,
+                    38.929852,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Hiatt Place betw. Park and Irving",
+                "styleUrl": "#style165",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.017563,
+                    38.912731,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "New Jersey and R",
+                "styleUrl": "#style195",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.027008,
+                    38.89764,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "11th and F",
+                "styleUrl": "#style78",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.049789,
+                    38.896091,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "23rd and WHO",
+                "styleUrl": "#style36",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.067757,
+                    38.903702,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "34th and Water",
+                "styleUrl": "#style40",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.046532,
+                    38.89233,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Constitution and 21st",
+                "styleUrl": "#style11",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.025993,
+                    38.887321,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "L'Enfant Plaza at Independence",
+                "styleUrl": "#style73",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.065308,
+                    38.947529,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Connecticut and Albemarle",
+                "styleUrl": "#style19",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.07,
+                    38.955608,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Connecticut and Nebraska",
+                "styleUrl": "#style5",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.063538,
+                    38.908501,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "O and Wisconsin (east)",
+                "styleUrl": "#style84",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.082458,
+                    38.95483,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Wisconsin and Fessenden",
+                "styleUrl": "#style164",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.077087,
+                    38.943741,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Wisconsin and Veazy",
+                "styleUrl": "#style44",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.032997,
+                    38.956379,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "14th and Colorado",
+                "styleUrl": "#style50",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.032417,
+                    38.94194,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "14th and Upshur",
+                "styleUrl": "#style182",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.019821,
+                    38.9566,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "5th and Kennedy",
+                "styleUrl": "#style105",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.026718,
+                    38.94833,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Georgia and Decatur",
+                "styleUrl": "#style192",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.990807,
+                    38.928761,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "12th and Irving",
+                "styleUrl": "#style120",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.978943,
+                    38.927059,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "18th and Rhode Island Ave",
+                "styleUrl": "#style37",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.003052,
+                    38.90572,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "2nd and M",
+                "styleUrl": "#style56",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.997238,
+                    38.927479,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Hamlin and 7th",
+                "styleUrl": "#style190",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.987267,
+                    38.903759,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Neal and Trinidad",
+                "styleUrl": "#style122",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.993912,
+                    38.921532,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Rhode Island Ave metro entrance",
+                "styleUrl": "#style70",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.004723,
+                    38.91814,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "V and Rhode Island Ave at Summit",
+                "styleUrl": "#style208",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.983543,
+                    38.889999,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "15th and East Capitol",
+                "styleUrl": "#style202",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.983528,
+                    38.897141,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "15th and F and Tenn - Miner ES",
+                "styleUrl": "#style186",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.020012,
+                    38.894588,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "6th and Indiana",
+                "styleUrl": "#style43",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.995178,
+                    38.88998,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "8th and East Capitol",
+                "styleUrl": "#style116",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.99472,
+                    38.897209,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "8th and F Street",
+                "styleUrl": "#style213",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.994087,
+                    38.876781,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "9th and M",
+                "styleUrl": "#style175",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.01387,
+                    38.892262,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Constitution and 2nd /DOL",
+                "styleUrl": "#style69",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.013977,
+                    38.887329,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Independence and Washington/HHS",
+                "styleUrl": "#style54",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.007332,
+                    38.884838,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "New Jersey and D",
+                "styleUrl": "#style111",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.001923,
+                    38.88739,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Pennsylvania and 3rd",
+                "styleUrl": "#style100",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.002403,
+                    38.874809,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Tingey and 3rd",
+                "styleUrl": "#style150",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.93351,
+                    38.90826,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Deanwood Rec Center and Library",
+                "styleUrl": "#style144",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.957451,
+                    38.883961,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Minnesota/34th and Ely",
+                "styleUrl": "#style143",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.94178,
+                    38.901428,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Nannie Helen Burroughs and Minn",
+                "styleUrl": "#style9",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.032097,
+                    38.916691,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "13th and U",
+                "styleUrl": "#style185",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.931488,
+                    38.898441,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Nannie Helen Burroughs and 49th",
+                "styleUrl": "#style38",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.980591,
+                    38.846691,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Alabama and Stanton",
+                "styleUrl": "#style162",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.999413,
+                    38.843208,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "MLK and Alabama",
+                "styleUrl": "#style201",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.990059,
+                    38.863918,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "MLK and Pleasant Street",
+                "styleUrl": "#style146",
+                "styleHash": "35b289e9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.02684,
+                    38.875118,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Haines Point Rec Center",
+                "styleUrl": "#style172",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.024887,
+                    38.898411,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "G Street at MLK Library",
+                "styleUrl": "#style189",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.059258,
+                    38.936611,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Connecticut and Porter",
+                "styleUrl": "#style52",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.080078,
+                    38.949612,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Brandywine and Wisconsin",
+                "styleUrl": "#style170",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.025932,
+                    38.884418,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "L'Enfant Plaza at Banneker Circle",
+                "styleUrl": "#style151",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.095833,
+                    38.944889,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Massachusetts and 48th",
+                "styleUrl": "#style12",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.084557,
+                    38.958172,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Wisconsin and Ingomar",
+                "styleUrl": "#style102",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.064919,
+                    38.907902,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "O and Wisconsin (west)",
+                "styleUrl": "#style21",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.041862,
+                    38.892929,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "18th and C",
+                "styleUrl": "#style147",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.032478,
+                    38.924549,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "14th and Fairmont",
+                "styleUrl": "#style127",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.00576,
+                    38.901829,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "1st and K",
+                "styleUrl": "#style39",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.017632,
+                    38.974709,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Cedar Underpass",
+                "styleUrl": "#style161",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.003067,
+                    38.952412,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Ft Totten",
+                "styleUrl": "#style98",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.017258,
+                    38.970009,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Van Buren and Rec Center",
+                "styleUrl": "#style135",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.014053,
+                    38.903858,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "New Jersey and L",
+                "styleUrl": "#style205",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.027924,
+                    38.967491,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Piney Branch and Georgia",
+                "styleUrl": "#style123",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.9832,
+                    38.925892,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Rhoed Iskand Ave and Franklin",
+                "styleUrl": "#style24",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.979507,
+                    38.932968,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "18th and Monroe",
+                "styleUrl": "#style92",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.949631,
+                    38.883018,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Ely and Ft Dupont Ice Rink",
+                "styleUrl": "#style60",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.925911,
+                    38.897301,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Nannie Helen Burroughs and Division",
+                "styleUrl": "#style104",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.996246,
+                    38.855129,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "MLK and St E's Gate 1",
+                "styleUrl": "#style99",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.995934,
+                    38.84771,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "MLK and St. E's Gate 5 entrance",
+                "styleUrl": "#style113",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.982071,
+                    38.868118,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "16th and Minnesota, AVE",
+                "styleUrl": "#style167",
+                "styleHash": "180ea57e"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.013901,
+                    38.864601,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "2nd and V Street,",
+                "styleUrl": "#style193",
+                "styleHash": "180ea57e"
+            }
+        }
+    ]
+}
