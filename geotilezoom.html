@@ -44,7 +44,7 @@ var projection = d3.geo.mercator();
  
 var zoom = d3.behavior.zoom()
     .scale(1 << 12)
-    .scaleExtent([1 << 9, 1 << 27])
+    //.scaleExtent([1 << 9, 1 << 27])
     .translate([width / 2, height / 2])
     .on("zoom", zoomed);
 // zoom = d3.behavior.zoom()

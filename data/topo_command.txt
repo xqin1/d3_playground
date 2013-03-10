@@ -1,1 +1,3 @@
 topojson -s 3e-7 --id-property=geoid10,geoid10 -p name10=name, -p name10=name -o statecounty.json state.shp county.shp
+
+topojson  -s 3e-7 -o dc.topojson dcboundary.geojson dcneighborhood.geojson dcwater.geojson

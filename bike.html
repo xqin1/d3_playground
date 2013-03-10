@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+ 
+body {
+  margin: 0;
+}
+ 
+.map {
+  position: relative;
+  overflow: hidden;
+}
+ 
+.layer {
+  position: absolute;
+}
+ 
+.tile {
+  position: absolute;
+  width: 256px;
+  height: 256px;
+}
+ 
+.info {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+ 
+</style>
+<body>
+<div id='map'>ss</div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/d3.geo.tile.v0.min.js"></script>
+<script>
+  var width=600, height=400;
+  var svgMap = d3.select('map').append('svg')
+                  .attr('widht',width)
+                  .attr('height',height);
+   var projection = d3.geo.albers()
+        //.rotate([87.73, 0])
+        .center([0, 42.0433])
+        .scale(120000)
+        .translate([width / 2, 0]);
+
+  // queue()
+  //     .defer(d3.json,"data/us-state-labels.json")
+  //     .defer(d3.json,"data/statecounty_5e6.json")
+  //     .defer(d3.json, "data/state_seq.geojson")
+  //     .await(ready);
+
+  //   function ready(error, label,us,seq) { 
+
+  //   }              
+</script>
+</html>

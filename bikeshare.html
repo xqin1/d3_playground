@@ -139,7 +139,7 @@ var tile = d3.geo.tile()
  zoom = d3.behavior.zoom()
     //.scale(4194304)
     .scale(1<<22)
-    .scaleExtent([2 << 9, 2 << 26])
+    //.scaleExtent([2 << 9, 2 << 26])
     .translate([898135.4357906517, 493023.96518590726])
     .on("zoom", zoomed);
  
