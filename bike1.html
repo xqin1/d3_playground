@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<header>
+   <link rel="stylesheet" href="css/bootstrap.min.css">
+   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" />
+
+</header>
+<style>
+body {
+  margin: 0;
+}
+ 
+.g-map {
+  position: relative;
+  overflow: hidden;
+  top:20px;
+}
+
+#lmap {
+  position: absolute;
+
+top: 300px;
+left: 600px;
+width:600px;
+height:500px;
+}
+.g-dcboundary{
+  stroke: black;
+  fill:none;
+  stroke-width: 2px;
+  stroke-linejoin: round;
+}
+.tile {
+  position: absolute;
+  width: 256px;
+  height: 256px;
+}
+
+.layer {
+  position: absolute;
+}
+
+#subcat {
+ margin-left: 800px;
+margin-top: 20px;
+}
+
+.mesh {
+  fill: none;
+  stroke: black;
+  stroke-width: .5px;
+  stroke-linejoin: round;
+}
+.water {
+  fill: rgb(14, 164, 248);
+  fill-opacity: 0.3;
+  stroke: none;
+}
+ 
+.g-title {
+  position: absolute;
+  margin-left: 150px;
+  margin-bottom:10px;
+}
+ 
+.info {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+
+    
+
+.circle {
+      fill:#aa0011;
+      fill-opacity: 0.4;
+      stroke:#fff;
+      stroke-width:0.5px;
+    }
+
+.pulse_circle {
+      fill:none;
+      fill-opacity: 1;
+      stroke:#cc0000;
+      stroke-width:2px;
+    }
+
+    .g-legend {
+      font-family: Arial;
+      font-size: 10px;
+}
+
+    .g-annotation {
+          position: absolute;
+          font-size: 14px;
+          line-height: 1.4em;
+          width: 552px;
+          display: inline;
+          top: 100px;
+          left: 600px;
+    }
+
+    
+</style>
+<body>
+<div class="g-title"><h1>Capital Bikeshare 2012 Data Analysis</div>
+<div id="subcat">
+    <div class="btn-group">
+        <a href="#" id="total" class="btn active">Total</a>
+        <a href="#" id="checkout" class="btn">Checkout</a>      
+        <a href="#" id="checkin" class="btn">Checkin</a>             
+    </div>
+</div>
+<div>
+<div class='g-map'></div>
+<div class="g-annotation"></div>
+<div id="lmap" class="g-map-tile"></div>
+</div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/topojson.v0.min.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script src="http://d3js.org/d3.geo.tile.v0.min.js"></script>
+<script src="js/jquery-1.6.2.min.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+           $('.btn-group a').click(function() { 
+              var view_type = $(this).attr('id'); 
+              $('.btn-group a').removeClass('active');
+             $(this).toggleClass('active');
+              updateBikeLocation(view_type); 
+              return false;
+          }); 
+         }); 
+  var width=600, height=800;
+  var map = d3.select('.g-map').append('svg')
+                  .attr('width',width)
+                  .attr('height',height);
+
+  var projection = d3.geo.mercator();
+  var path = d3.geo.path()
+        .projection(projection);
+
+  projection
+      .scale(1)
+      .translate([0, 0]);
+
+  var radius = d3.scale.sqrt()
+      //.domain([0,700000000])
+      .range([1,15])
+
+  var format = d3.format(",");
+
+  //leaflet
+//  var lmap = L.map("lmap").setView([38.9, -77.01],12);
+
+//make the map
+var lmap = new L.Map('lmap', {
+    center: new L.LatLng(38.9, -77.01),
+    zoom: 12,
+    layers: new L.TileLayer('http://a.tiles.mapbox.com/v3/herwig.map-onzoztaf/{z}/{x}/{y}.png')
+});
+
+var svg = d3.select(lmap.getPanes().overlayPane).append("svg"),
+    g = svg.append("g").attr("class", "leaflet-zoom-hide");
+
+function updateBikeLocation(type){
+  locations = map.selectAll(".circle").data(bikeLoc1);
+  locationsEnter = locations.enter()
+                      .append("circle")
+                    .attr("class", "circle")
+                    .attr("transform", function(d) {
+                          var centroid = projection(d.coordinates)
+                          x = centroid[0];
+                          y = centroid[1];
+                          return "translate(" + x + "," + y + ")";
+                    })
+                    .attr("r", function(d) { return radius(d[type])})
+          //.on("mouseover",function(d,i) {return showPieChart(d.properties,d.geometry)})
+          //.on("mouseout", hidePieChart)
+  locationsUpdate = d3.transition(locations)
+                    .attr("class", "circle")
+                    .attr("transform", function(d) {
+                          var centroid = projection(d.coordinates)
+                          x = centroid[0];
+                          y = centroid[1];
+                          return "translate(" + x + "," + y + ")";
+                    })
+                    .attr("r", function(d) { return radius(d[type])})
+          //.on("mouseover",function(d,i) {return showPieChart(d.properties,d.geometry)})
+          //.on("mouseout", hidePieChart)
+  locationExit = d3.transition(locations.exit()).remove();
+
+   // var bounds = d3.geo.bounds(collection),
+   //    path = d3.geo.path().projection(project);
+
+   locationsL = g.selectAll(".circle").data(bikeLoc1);
+  locationsEnterL = locationsL.enter()
+                      .append("circle")
+                    .attr("class", "circle")
+                    .attr("transform", function(d) {
+                          var centroid = project(d.coordinates)
+                          x = centroid[0];
+                          y = centroid[1];
+                          return "translate(" + x + "," + y + ")";
+                    })
+                    .attr("r", function(d) { return radius(d[type])})
+          //.on("mouseover",function(d,i) {return showPieChart(d.properties,d.geometry)})
+          //.on("mouseout", hidePieChart)
+  locationsUpdateL = d3.transition(locationsL)
+                    .attr("class", "circle")
+                    .attr("transform", function(d) {
+                          var centroid = project(d.coordinates)
+                          x = centroid[0];
+                          y = centroid[1];
+                          return "translate(" + x + "," + y + ")";
+                    })
+                    .attr("r", function(d) { return radius(d[type])})
+          //.on("mouseover",function(d,i) {return showPieChart(d.properties,d.geometry)})
+          //.on("mouseout", hidePieChart)
+  locationExitL = d3.transition(locationsL.exit()).remove();
+    
+    lmap.on("viewreset", reset);
+  reset();
+
+}
+// Reposition the SVG to cover the features.
+  function reset() {
+    var bottomLeft = project(bounds[0]),
+        topRight = project(bounds[1]);
+
+    svg .attr("width", topRight[0] - bottomLeft[0])
+        .attr("height", bottomLeft[1] - topRight[1])
+        .style("margin-left", bottomLeft[0] + "px")
+        .style("margin-top", topRight[1] + "px");
+
+    g.attr("transform", "translate(" + -bottomLeft[0] + "," + -topRight[1] + ")");
+d3.transition(locationsL)
+                    .attr("class", "circle")
+                    .attr("transform", function(d) {
+                          var centroid = project(d.coordinates)
+                          x = centroid[0];
+                          y = centroid[1];
+                          return "translate(" + x + "," + y + ")";
+                    })
+   // updateBikeLocation();
+    //feature.attr("d", path);
+  }
+function addBaseLayer(dc){
+   dcBoundary = topojson.object(dc, dc.objects.dcboundary);
+   //   state = states.geometries.filter(function(d) { return d.id === "11"; })[0];
+bounds=d3.geo.bounds(dcBoundary);
+  var b = path.bounds(dcBoundary),
+      s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
+      t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+
+  projection
+      .scale(s)
+      .translate(t);
+
+  map.append("path")
+      .datum(dcBoundary)
+      .attr("class", "g-dcboundary")
+      .attr("d", path);
+
+  map.append("path")
+      .datum(topojson.object(dc, dc.objects.dcneighborhood))
+      .attr("class", "mesh")
+      .attr("d", path);
+  map.append("path")
+      .datum(topojson.object(dc, dc.objects.dcwater))
+      .attr("class", "water")
+      .attr("d", path);
+};
+
+
+function highlight(terminalid){
+  console.log(terminalid);
+  var selectedNode = bikeLoc1.filter(function(d){
+          return d.id == terminalid;
+      })
+  console.log(selectedNode);
+  map.selectAll(".pulse_circle").data(selectedNode)
+                .enter().append("circle")
+                    .attr("class", "pulse_circle")
+                    .attr("transform", function(d) {
+                          var centroid = projection(d.coordinates)
+                          x = centroid[0];
+                          y = centroid[1];
+                          return "translate(" + x + "," + y + ")";
+                    })
+                    .each(pulse())
+}
+
+function removeHighlight(){
+  d3.selectAll(".pulse_circle").remove();
+}
+
+function pulse() {
+              return function(d, i, j) {
+                  //the stuff before transition() resets the
+                  //attributes of the pulser when this function is
+                  //called again
+                  d3.select(this).attr("r", 5).style("stroke-opacity", 1.0)
+                  .transition()
+                  .ease("linear") //appears a lot more smoother
+                  .duration(1000)
+                  .attr("r",25)
+                  .style("stroke-opacity", 0.0)
+                  .each("end", pulse()); //lather rinse repeat
+              };
+          }
+
+queue()
+      .defer(d3.json,"data/dc.topojson")
+      .defer(d3.json,"data/bikelocation.topojson")
+      .defer(d3.csv, "data/terminal_count.csv")
+      .await(ready);
+
+function ready(error, dc,bike,terminalcount) { 
+  addBaseLayer(dc);
+  bikeLoc = topojson.object(bike, bike.objects.bikelocation).geometries;
+  terminal_count = d3.nest()
+                      .key(function(d){return d.startterminal})
+                      .map(terminalcount);
+  bikeLoc.forEach(function(d){
+      if (typeof terminal_count[d.id] != 'undefined'){
+                    d.checkin= +terminal_count[d.id][0].checkin;
+                    d.checkout= +terminal_count[d.id][0].checkout;
+                    d.total= +terminal_count[d.id][0].total;
+      }
+  });
+  bikeLoc1 = bikeLoc.filter(function(d){
+    if(typeof d.checkin != "undefined"){
+      return d;
+    }
+  })
+
+  bikeLocCheckOutOrder = bikeLoc1.sort(function(a,b){return a.checkout - b.checkout});
+  bikeLocCheckInOrder = bikeLoc1.sort(function(a,b){return a.checkin - b.checkin});
+
+  var text = 'In 2012, there are total ' + format(2049576) + ' trips being made.';
+  text += " Most checkout station is at <a href='#' class='g-link' id='" + bikeLocCheckOutOrder[bikeLocCheckOutOrder.length-1].id +
+          "'>" + bikeLocCheckOutOrder[bikeLocCheckOutOrder.length-1].properties.ADDRESS + "</a>,";
+  text += " where " + format(bikeLocCheckOutOrder[bikeLocCheckOutOrder.length-1].checkout) + " number of trips being checked out."
+  text += " The least checkout station is at <a href='#' class='g-link' id='" + bikeLocCheckOutOrder[0].id +
+          "'>" + bikeLocCheckOutOrder[0].properties.ADDRESS + "</a>,";
+  text += " where only " + format(bikeLocCheckOutOrder[0].checkout) + " trips being initiated there. ";
+
+  text += " Most checkin station is at <a href='#' class='g-link' id='" + bikeLocCheckInOrder[bikeLocCheckInOrder.length-1].id +
+          "'>" + bikeLocCheckInOrder[bikeLocCheckInOrder.length-1].properties.ADDRESS + "</a>,";
+  text += " where " + format(bikeLocCheckInOrder[bikeLocCheckInOrder.length-1].checkin) + " number of times bikes being checked."
+  text += " The least checkin station is at <a href='#' class='g-link' id='" + bikeLocCheckInOrder[0].id +
+          "'>" + bikeLocCheckInOrder[0].properties.ADDRESS + "</a>,";
+  text += " where only " + format(bikeLocCheckInOrder[0].checkin) + " trips being ended there. "
+
+
+  $(".g-annotation").html(text);
+
+  $('.g-annotation a').mouseover(function(){
+                        highlight($(this).attr('id'));return false})
+                      .mouseout(function(){
+                        removeHighlight();return false});
+                    
+
+  var max = d3.max(bikeLoc1,function(d){return d["total"]});
+  radius.domain([0,max]);
+
+  updateBikeLocation("total");
+
+}  
+
+// Use Leaflet to implement a D3 geographic projection.
+  function project(x) {
+    var point = lmap.latLngToLayerPoint(new L.LatLng(x[1], x[0]));
+    return [point.x, point.y];
+  }
+ </script>
+</html>
