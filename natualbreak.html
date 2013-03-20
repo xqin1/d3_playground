@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font:normal 14px sans-serif;
+}
+
+#form {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+input {
+  margin-right: 10px;
+}
+
+.states {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+}
+
+path {
+  -webkit-transition: fill 200ms linear;
+}
+
+.q0-9 { fill:rgb(247,251,255); }
+.q1-9 { fill:rgb(222,235,247); }
+.q2-9 { fill:rgb(198,219,239); }
+.q3-9 { fill:rgb(158,202,225); }
+.q4-9 { fill:rgb(107,174,214); }
+.q5-9 { fill:rgb(66,146,198); }
+.q6-9 { fill:rgb(33,113,181); }
+.q7-9 { fill:rgb(8,81,156); }
+.q8-9 { fill:rgb(8,48,107); }
+
+</style>
+<body>
+<div id='form'>
+  <input checked='true' type='radio' name='scale' id='jenks9' /><label for='jenks9'>jenks 9</label>
+  <input type='radio' name='scale' id='quantize' /><label for='quantize'>quantize</label>
+</div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="js/simple_statistics.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script src="http://d3js.org/topojson.v0.min.js"></script>
+<script>
+
+var width = 960,
+    height = 500;
+
+var scales = {};
+
+scales.quantize = d3.scale.quantize()
+    .domain([0, .15])
+    .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
+
+var path = d3.geo.path();
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+queue()
+    .defer(d3.json, "data/us.json")
+    .defer(d3.tsv, "data/unemployment.tsv")
+    .await(ready);
+
+function ready(error, us, unemployment) {
+  var rateById = {};
+
+  unemployment.forEach(function(d) { rateById[d.id] = +d.rate; });
+
+  scales.jenks9 = d3.scale.threshold()
+      .domain(ss.jenks(unemployment.map(function(d) { return +d.rate; }), 9))
+      .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
+
+  var counties = svg.append("g")
+      .attr("class", "counties")
+    .selectAll("path")
+      .data(topojson.object(us, us.objects.counties).geometries)
+    .enter().append("path")
+      .attr("d", path);
+
+  d3.selectAll('input').on('change', function() {
+      setScale(this.id);
+  });
+
+  function setScale(s) {
+      counties.attr("class", function(d) { return scales[s](rateById[d.id]); })
+  }
+
+  setScale('jenks9');
+
+  svg.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a.id !== b.id; }))
+      .attr("class", "states")
+      .attr("d", path);
+}
+
+</script>
