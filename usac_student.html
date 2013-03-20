@@ -29,10 +29,10 @@ path {
 </style>
 <body>
 <div id="title">
-	<h2>Schools Total Disbursements by State</h2>
+	<h2>Schools and Libraries Funding Commitments and Disbursements per Student by State </h2>
 </div>
 <div>
-	<h3>Funding Year 2009: July 1, 2009 through June 30, 2010</h3>
+	<h3>Funding Year 2008: July 1, 2008 through June 30, 2009</h3>
 </div>
 <div id="map"></div>
 							
@@ -65,20 +65,20 @@ var key = svg.append("g")
  
 queue()
     .defer(d3.json, "data/statecounty_5e6.json")
-    .defer(d3.tsv, "data/2009school_map.tsv")
+    .defer(d3.tsv, "data/2008student.tsv")
     .defer(d3.json, "data/us-state-labels.json")
     .await(ready);
 
-function ready(error, us, schools, labels) {
-  school = schools;
- breaks = ss.jenks(school.map(function(d) { return +d.Total; }), 6);
+function ready(error, us, students, labels) {
+  student = students;
+ breaks = ss.jenks(student.map(function(d) { return +d.Disbursed_Student; }), 6);
 breaks.pop();
 breaks.shift();
   color.domain(breaks)
   states = topojson.object(us, us.objects.state).geometries;
   totalByFips= d3.nest()
                 .key(function(d){return d.Fips})
-                .map(schools);
+                .map(students);
 
   var statePaths = svg.append("g")
               .attr("id","statePath");  
@@ -87,10 +87,10 @@ breaks.shift();
             	.enter()
             	.append("path")
            	 .attr("d",path)
-           	 .style("fill", function(d){return color(+totalByFips[d.id][0].Total)});
+           	 .style("fill", function(d){return color(+totalByFips[d.id][0].Disbursed_Student)});
      s.append("svg:title")
         .text(function(d) { 
-                      return totalByFips[d.id][0].State + ":$" + format(totalByFips[d.id][0].Total);
+                      return totalByFips[d.id][0].State + ":$" + format(totalByFips[d.id][0].Disbursed_Student);
         	});  
 
  var stateBoundaryPath = svg.append("path")
@@ -100,7 +100,7 @@ breaks.shift();
 
 // A position encoding for the key only.
 var x = d3.scale.linear()
-    .domain([42500,110000000])
+    .domain([2,170])
     .range([0, 360]);
 
 var xAxis = d3.svg.axis()
@@ -125,7 +125,7 @@ key.selectAll("rect")
 
 key.selectAll('text').remove();
 key.selectAll('text')
-	.data([{x:10,y:-6, txt:'3'},{x:25,y:-6, txt:'10'}, {x:50,y:-6, txt:'17'},{x:85,y:-6, txt:'26'},{x:125,y:-6, txt:'40'}, {x:300,y:-6, txt:'$100 million'}])
+	.data([{x:15,y:-6, txt:'16'}, {x:50,y:-6, txt:'28'},{x:75,y:-6, txt:'42'},{x:110,y:-6, txt:'56'},{x:155,y:-6, txt:'77'},{x:340,y:-6, txt:'$170'}])
 	.enter()
 	.append("text")
     .attr("class", "caption")
