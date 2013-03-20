@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<header>
+<meta charset="utf-8">
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/topojson.v0.min.js"></script>
+<script src="js/jquery-1.6.2.min.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script src="http://d3js.org/d3.geo.projection.v0.min.js"></script>
+</header>
+<style>
+		#nytg-schoolSection .nytg-backButton{
+			background: url("http://graphics8.nytimes.com/packages/images/newsgraphics/2013/0313-ny-high-schools/back.png") no-repeat scroll center center #346F9A;
+		}
+		#nytg-schoolSection .nytg-nextButton{
+			background: url("http://graphics8.nytimes.com/packages/images/newsgraphics/2013/0313-ny-high-schools/next.png") no-repeat scroll center center #346F9A;
+		}
+		.nytg-step-0 #nytg-schoolSection .nytg-backButton,
+		.nytg-step-9 #nytg-schoolSection .nytg-nextButton{
+			background-color:#ddd;
+			box-shadow:none;
+			cursor:default;
+		}
+		#nytg-mapSection .nytg-2001 .nytg-nextButton,
+		#nytg-mapSection .nytg-2011 .nytg-backButton{
+			background-color:#ddd;
+			box-shadow:none;
+			cursor:pointer;
+		}
+#nytg-shell{
+	font-family:Arial,Helvetica,sans-serif;
+	margin-left:10px;
+	width:950px;
+}
+#nytg-mapSection{
+	position:relative;
+	width:950px;
+	height:1000px;
+}
+.nytg-schoolTextBox{
+	display:none;
+}
+.nytg-navSection,
+#nytg-mapTextBox,
+#nytg-schoolInfoBox,
+#nytg-schoolImageOuterBox1,
+.nytg-chartLabelBoxLeft,
+.nytg-chartLabelBoxRight,
+.nytg-gradRateChartBox,
+.nytg-satChartBox,
+.nytg-schoolNumber,
+.nytg-schoolName,
+.nytg-mapTableCell{
+	float:left;display:inline;
+}
+#nytg-schoolSection{
+	width:950px;
+}
+#nytg-schoolSection,
+#nytg-schoolImageOuterBox1{
+	height:290px;
+}
+#nytg-schoolImageOuterBox1{
+	position:relative;
+}
+#nytg-schoolImageOuterBox2{
+	position:absolute;
+	overflow:hidden;
+/*	width:490px;*/
+/*	height:490px;*/
+	top:-124px;
+}
+#nytg-schoolImageBox{
+	width:490px;
+	height:490px;
+	position:relative;
+}
+.nytg-schoolImage{
+	position:absolute;
+/*	visibility:hidden;*/
+/*	display:none;*/
+/*	border:1px solid red;*/
+	top:0;
+	left:0;
+/*	z-index:20;*/
+	opacity:.001;
+	filter: alpha(opacity=.1);
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=.1)";
+
+	-moz-transition-property:		top, opacity;
+	-webkit-transition-property:	top, opacity;
+	-o-transition-property:			top, opacity;
+	-ms-transition-property:		top, opacity;
+	transition-property:			top, opacity;
+	-moz-transition-duration:		1.5s, .5s;
+	-webkit-transition-duration:	1.5s, .5s;
+	-o-transition-duration:			1.5s, .5s;
+	-ms-transition-duration:		1.5s, .5s;
+	transition-duration:			1.5s, .5s;
+	-moz-transition-timing-function:		ease-out	ease-in-out;
+	-webkit-transition-timing-function:		ease-out	ease-in-out;
+	-o-transition-timing-function:			ease-out	ease-in-out;
+	-ms-transition-timing-function:			ease-out	ease-in-out;
+	transition-timing-function:				ease-out	ease-in-out;
+	-moz-transition-delay:		0s	0s;
+	-webkit-transition-delay:	0s	0s;
+	-o-transition-delay:		0s	0s;
+	-ms-transition-delay:		0s	0s;
+	transition-delay:			0s	0s;
+}
+
+.nytg-navSection{
+	width:128px;
+	margin-right:30px;
+}
+.nytg-buttons{
+	margin-top:3px;
+}
+.nytg-buttons,
+.nytg-backButton,
+.nytg-nextButton{
+	height: 43px;
+}
+.nytg-backButton,
+.nytg-nextButton{
+	border-radius: 3px 3px 3px 3px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+	cursor: pointer;
+	display: inline;
+	float: left;
+	width: 60px;
+}
+#nytg-schoolSection .nytg-backButton:hover,
+#nytg-schoolSection .nytg-nextButton:hover{
+	box-shadow:none;
+}
+#nytg-mapSection .nytg-backButton,
+#nytg-mapSection .nytg-nextButton{
+	background-color: #346F9A;
+	cursor:default;
+}
+.nytg-backButton{
+	margin-right:8px;
+}
+.nytg-buttonText{
+    color: #fff;
+    font-size: 14px;
+    line-height: 18px;
+    padding-top: 13px;
+    text-align: center;
+}
+.nytg-navDots{
+	padding-top:12px;
+}
+.nytg-stepperDot{
+	border: 1px solid #BBBBBB;
+	border-radius: 4px 4px 4px 4px;
+	box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.15) inset;
+	display: inline;
+	float: left;
+	height: 6px;
+	margin-left: 5px;
+	width: 6px;
+	cursor: pointer;
+}
+#nytg-stepperDot-0{
+	margin-left:0;
+}
+.ledeStory .storySummary,
+#nytg-schoolInfoBox{
+	width:260px;
+	margin-right:40px;
+	min-height:1px;
+}
+.nytg-sectionDivider{
+/*#nytg-schoolSection:after{*/
+/*	content:"<div class='nytg-sectionDivider'></div>";*/
+	margin-left:160px;
+	width:629px;
+	height:1px;
+	background-color:#ddd;
+	margin-bottom:0px;
+	margin-top:80px;
+	position:relative;
+	z-index:1000;
+}
+#nytg-mapTextBox{
+	width:250px;
+}
+.nytg-mapHed{
+	font-family:Georgia,Times,serif;
+	font-size: 2.2em;
+	font-weight:normal;
+	line-height: 1.182em;
+	padding-top:37px;
+	margin-bottom:14px;
+}
+.ledeStory .storySummary .summary,
+.nytg-mapIntroText{
+	font-family:Georgia,Times,serif;
+	font-size:15px !important;
+	line-height:22px !important;
+}
+.nytg-chartLabelRow{
+	margin-top:20px;
+}
+.nytg-gradRateChartBox,
+.nytg-satChartBox{
+	margin-bottom:10px;
+}
+.nytg-gradRateChartBox,
+.nytg-satChartBox,
+.nytg-chartImage{
+	width:100px;
+	position:relative;
+}
+.nytg-chartLabelBoxLeft,
+.nytg-chartLabelBoxRight{
+	width:50px;
+}
+.nytg-chartImage{
+	height:80px;
+}
+.nytg-satChartBox{
+	margin-left:40px;
+}
+.nytg-floorNumberBox{
+	position:absolute;
+	top:228px;
+	left:388px;
+	z-index:100;
+	display:none;
+}
+.nytg-chartKeyLine{
+	width:20px;
+	height:3px;
+	margin:5px .5em 0 .5em;
+/*	line-height:1px;*/
+	float:left;
+}
+.nytg-grayLine{
+	background-color:#888;
+}
+.nytg-redLine{
+	background-color:#CD3B28;
+}
+
+#nytg-mapInfoArea,
+.nytg-mapHed{
+	position:relative;
+	z-index:1000;
+}
+
+/* Labels */
+
+.nytg-label{
+	position:absolute;
+	font-size:12px;
+	line-height:14px;
+	color:#666;
+	display:none;
+	z-index:100;
+}
+.nytg-mapLabel{
+	position:absolute;
+	font-size:12px;
+	line-height:14px;
+	color:#666;
+	z-index:100;
+}
+.nytg-center{text-align:center;}
+.nytg-right{text-align:right;}
+
+
+/* Typography */
+
+.nytg-chartKey{
+	font-size:12px;
+	margin-left:10px;
+}
+.nytg-chartKeyText{
+	padding-right:1em;
+	float:left;
+}
+.nytg-floorNumber{
+	font-size:28px;
+	color:#222;
+}
+.nytg-suffix,
+.nytg-floorText{
+	font-size:16px;
+}
+.nytg-suffix,
+.nytg-floorText{
+	color:#aaa;
+}
+
+.nytg-schoolNumber{
+	font-size:39px;
+	line-height:38px;
+	margin:-1px 0 0 0;
+	padding:0;
+	width:30px;
+/*	color:#555;*/
+	color:#CD3B28;
+}
+.nytg-schoolTextBox .nytg-schoolName{
+	font-size:13px;
+	line-height:18px;
+	margin:0;
+	padding:0;
+	width:230px;
+	color:#555;
+}
+.nytg-schoolTextBox .nytg-schoolDescription{
+	font-size:13px;
+	line-height:18px;
+	color:#666;
+	margin:0;
+	padding:0;
+}
+.nytg-schoolTextBox .nytg-schoolDetails{
+	font-size:11px;
+	line-height:16px;
+	text-transform:uppercase;
+	margin:0;
+	padding-top:   6px;
+	padding-bottom:6px;
+}
+.nytg-secondLabel{
+	padding-left:35px;
+}
+.nytg-chartLabelBoxRight p{
+	text-align:right;
+}
+.nytg-schoolTextBox .nytg-chartYearLabel{
+	font-size:11px;
+	line-height:13px;
+	margin:0;padding:0;
+}
+.nytg-schoolTextBox .nytg-chartDataLabel{
+	font-size:12px;
+	line-height:20px;
+	margin:0;padding:0;
+}
+.nytg-schoolTextBox .nytg-chartTitle{
+	font-size:12px;
+	line-height:15px;
+	margin:10px 0 0 0;
+	padding:0;
+	text-align:center;
+}
+.nytg-mapDescription{
+	color:#aaa;
+	margin-top:15px;
+}
+.nytg-mapTableRow{
+	padding-bottom:2px;
+	margin-bottom:11px;
+	border-bottom:1px solid #ddd;
+	width:220px;
+}
+.nytg-mapTableHed{
+	font-weight:bold;
+	padding-bottom:5px;
+}
+.nytg-mapTableCell{
+	text-align:right;
+	margin-bottom:0;
+}
+.nytg-mapTableCol1{
+	width:76px;
+	margin-right:20px;
+}
+.nytg-mapTableCol2,
+.nytg-mapTableCol3{
+	width:60px;
+	margin-left:0px;
+}
+.nytg-mapTableLabel{
+	
+}
+.nytg-mapTableNumber{
+	font-size:24px;
+	line-height:37px;
+	color:#aaa;
+}
+/* custom clearfix */
+
+.nytg-clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.nytg-ie .nytg-clearfix {
+  zoom: 1;     /* triggers hasLayout */
+  display: block;     /* resets display for IE/Win */
+}
+
+/* IE fixes */
+
+.nytg-ie6 #nytg-mapSection,
+.nytg-ie7 #nytg-mapSection,
+.nytg-ie8 #nytg-mapSection{
+	display:none;
+}
+
+#g-graphic {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 13px;
+	line-height: 1.35em;
+/*	margin: 0 10px;*/
+	position: relative;
+}
+
+#g-graphic path {
+	stroke-linejoin: round;
+}
+
+.g-borough-boundary {
+	fill: none;
+	stroke: #aaa;
+	stroke-dasharray: 2,2;
+}
+
+.g-enrollment .g-split,
+.g-enrollment .g-not-split {
+	-webkit-transition-property: fill, stroke, stroke-width;
+	-webkit-transition-duration: 750ms;
+	-moz-transition-property: fill, stroke, stroke-width;
+	-moz-transition-duration: 750ms;
+	-o-transition-property: fill, stroke, stroke-width;
+	-o-transition-duration: 750ms;
+	transition-property: fill, stroke, stroke-width;
+	transition-duration: 750ms;
+}
+
+.g-enrollment .g-not-split {
+	fill: #bbb;
+	stroke: #999;
+}
+
+.g-enrollment .g-split {
+	fill: orange;
+	stroke: #c67600;
+	stroke-width: .25px;
+}
+
+.g-enrollment .g-split .g-halo {
+	stroke: #c67600;
+	stroke-width: 3px;
+}
+
+.g-borough-label {
+	fill: #777;
+	font-size: 11px;
+/*	font-style: oblique;*/
+	letter-spacing: 2px;
+	text-anchor: middle;
+	text-transform: uppercase;
+	pointer-events: none;
+}
+
+#g-form {
+	position: absolute;
+	top: 40px;
+	left: 40px;
+}
+
+#g-form input {
+	vertical-align: baseline;
+}
+
+
+</style>
+<body>
+<div id="g-graphic">
+</div>
+</div>
+<!--begin map labels -->
+<img style="left:821px;top:199px;width:23px;height:71px;" class="nytg-mapLabel" src="http://graphics8.nytimes.com/packages/images/newsgraphics/2013/0313-ny-high-schools/mapkey.png" />
+<p style="left:850px;top:174px;font-weight:bold;color:#333;" class="nytg-mapLabel">Map Key</p>
+<p style="left:850px;top:200px;" class="nytg-mapLabel">4,000 students</p>
+<p style="left:850px;top:225px;" class="nytg-mapLabel">400</p>
+<p style="left:850px;top:250px;" class="nytg-mapLabel">Multiple schools<br>at the same<br>address</p>
+<p style="left:698px;top:224px;font-weight:bold;color:#333;" class="nytg-mapLabel">Former<br>Stevenson H.S.</p>
+<!--end map labels -->
+<h3 class="nytg-mapHed">In 10 Years, Double the Number of High Schools</h3>
+<div id="nytg-mapInfoArea" class="clearfix">
+<div id="nytg-mapNavSection" class="nytg-2011">
+<div class="nytg-navSection">
+<div class="nytg-buttons">
+<div class="nytg-backButton">
+<p class="nytg-buttonText">2001</p>
+</div>
+<div class="nytg-nextButton">
+<p class="nytg-buttonText">2011</p>
+</div>
+</div>
+<p class="nytg-mapDescription">Each circle on the map represents one high school and is sized by the number of students. Click the buttons above to see how the number of schools changed between 2001 and 2011.</p>
+</div>
+</div>
+<div id="nytg-mapTextBox">
+<p class="nytg-mapIntroText">The Bronx, Manhattan and Brooklyn have been most affected by the mini-high-school trend. Of the nine high schools in the Bronx that had more than 2,000 students in 2002, only three remain.</p>
+<div class="nytg-mapTableRow clearfix">
+<p class="nytg-mapTableCol1 nytg-mapTableHed nytg-mapTableCell">N.Y.C.<br>high schools</p>
+<p class="nytg-mapTableCol2 nytg-mapTableHed nytg-mapTableCell"><br>2001</p>
+<p class="nytg-mapTableCol3 nytg-mapTableHed nytg-mapTableCell"><br>2011</p>
+</div>
+<div class="nytg-mapTableRow clearfix">
+<p class="nytg-mapTableCol1 nytg-mapTableLabel  nytg-mapTableCell"><br>Total</p>
+<p class="nytg-mapTableCol2 nytg-mapTableNumber nytg-mapTableCell">186</p>
+<p class="nytg-mapTableCol3 nytg-mapTableNumber nytg-mapTableCell">383</p>
+</div>
+<div class="nytg-mapTableRow clearfix">
+<p class="nytg-mapTableCol1 nytg-mapTableLabel  nytg-mapTableCell">Fewer than<br>300 students</p>
+<p class="nytg-mapTableCol2 nytg-mapTableNumber nytg-mapTableCell">21</p>
+<p class="nytg-mapTableCol3 nytg-mapTableNumber nytg-mapTableCell">94</p>
+</div>
+<div class="nytg-mapTableRow clearfix">
+<p class="nytg-mapTableCol1 nytg-mapTableLabel  nytg-mapTableCell">More than<br>2,000</p>
+<p class="nytg-mapTableCol2 nytg-mapTableNumber nytg-mapTableCell">60</p>
+<p class="nytg-mapTableCol3 nytg-mapTableNumber nytg-mapTableCell">36</p>
+</div>
+<div class="nytg-mapTableRow clearfix">
+<p class="nytg-mapTableCol1 nytg-mapTableLabel  nytg-mapTableCell">Average<br>enrollment</p>
+<p class="nytg-mapTableCol2 nytg-mapTableNumber nytg-mapTableCell">1,437</p>
+<p class="nytg-mapTableCol3 nytg-mapTableNumber nytg-mapTableCell">713</p>
+</div>
+<p class="nytg-mapDescription">Includes traditional schools in the<br>city&rsquo;s 32 geographic districts.</p>
+</div>
+</div>
+<script type="text/javascript" charset="utf-8">
+				var width = 950,
+				    height = 1000,
+				    maxRadius = 16, // TODO verify
+				    formatNumber = d3.format(",d");
+
+				// ESRI:102718
+				var projection = d3.geo.conicConformal()
+				    .rotate([74, -40 - 10 / 60])
+				    .parallels([40 + 40 / 60, 41 + 2 / 60])
+				    .scale(102800)
+				    .center([0.0162, 0.5392])
+				    .translate([width / 2, height / 2]);
+
+				var radius = d3.scale.sqrt()
+				    .domain([0, 1000])
+				    .range([0, 4]);
+
+				var path = d3.geo.path()
+				    .projection(projection);
+
+				var force = d3.layout.force()
+				    .gravity(0)
+				    .charge(0)
+				    .size([width, height]);
+
+				var svg = d3.select("#g-graphic").append("svg")
+				    .attr("width", width)
+				    .attr("height", height);
+
+				queue()
+			
+			
+					.defer(d3.json, "data/ny.json")
+					// .defer(d3.json, "http://newsgraphics.ec2.nytimes.com/stencil-previews/2013/0313-ny-high-schools/javascripts/ny.json")
+				    // .defer(d3.json, "/javascripts/ny.json")
+				    .await(ready);
+
+				function ready(error, ny) {
+				  var schools = topojson.object(ny, ny.objects.schools),
+				      nodes = schools.geometries.filter(function(d) { return d.coordinates; });
+
+				  nodes.forEach(function(d) {
+				    var p = projection(d.coordinates);
+				    d.x = d.x0 = p[0] + Math.random() - .5;
+				    d.y = d.y0 = p[1] + Math.random() - .5;
+				    d.r = radius(d.properties[2011]);
+				  });
+
+				  force
+				      .nodes(nodes)
+				      .on("tick", tick)
+				      .start();
+
+				   schoolsByAddress = d3.nest()
+				      .key(function(d) { return ["street", "city", "state", "zip"].map(function(k) { return d.properties[k]; }).join(" "); })
+				      .map(nodes, d3.map);
+
+				  svg.append("image")
+				      .attr("xlink:href", "http://graphics8.nytimes.com/packages/images/newsgraphics/2013/0313-ny-high-schools/ny-" + (window.devicePixelRatio || 1) + "x.jpg")
+				      .attr("width", width)
+				      .attr("height", height);
+
+				  svg.append("path")
+				      .datum(topojson.mesh(ny, ny.objects.boroughs, function(a, b) { return a !== b; }))
+				      .attr("class", "g-borough-boundary")
+				      .attr("d", path);
+
+				  var cluster = svg.append("g")
+				      .attr("class", "g-enrollment")
+				    .selectAll("g")
+				      //.data(schoolsByAddress.values())
+				      .data(d3.values(schoolsByAddress))
+
+				    .enter().append("g")
+				      .each(function(d, i) { d.forEach(function(c) { c.id = i; c.cluster = d.length > 1; }); })
+				      .attr("class", function(d) { return d.filter(function(d) { return d.properties[2011]; }).length > 1 ? "g-split" : "g-not-split"; });
+
+				  // cluster.append("title")
+				  //     .text(function(d) {
+				  //       return d.map(function(d) {
+				  //         return d.properties.name
+				  //             + ": " + formatNumber(d.properties[2001])
+				  //             + " → " + formatNumber(d.properties[2011]);
+				  //       }).join("\n");
+				  //     });
+
+				  cluster.append("g")
+				      .attr("class", "g-halo")
+				    .selectAll("circle")
+				      .data(function(d) { return d; })
+				    .enter().append("circle")
+				      .attr("r", function(d) { return d.r; });
+
+				  cluster.append("g")
+				      .attr("class", "g-not-halo")
+				    .selectAll("circle")
+				      .data(function(d) { return d; })
+				    .enter().append("circle")
+				      .attr("r", function(d) { return d.r; });
+
+				  var node = cluster.selectAll("circle")
+				      // .call(force.drag);
+
+				  svg.append("g")
+				      .attr("class", "g-borough-label")
+				    .selectAll("text")
+				      .data(topojson.object(ny, ny.objects.boroughs).geometries)
+				    .enter().append("text")
+				      .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+				      .text(function(d) { return d.properties.name; });
+
+				  d3.selectAll("#g-form input")
+				      .datum(function() { return +this.value; })
+				      .on("change", function(year) {
+				        cluster
+				            .attr("class", function(d) { return d.filter(function(d) { return d.properties[year]; }).length > 1 ? "g-split" : "g-not-split"; })
+				          .selectAll("circle")
+				          .transition()
+				            .duration(750)
+				            .attr("r", function(d) { return d.r = radius(d.properties[year]); });
+
+				        force.start();
+				      });
+
+				  function tick(e) {
+				    var q = d3.geom.quadtree(nodes),
+				        i = 0,
+				        n = nodes.length;
+
+				    while (++i < n) {
+				      var d = nodes[i];
+				      d.y += (d.y0 - d.y) * .1;
+				      d.x += (d.x0 - d.x) * .1;
+				      q.visit(collide(d));
+				    }
+
+				    node.attr("cx", function(d) { return d.x; })
+				        .attr("cy", function(d) { return d.y; });
+				  }
+
+					// =============================
+
+					function change(year) {
+						// console.log("penguin");
+					  cluster
+					      .attr("class", function(d) { return d.filter(function(d) { return d.properties[year]; }).length > 1 ? "g-split" : "g-not-split"; })
+					    .selectAll("circle")
+					    .transition()
+					      .duration(750)
+					      .attr("r", function(d) { return d.r = radius(d.properties[year]); });
+
+					  force.start();
+					}
+					d3.selectAll("#nytg-mapSection .nytg-backButton").on('click',function(d){
+						$j("#nytg-mapNavSection").removeClass();
+						$j("#nytg-mapNavSection").attr("class","nytg-2001");
+						change(2001);
+					});
+
+					d3.selectAll("#nytg-mapSection .nytg-nextButton").on('click',function(d){
+						$j("#nytg-mapNavSection").removeClass();
+						$j("#nytg-mapNavSection").attr("class","nytg-2011");
+						change(2011);
+					});
+
+
+
+					// =============================
+
+				  function collide(node) {
+				    var r = node.r + maxRadius,
+				        nx1 = node.x - r,
+				        nx2 = node.x + r,
+				        ny1 = node.y - r,
+				        ny2 = node.y + r;
+				    return function(quad, x1, y1, x2, y2) {
+				      if (quad.point && (quad.point !== node) && node.r && quad.point.r) {
+				        var x = node.x - quad.point.x,
+				            y = node.y - quad.point.y,
+				            l = Math.sqrt(x * x + y * y),
+				            r = node.r + quad.point.r + (node.id === quad.point.id ? 0 : 2 * (1 + node.cluster + quad.point.cluster));
+				        if (l < r) {
+				          l = (l - r) / l * .5;
+				          node.x -= x *= l, node.y -= y *= l;
+				          quad.point.x += x, quad.point.y += y;
+				        }
+				      }
+				      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+				    };
+				  }
+			
+			
+				}
+</script>

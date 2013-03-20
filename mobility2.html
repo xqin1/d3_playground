@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<header>
+   <link rel="stylesheet" href="css/bootstrap.min.css"/>
+
+</header>
 <style>
 
 body,
@@ -10,7 +14,7 @@ svg {
   float: left;
 }
 #map {
-  border:2px solid #000;
+  border:1px solid #000;
   width:960px;
   height:550px;
 }
@@ -37,26 +41,62 @@ path {
   fill:black;
 }
 
+.circle {
+  fill: orange;
+  stroke: #c67600;
+  stroke-width: .2px;
+  opacity:0.6;
+}
+
+
 
 </style>
 <body>
-  <div id="map"><div>
+  <div id="subcat">
+    <div class="btn-group">
+        <a href="#" id="road_miles" class="btn active">Road Miles</a>
+        <a href="#" id="population" class="btn">Population</a>        
+    </div>
+  </div>
+    <div id="map"><div>
+
 <script src="js/d3.v3.min.js"></script>
 <script src="js/topojson.v0.min.js"></script>
 <script src="js/queue.v1.min.js"></script>
-
+<script src="js/jquery-1.6.2.min.js"></script>
 <script>
 
+$(document).ready(function() {
+           $('.btn-group a').click(function() { 
+              currentSelected = $(this).attr('id'); 
+              changeSet();
+              drawBubles(nodes);
+              $('.btn-group a').removeClass('active');
+             $(this).toggleClass('active');
+              return false;
+          }); 
+  }); 
 var width = 800,
-    height = 500;
-var counties, bid;
+    height = 500
+    maxRadius = 12;
+var counties, bid, nodes;
 var countyPath,stateBoundaryPath,countyHover;
-var currentSelected = "";
+var domainObj={};
+var currentSelected = "population";
+
 
 //var projection = albersUsa();
 var projection = d3.geo.albersUsa();
 var path = d3.geo.path()
     .projection(projection);
+var radius = d3.scale.sqrt()
+   // .domain([0, 1])
+    .range([1, 8]);
+
+var force = d3.layout.force()
+    .gravity(0)
+    .charge(0)
+    .size([width, height]);
 
 var svg = d3.select("#map").append("svg")
    // .attr("viewBox", "0 0 " + width + " " + height)
@@ -66,34 +106,220 @@ var svg = d3.select("#map").append("svg")
       .on("zoom", redraw))
      .append("g");
 
+function changeSet(){
+  radius.domain(d3.extent(nodes, function(d){return d.properties[currentSelected]}));
+  nodes.forEach(function(d,i) {
+            // var p = projection(d.coordinates);
+            // d.x = d.x0 = p[0] + Math.random() - .5;
+            // d.y = d.y0 = p[1] + Math.random() - .5;
+            d.r = radius(d.properties[currentSelected]);
+          });
+}
+function drawBubles(sNodes){
+  // radius.domain(d3.extent(nodes, function(d){return d.properties[currentSelected]}));
+  // nodes.forEach(function(d,i) {
+  //           // var p = projection(d.coordinates);
+  //           // d.x = d.x0 = p[0] + Math.random() - .5;
+  //           // d.y = d.y0 = p[1] + Math.random() - .5;
+  //           d.r = radius(d.properties[currentSelected]);
+  //         });
+
+var force = d3.layout.force()
+    .gravity(0)
+    .charge(0)
+    .size([width, height]);
+  bidItemsByTract = d3.nest()
+              .key(function(d) { return ["tribe_fips"].map(function(k) { return d.properties[k]; }); })
+              .map(sNodes, d3.map);
+
+
+   clusterG =  clusterContainer
+                .selectAll("g")
+                .data(d3.values(bidItemsByTract));
+  clusterEnter=clusterG
+              .enter().append("g")
+              .each(function(d, i) { d.forEach(function(c) { c.id = i; c.cluster = d.length > 1; }); })
+  clusterUpdate=d3.transition(clusterEnter)
+              .each(function(d, i) { d.forEach(function(c) { c.id = i; c.cluster = d.length > 1; }); })
+  clusterExit = d3.transition(clusterG.exit()).remove();
+
+   circles =  clusterG.selectAll("circle")
+              .data(function(d) { return d; })
+   circleEnter = circles.enter().append("circle")
+              .attr("class", "circle")
+              .attr("r", function(d) { return d.r; })
+              .on("mouseover", function(d){console.log(d.r)});
+  circleUpdate = d3.transition(circleEnter)
+               .attr("class", "circle")
+              .attr("r", function(d) {return d.r; })
+              .on("mouseover", function(d){console.log(d.r)});
+  circleExit = d3.transition(circles.exit()).remove();
+    node = clusterG.selectAll("circle");
+      force
+              .nodes(sNodes)
+              .on("tick", tick)
+              .start();
+
+    //    cluster = svg.append("g")
+    //           .attr("class", "g-enrollment")
+    //         .selectAll("g")
+    //           .data(d3.values(bidItemsByTract))
+    //         .enter().append("g")
+    //           .attr("class", "g-split")
+    //           .each(function(d, i) { d.forEach(function(c) { c.id = i; c.cluster = d.length > 1; }); })
+    //           .attr("class", function(d) { return d.filter(function(d) { return d.properties[currentSelected]; }).length > 1 ? "g-split" : "g-not-split"; });
+
+    // cluster.append("g")
+    //           .attr("class", "g-not-halo")
+    //         .selectAll("circle")
+    //           .data(function(d) { return d; })
+    //         .enter().append("circle")
+    //           .attr("r", function(d) { return d.r; })
+    //           .on("mouseover", function(d){console.log(d.r)});
+    // node = cluster.selectAll("circle");
+  //  bubbleg = svg.append("g")
+  //             .attr("class", "g-enrollment");
+  // bubble = bubbleg.selectAll(".circle").data(nodes)
+  // bubbleEnter = bubble.enter()
+  //            .append("circle")
+  //             .attr("class", "g-split")
+  //             .attr("cx",function(d){return d.x})
+  //             .attr("cy",function(d){return d.y})
+  //             .attr("r", function(d) { return d.r; })
+  //             .on("mouseover", function(d){console.log(d.r)});
+  // bubbleUpdate = d3.transition(bubbleEnter)
+  //               .attr("class", "g-split")
+  //             .attr("cx",function(d){return d.x})
+  //             .attr("cy",function(d){return d.y})
+  //             .attr("r", function(d) { return d.r; })
+  //             .on("mouseover", function(d){console.log(d.r)});
+  // bubbleExit = d3.transition(bubble.exit()).remove();
+  // node = bubbleg.selectAll("circle");
+
+}
 
 queue()
     .defer(d3.json, "data/statecounty_5e6.json")
     .defer(d3.json, "data/mobility_2_bidding_items.topojson")
+    .defer(d3.json, "data/mobility_2_bidding_items_centroid.topojson")
     .await(ready);
 
-function ready(error, us, biditem) {
+function ready(error, us, biditem,biditemPoint) {
   counties = topojson.object(us, us.objects.county);
   state = topojson.object(us, us.objects.state);
   biditem = topojson.object(biditem, biditem.objects.mobility_2_bidding_items);
+  biditemPoint = topojson.object(biditemPoint, biditemPoint.objects.mobility_2_bidding_items_centroid);
 
   stateBoundaryPath = svg.append("path")
-        .datum(state)
-        .attr("d", path)
-        .attr("class", "state-boundary");
-   countyBoundaryPath = svg.append("path")
-        .datum(counties)
-        .attr("d", path)
-        .attr("class", "county");
-   biditemPath = svg.append("path")
-        .datum(biditem)
-        .attr("d", path)
-        .attr("class", "biditem");  
+      .datum(state)
+      .attr("d", path)
+      .attr("class", "state-boundary");
+  countyBoundaryPath = svg.append("path")
+      .datum(counties)
+      .attr("d", path)
+      .attr("class", "county");
+  biditemPath = svg.append("path")
+      .datum(biditem)
+      .attr("d", path)
+      .attr("class", "biditem"); 
+
+  clusterContainer = svg.append("g");
+
+  nodes = biditemPoint.geometries.filter(function(d) { return d.coordinates; });
+  nodes.forEach(function(d,i) {
+            var p = projection(d.coordinates);
+            d.x = d.x0 = p[0] + Math.random() - .5;
+            d.y = d.y0 = p[1] + Math.random() - .5;
+           // d.r = radius(d.properties[currentSelected]);
+          });
+
+  changeSet();
+  drawBubles(nodes);
+  // nodes.forEach(function(d) {
+  //           var p = projection(d.coordinates);
+  //           d.x = d.x0 = p[0] + Math.random() - .5;
+  //           d.y = d.y0 = p[1] + Math.random() - .5;
+  //           d.r = radius(d.properties["population"]);
+  //         });
+
+  //         force
+  //             .nodes(nodes)
+  //             .on("tick", tick)
+  //             .start();
+
+  // bidItemsByCounty = d3.nest()
+  //             .key(function(d) { return ["county_name"].map(function(k) { return d.properties[k]; }); })
+  //             .map(nodes, d3.map);
+
+
+  //  cluster = svg.append("g")
+  //             .attr("class", "g-enrollment")
+  //           .selectAll("g")
+  //             .data(d3.values(bidItemsByCounty))
+  //           .enter().append("g")
+  //             .each(function(d, i) { d.forEach(function(c) { c.id = i; c.cluster = d.length > 1; }); })
+  //             .attr("class", function(d) { return d.filter(function(d) { return d.properties["population"]; }).length > 1 ? "g-split" : "g-not-split"; });
+  //  // cluster.append("g")
+  //  //            .attr("class", "g-halo")
+  //  //          .selectAll("circle")
+  //  //            .data(function(d) { return d; })
+  //  //          .enter().append("circle")
+  //  //            .attr("r", function(d) { return d.r; });
+
+  //   cluster.append("g")
+  //             .attr("class", "g-not-halo")
+  //           .selectAll("circle")
+  //             .data(function(d) { return d; })
+  //           .enter().append("circle")
+  //             .attr("r", function(d) { return d.r; });
+
+  //    node = cluster.selectAll("circle");
 
 };
 function redraw() {
 svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+d3.selectAll(".state-boundary").style("strokeWidth","1px");
 }
 
 
+ function tick(e) {
+            var q = d3.geom.quadtree(nodes),
+                i = 0,
+                n = nodes.length;
+
+            while (++i < n) {
+              var d = nodes[i];
+              d.y += (d.y0 - d.y) * .1;
+              d.x += (d.x0 - d.x) * .1;
+              q.visit(collide(d));
+            }
+
+            node.attr("cx", function(d) { return d.x; })
+                .attr("cy", function(d) { return d.y; });
+          }
+ function collide(node) {
+            var r = node.r + maxRadius,
+                nx1 = node.x - r,
+                nx2 = node.x + r,
+                ny1 = node.y - r,
+                ny2 = node.y + r;
+            return function(quad, x1, y1, x2, y2) {
+              if (quad.point && (quad.point !== node) && node.r && quad.point.r) {
+                var x = node.x - quad.point.x,
+                    y = node.y - quad.point.y,
+                    l = Math.sqrt(x * x + y * y),
+                    r = node.r + quad.point.r + (node.id === quad.point.id ? 0 : 2 * (1 + node.cluster + quad.point.cluster));
+                if (l < r) {
+                  l = (l - r) / l * .5;
+                  node.x -= x *= l, node.y -= y *= l;
+                  quad.point.x += x, quad.point.y += y;
+                }
+              }
+              return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+            };
+          }
+
+
+
 </script>
+</html>
