@@ -64,18 +64,18 @@ var key = svg.append("g")
     .attr("transform", "translate(550,20)");
  
 queue()
-    .defer(d3.json, "data/statecounty_5e6.json")
+    .defer(d3.json, "data/state.topojson")
     .defer(d3.tsv, "data/2009school_map.tsv")
-    .defer(d3.json, "data/us-state-labels.json")
     .await(ready);
 
-function ready(error, us, schools, labels) {
+function ready(error, state, schools) {
   school = schools;
  breaks = ss.jenks(school.map(function(d) { return +d.Total; }), 6);
 breaks.pop();
 breaks.shift();
   color.domain(breaks)
-  states = topojson.object(us, us.objects.state).geometries;
+  states = topojson.object(state, state.objects.state).geometries.filter(function(d){
+          return d.id != '60' && d.id != '69' && d.id != '66' && d.id != '78'});
   totalByFips= d3.nest()
                 .key(function(d){return d.Fips})
                 .map(schools);
@@ -87,14 +87,14 @@ breaks.shift();
             	.enter()
             	.append("path")
            	 .attr("d",path)
-           	 .style("fill", function(d){return color(+totalByFips[d.id][0].Total)});
+           	 .style("fill", function(d){console.log(d.id);return color(+totalByFips[d.id][0].Total)});
      s.append("svg:title")
         .text(function(d) { 
                       return totalByFips[d.id][0].State + ":$" + format(totalByFips[d.id][0].Total);
         	});  
 
  var stateBoundaryPath = svg.append("path")
-        .datum(topojson.mesh(us, us.objects.state, function(a, b) { return a !== b; }))
+        .datum(topojson.mesh(state, state.objects.state, function(a, b) { return a !== b; }))
         .attr("d", path)
         .attr("class", "state-boundary");
 

@@ -260,6 +260,7 @@
       });
 
       function init() {
+        console.log("init");
         var features = carto.features(topology, geometries),
             path = d3.geo.path()
               .projection(proj);
@@ -280,6 +281,7 @@
       }
 
       function reset() {
+        console.log("reset");
         stat.text("");
         body.classed("updating", false);
 
@@ -301,6 +303,7 @@
       }
 
       function update() {
+        console.log("update");
         var start = Date.now();
         body.classed("updating", true);
 
@@ -333,6 +336,7 @@
 
         // tell the cartogram to use the scaled values
         carto.value(function(d) {
+          console.log(d);
           return scale(value(d));
         });
 
