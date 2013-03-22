@@ -100,13 +100,14 @@ function ready(error, state, students) {
 
   scale = d3.scale.linear()
           .domain(d3.extent(student.map(function(d) { return +d.Disbursed_Student; })))
-          .range([1, 1000]);
+          .range([1, 3000]);
  
  carto = d3.cartogram()
             .projection(projection)
 
    carto.value(function(d) {
           return scale(totalByFips[d.id][0].Disbursed_Student);
+
         });
    var stateGeo = state.objects.state.geometries.filter(function(d){
           return d.id != '60' && d.id != '69' && d.id != '66' && d.id != '78'});
