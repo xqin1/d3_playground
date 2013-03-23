@@ -20,7 +20,7 @@ input {
 </style>
 <h1> US Public and Private Schools</h1>
 <input autofocus maxlength=5 placeholder="type a zipcode">
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="js/d3.v3.min.js"></script>
 <script>
 //http://bl.ocks.org/mbostock/5180185
 var width = 960,
@@ -31,6 +31,7 @@ var projection = d3.geo.albersUsa()
     .translate([width / 2, height / 2]);
 
 d3.tsv("data/school_zip.tsv", function(error, zipcodes) {
+  z = zipcodes;
   var zip0;
 
   // Compute projected locations of each zipcode.

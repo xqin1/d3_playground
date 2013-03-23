@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+
+<title>Zip Decode</title>
+
+<script src="js/d3.v3.min.js"></script>
+<script src="js/queue.v1.min.js"></script>
+<script src="http://d3js.org/topojson.v0.min.js"></script>
+
+<style type="text/css">
+input
+  position: absolute;
+}
+
+input {
+  background: transparent;
+  border: none;
+  margin: 10px 384px;
+  width: 180px;
+  font-size: 18px;
+  padding: 6px;
+  text-align: center;
+}
+#states { fill: none; stroke: #555555; stroke-width: 0.5px; }
+circle {
+    transition: fill 0.4s;
+    -webkit-transition: fill 0.4s;
+    -o-transition: fill 0.4s;
+}
+.selected {
+    fill: #f00;
+    fill-opacity:1;}
+.unselected { 
+    fill: #8C8789;
+    fill-opacity:0.8; }
+.alldots { 
+    fill: #000;
+    fill-opacity:1;
+    }
+</style>
+
+</head><body>
+<h1> US Public and Private Schools</h1>
+<input autofocus maxlength=5 placeholder="type a zipcode">
+<div id="map"></div>
+
+<script type="text/javascript">
+
+// Display: configurable parameters (see also HTML)
+var width = 960, height = 500;
+var zip0;
+
+// Display: geographic projection
+var proj = d3.geo.albersUsa().scale(1000)
+    .translate([width / 2, height / 2]);
+var path = d3.geo.path().projection(proj);
+
+// Interaction: stored state
+var selectedZip = "", selectedCount=0;
+var input = d3.select("input")
+      .on("cut", function() { setTimeout(change, 10); })
+      .on("paste", function() { setTimeout(change, 10); })
+      .on("change", change)
+      .on("keyup", change);
+
+// Display: AJAX load the data files, then call render()
+queue()
+    .defer(d3.json, "data/state.topojson")
+    .defer(d3.tsv, "data/school_zip.tsv")
+    .await(render);
+
+
+// Data: is the given zip code in the selection?
+function zipSelected(zip) {
+    var l=selectedZip.length;
+    if(zip.substr(0, l) == selectedZip){
+        selectedCount++;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+
+// Display: create the SVG, draw the map
+function render(error, state, zips) {
+    zips.forEach(function(d) {
+    var p = proj([+d.lon, +d.lat]);
+    d.x = Math.round(p[0]), d.y = Math.round(p[1]);
+  });
+    // Display: the main SVG container
+    var svg = d3.select("#map").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    // Display: state outlines
+    svg.append("g").attr("id", "states");
+    states = topojson.object(state, state.objects.state).geometries.filter(function(d){
+          return d.id != '60' && d.id != '69' && d.id != '66' && d.id != '78'});
+    d3.select("#states").selectAll("path")
+        .data(states)
+      .enter().append("path")
+        .attr("d", path);
+
+    var start = Date.now();
+
+    // Display: all the dots for zip code centroids
+    svg.append("g").attr("id", "zipdots");
+    d3.select("#zipdots").selectAll("circle")
+        .data(zips)
+      .enter().append("circle")
+        .attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; })
+
+        .attr("class", "alldots")
+        .attr("r", 0.3);
+
+    console.log("Draw dots: " + (Date.now() - start) + "ms");
+};
+function change() {
+     selectedZip = input.property("value");
+    if (zip0 === selectedZip) return;
+    zip0 = selectedZip;
+    selectedCount=0;
+    var start = Date.now();
+    if (selectedZip.length>0){      
+    // Recolor all the zip dots. Sadly this is slow, a transition won't work
+        d3.select("#zipdots").selectAll("circle")
+            .attr("class", function(d) { return zipSelected(d.zip) ? "selected" : "unselected" });
+    }
+    else{
+        d3.select("#zipdots").selectAll("circle")
+            .attr("class", "alldots");
+    }
+    if (selectedCount==0){
+        d3.select("#zipdots").selectAll("circle")
+            .attr("class", "alldots");
+    }
+
+    console.log("Update dots: " + (Date.now() - start) + "ms");
+
+  }
+</script>
+</body></html>
