@@ -23,7 +23,7 @@ input {
   text-align: center;
 }
 #states { fill: none; stroke: #555555; stroke-width: 0.5px; }
-circle {
+rect {
     transition: fill 0.4s;
     -webkit-transition: fill 0.4s;
     -o-transition: fill 0.4s;
@@ -108,14 +108,14 @@ function render(error, state, zips) {
 
     // Display: all the dots for zip code centroids
     svg.append("g").attr("id", "zipdots");
-    d3.select("#zipdots").selectAll("circle")
+    d3.select("#zipdots").selectAll("rect")
         .data(zips)
-      .enter().append("circle")
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; })
-
+      .enter().append("rect")
+        .attr("x", function(d) { return d.x; })
+        .attr("y", function(d) { return d.y; })
         .attr("class", "alldots")
-        .attr("r", 0.3);
+        .attr("width", 1)
+        .attr("height",1);
 
     console.log("Draw dots: " + (Date.now() - start) + "ms");
 };
@@ -127,15 +127,15 @@ function change() {
     var start = Date.now();
     if (selectedZip.length>0){      
     // Recolor all the zip dots. Sadly this is slow, a transition won't work
-        d3.select("#zipdots").selectAll("circle")
+        d3.select("#zipdots").selectAll("rect")
             .attr("class", function(d) { return zipSelected(d.zip) ? "selected" : "unselected" });
     }
     else{
-        d3.select("#zipdots").selectAll("circle")
+        d3.select("#zipdots").selectAll("rect")
             .attr("class", "alldots");
     }
     if (selectedCount==0){
-        d3.select("#zipdots").selectAll("circle")
+        d3.select("#zipdots").selectAll("rect")
             .attr("class", "alldots");
     }
 
