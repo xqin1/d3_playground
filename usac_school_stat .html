@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<header>
+<meta charset="utf-8">
+<style>
+canvas{
+  position:absolute;
+}
+</style>
+<script src="js/dat.gui.min.js"></script>
+<script src="js/d3.v3.min.js"></script>
+</header>
+<body>
+<h1> US Public and Private Schools</h1>
+<div id="canvas"></div>
+<div id="filter"></div>
+
+
+<script>
+//http://bl.ocks.org/mbostock/5180185
+var width = 560,
+    height = 500;
+
+var projection = d3.geo.albersUsa()
+    .scale(750)
+    .translate([width / 2, height / 2]);
+
+var filterOptionsText = function(){
+            this.type = "0",
+            this.Number_Students=-100
+            // cumulative:true,
+            // fps:20,
+            // trails:false,
+            // point_type:'circle'
+        }
+
+        dat.GUI.DEFAULT_WIDTH = 300;
+        var filterOptions = new filterOptionsText();
+        var filterGui = new dat.GUI({autoPlace:true});
+        var typeController = filterGui.add(filterOptions, 'type', {"All": 0, "Regular":1, "Special Ed":2,"Vocational":3,"Other":4});
+        var numberStudentController = filterGui.add(filterOptions, 'Number_Students').min(-100).max(9600).step(100);
+        // filter.add(filterOptions, 'trails').listen();
+        // filter.add(filterOptions, 'steps', 10, 750).listen();
+        // filter.add(filterOptions, 'fps', 0.05, 48, false).listen();
+        // filter.add(filterOptions, 'point_type', ['circle', 'square']).listen();
+
+var selectAll = false;
+var school;
+d3.tsv("data/school_stat.tsv", function(error, schools) {
+  school = schools;
+  school.forEach(function(d) {
+    var p = projection([+d.lon, +d.lat]);
+    d.x = Math.round(p[0]), d.y = Math.round(p[1]);
+    d.type = +d.type;
+    d.ulocal = +d.ulocal;
+    d.level = +d.level;
+    d.totfrl = +d.totfrl;
+    d.member = +d.member;
+  });
+  
+  typeController.onChange(function(e){change()});
+  numberStudentController.onChange(function(e){change()});
+  change();
+})
+
+  function renderInactive(d){
+    if (filterType == 0){
+        if (d.member < filterNumStudent ) {
+            return true;
+        }
+    }
+    else{
+        if (d.type !== filterType || d.member < filterNumStudent ) {
+            return true;
+        }
+    }
+
+    return false;
+  }
+
+   function renderActive(d){
+      if (filterType == 0){
+          if (d.member > filterNumStudent ) {
+              return true;
+          }
+      }
+      else{
+          if (d.type == filterType && d.member > filterNumStudent ) {
+              return true;
+          }
+      }
+      return false;
+  }
+
+  function change() {
+      filterType = +filterOptions.type;
+      filterNumStudent = filterOptions.Number_Students;
+
+    selectAll = false;
+    if (filterType==0 && filterNumStudent<0 ){
+      selectAll = true;
+    }
+
+    // Select old canvases to remove after fade.
+    var canvas0 = d3.selectAll("canvas");
+
+    // Add a new canvas, initially with opacity 0, to show the new zipcodes.
+    var canvas1 = d3.select("#canvas").insert("canvas","input")
+        .attr("width", width)
+        .attr("height", height)
+        .style("opacity", 0);
+
+    var context = canvas1.node().getContext("2d");
+    context.fillStyle = "#fff";
+    context.fillRect(0, 0, width, height);
+
+    if (selectAll){
+          context.globalAlpha = .4;
+          context.fillStyle = "#000";
+          school.forEach(function(d) {
+              context.fillRect(d.x, d.y, 1, 1);
+          });
+    }
+    else{
+       // Render the inactive schools.
+        context.globalAlpha = .4;
+        var fillColor;
+        context.fillStyle = "#aaa";
+        school.forEach(function(d) {
+            // if (d.type !== filterType || d.member < filterNumStudent ) {
+            //   context.fillRect(d.x, d.y, 1, 1);
+            //   return;
+            // }
+            if (renderInactive(d)){
+              context.fillRect(d.x, d.y, 1, 1);
+            };
+          });
+
+        // Render the active schools.
+        context.globalAlpha = 1;
+        context.fillStyle = "#f00";
+        count1=0;
+        school.forEach(function(d) {
+            // if (d.type !== filterType || d.member >= filterNumStudent) {
+            //   return;
+            // }
+            if (renderActive(d)){
+                context.fillRect(d.x, d.y, 1, 1);
+                count1++;
+            }
+
+        });
+        console.log("count1 " + count1);
+    }
+
+    // Use a transition to fade-in the new canvas.
+    // When this transition finishes, remove the old canvases.
+    canvas1.transition()
+       // .duration(350)
+        .style("opacity", 1)
+        .each("end", function() { canvas0.remove(); });
+  }
+
+</script>
+</body>
+</html>

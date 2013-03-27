@@ -38,9 +38,19 @@ text {
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="http://d3js.org/topojson.v0.min.js"></script>
 <script>
-
-var width = 500,
-    height = 500;
+var regionsProj={"Africa":[17,12],
+        "Asia":[83,29.9],
+        "North and Central America":[-97.5,33.5],
+        "Eastern Europe":[20.79,44.22],
+        "Middle East":[33.5,32.5],
+        "Caribbean":[-72.68,18.89],
+        "Other regions":[29.73,-77.37],
+        "Oceania":[134.48, -25.74],
+        "Western Europe":[14.5,51.5],
+        "South America":[-71.53,39.05]        
+        };
+var width = 400,
+    height = 400;
 
 var centroid = d3.geo.path()
     .projection(function(d) { return d; })
@@ -48,7 +58,7 @@ var centroid = d3.geo.path()
 
 var projection = d3.geo.orthographic()
     .translate([width / 2, height / 2])
-    .scale(248)
+    .scale(200)
     .rotate([98,-39])
     .clipAngle(90);
 
@@ -107,13 +117,14 @@ function rotateToCounty(countryName) {
     if (c.length>0){
       title.text(c[0].id);
     country.transition()
-        .style("fill", function(d, j) { console.log(d);return d.id.toUpperCase() === c[0].id.toUpperCase() ? "red" : "#b8b8b8"; });
+        .style("fill", function(d, j) {return d.id.toUpperCase() === c[0].id.toUpperCase() ? "red" : "#b8b8b8"; });
 
     d3.transition()
         .delay(250)
         .duration(1250)
         .tween("rotate", function() {
           var point = centroid(c[0]);
+          console.log(point);
           rotate.source(projection.rotate()).target([-point[0], -point[1]]).distance();
           return function(t) {
             projection.rotate(rotate(t));
@@ -126,6 +137,25 @@ function rotateToCounty(countryName) {
     }
     
   }
+  function rotateToRegion(regionName) {
+
+
+    d3.transition()
+        .delay(250)
+        .duration(1250)
+        .tween("rotate", function() {
+          var point = regionsProj[regionName];
+          rotate.source(projection.rotate()).target([-point[0], -point[1]]).distance();
+          return function(t) {
+            projection.rotate(rotate(t));
+            country.attr("d", path);
+            line.attr("d", path);
+          };
+        })
+      //.transition()
+      //  .each("end", step);
+    }
+    
 var d3_radians = Math.PI / 180;
 
 function d3_geo_greatArcInterpolator() {
