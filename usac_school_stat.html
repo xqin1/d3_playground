@@ -6,100 +6,164 @@
 canvas{
   position:absolute;
 }
+svg{
+  fill:none;
+}
+path {
+  fill: none;
+  stroke-linejoin: round;
+}
+
+.state {
+  fill: none;
+  stroke: steelblue;
+  stroke-width:0.5px;
+  cursor:pointer;
+}
+.state-boundary {
+        fill: none;
+        stroke: #fff;
+        stroke-width:1px;
+        pointer-events: none;
+}
 </style>
 <script src="js/dat.gui.min.js"></script>
 <script src="js/d3.v3.min.js"></script>
 <script src="js/crossfilter.min.js"></script>
+<script src="js/queue.v1.min.js"></script>
+<script src="js/topojson.v0.min.js"></script>
 </header>
 <body>
 <h1> US Public and Private Schools</h1>
-<div id="canvas"></div>
+<div id="map"></div>
 <div id="filter"></div>
 
 
 <script>
 //http://bl.ocks.org/mbostock/5180185
-var width = 560,
-    height = 500;
+var width = 800,
+    height = 450;
 var data, schools;
 var projection = d3.geo.albersUsa()
-    .scale(750)
+    .scale(950)
     .translate([width / 2, height / 2]);
+var path = d3.geo.path()
+    .projection(projection);
 
 var filterOptionsText = function(){
             this.School_Type = "0",
             this.School_Level = "0",
-            this.Number_Students=-100
-            // cumulative:true,
-            // fps:20,
-            // trails:false,
-            // point_type:'circle'
-        }
+            this.School_Locality = "0",
+            this.FreeLunch_Percent = 0,
+            this.Number_Students=0,
+            this.Max_Download_Speed="0"
+}
 
-        dat.GUI.DEFAULT_WIDTH = 300;
-        var filterOptions = new filterOptionsText();
-        var filterGui = new dat.GUI({autoPlace:true});
-        var typeController = filterGui.add(filterOptions, 'School_Type', {"All": 0, "Regular":1, "Special Ed":2,"Vocational":3,"Other":4});
-        var levelController = filterGui.add(filterOptions, 'School_Level', {"All": 0, "Primary":1, "Middle":2,"High":3,"Other":4});
-        var numberStudentController = filterGui.add(filterOptions, 'Number_Students').min(-100).max(9600).step(100);
-        // filter.add(filterOptions, 'trails').listen();
-        // filter.add(filterOptions, 'steps', 10, 750).listen();
-        // filter.add(filterOptions, 'fps', 0.05, 48, false).listen();
-        // filter.add(filterOptions, 'point_type', ['circle', 'square']).listen();
+dat.GUI.DEFAULT_WIDTH = 300;
+var filterOptions = new filterOptionsText();
+var filterGui = new dat.GUI({autoPlace:true});
+var typeController = filterGui.add(filterOptions, 'School_Type', {"All": 0, "Regular":1, "Special Ed":2,"Vocational":3,"Other":4});
+var levelController = filterGui.add(filterOptions, 'School_Level', {"All": 0, "Primary":1, "Middle":2,"High":3,"Other":4});
+var localityController = filterGui.add(filterOptions, 'School_Locality',{"All": 0, "City_Large": 11,"City_Mid-size": 12,"City_Small": 13,"Suburb_Large": 21,
+          "Suburb, Mid-size":22, "Suburb_Small": 23,"Town_Fringe": 31,"Town_Distant":32, 
+          "Town_Remote": 33,"Rural_Fringe": 41,"Rural_Distant":42, "Rural_Remote": 43});
+var numberStudentController = filterGui.add(filterOptions, 'Number_Students').min(0).max(9600).step(100);
+var freeLunchPctController = filterGui.add(filterOptions, 'FreeLunch_Percent').min(0).max(100).step(5);
+var maxdownSpeedController = filterGui.add(filterOptions, 'Max_Download_Speed', {"All": 0,"768 kbps–1.5mbps": 3,"1.5–3.0mbps":4,"3–6mbps":5,
+                                 "6–10mbps":6,"10–25mbps":7,"25–50mbps":8,"50–100mbps":9,"100mbps–1gbps":10,">1gbps":11});
 
-d3.tsv("data/school_stat.tsv", function(error, school) {
+var canvas = d3.select("#map").append("canvas")
+    .attr("width", width)
+    .attr("height", height)
+    .style("opacity", 1);
+var svg = d3.select("#map").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+var context = canvas.node().getContext("2d");
+context.fillStyle = "#fff";
+context.fillRect(0, 0, width, height);
+
+queue()
+  .defer(d3.tsv, "data/school_stat.tsv")
+  .defer(d3.json, "data/state.topojson")
+  .await(ready);
+//d3.tsv("data/school_stat.tsv", function(error, school) {
+function ready(error, school,state){
   schools = school;
   schools.forEach(function(d) {
     var p = projection([+d.lon, +d.lat]);
     d.x = Math.round(p[0]), d.y = Math.round(p[1]);
+    d.fips = +d.fips;
     d.type = +d.type;
     d.ulocal = +d.ulocal;
     d.level = +d.level;
     d.totfrl = +d.totfrl;
     d.member = +d.member;
+    d.frlpct = +d.totfrlPct;
     d.maxdown = +d.maxdown;
   });
   
   data = crossfilter(schools);
+  data.fips = data.dimension(function(d){return d.fips});
+  data.groupByFips = data.fips.group();
   data.type = data.dimension(function(d){return d.type});
   data.level = data.dimension(function(d){return d.level});
+  data.locality = data.dimension(function(d){return d.ulocal});
+  data.frlPct = data.dimension(function(d){return d.frlpct});
   data.member = data.dimension(function(d){return d.member});
-  memberMax = data.member.top(1)[0].member;
+   data.maxdown = data.dimension(function(d){return d.maxdown});
+  //memberMax = data.member.top(1)[0].member;
+
 
   typeController.onChange(function(e){change()});
   levelController.onChange(function(e){change()});
+  localityController.onChange(function(e){change()});
   numberStudentController.onChange(function(e){change()});
+   freeLunchPctController.onChange(function(e){change()});
+   maxdownSpeedController.onChange(function(e){change()});
+
+  states = topojson.object(state, state.objects.state).geometries.filter(function(d){
+          return d.id != '60' && d.id != '69' && d.id != '66' && d.id != '78'});
+
+var statePaths = svg.append("g")
+              .attr("id","statePath");  
+var s = statePaths.selectAll("path")
+            .data(states)
+              .enter()
+              .append("path")
+              .attr("d",path)
+              .attr("class", "state");
+            
   change();
-})
+}
 
   function change() {
      var filterType = +filterOptions.School_Type;
      var filterLevel = +filterOptions.School_Level;
+     var filterLocality = + filterOptions.School_Locality;
      var filterNumStudent = filterOptions.Number_Students;
+     var filterFrlPct = filterOptions.FreeLunch_Percent;
+     var filterMaxdownSpeed = filterOptions.Max_Download_Speed;
 
 
       data.type.filterAll();
       data.level.filterAll();
+      data.locality.filterAll();
       data.member.filterAll();
+      data.frlPct.filterAll();
+      data.fips.filterAll();
+      data.maxdown.filterAll();
 
     filterType==0 ? data.type.filterAll() : data.type.filterExact(filterType);
     filterLevel==0 ? data.level.filterAll() : data.level.filterExact(filterLevel);
-    data.member.filterRange([filterNumStudent, memberMax]);
+    filterLocality==0 ? data.locality.filterAll() : data.locality.filterExact(filterLocality);
+    filterMaxdownSpeed==0 ? data.maxdown.filterAll() : data.maxdown.filterRange([filterMaxdownSpeed,Infinity]);
+    data.member.filterRange([filterNumStudent, Infinity]);
+    data.frlPct.filterRange([filterFrlPct, Infinity]);
 
-    // Select old canvases to remove after fade.
-    var canvas0 = d3.selectAll("canvas");
+    context.clearRect(0,0,width,height);
 
-    // Add a new canvas, initially with opacity 0, to show the new zipcodes.
-    var canvas1 = d3.select("#canvas").insert("canvas","input")
-        .attr("width", width)
-        .attr("height", height)
-        .style("opacity", 0);
-
-    var context = canvas1.node().getContext("2d");
-    context.fillStyle = "#fff";
-    context.fillRect(0, 0, width, height);
-
-    if (data.member.top(Infinity).length+1 == data.size()){
+    if (data.member.top(Infinity).length == data.size()){
           context.globalAlpha = .4;
           context.fillStyle = "#000";
           schools.forEach(function(d) {
@@ -126,13 +190,6 @@ d3.tsv("data/school_stat.tsv", function(error, school) {
 
         console.log("count1 " + count1);
     }
-
-    // Use a transition to fade-in the new canvas.
-    // When this transition finishes, remove the old canvases.
-    canvas1.transition()
-       // .duration(350)
-        .style("opacity", 1)
-        .each("end", function() { canvas0.remove(); });
   }
 
 
