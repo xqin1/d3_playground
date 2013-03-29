@@ -2,6 +2,9 @@
 <html>
 <header>
 <meta charset="utf-8">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
 <style>
 canvas{
   position:absolute;
@@ -9,6 +12,7 @@ canvas{
 svg{
   fill:none;
 }
+
 path {
   fill: none;
   stroke-linejoin: round;
@@ -26,20 +30,157 @@ path {
         stroke-width:1px;
         pointer-events: none;
 }
+#map {
+    border: 1px solid red;
+    float: left;
+    height: 700px;
+    position: relative;
+    width: 64%;
+}
+
+
+#map-sidebar {
+   border: 1px solid blue;
+    background-color: #FFFFFF;
+    float: left;
+    height: 700px;
+    right: 0;
+    top: 0;
+    width: 34%;
+}
+.slider{
+  width:200px;
+  float:left;
+  margin-left:15px;
+}
+.float_left{
+  float:left;
+}
+.filter{
+  overflow:hidden;
+}
 </style>
-<script src="js/dat.gui.min.js"></script>
 <script src="js/d3.v3.min.js"></script>
 <script src="js/crossfilter.min.js"></script>
 <script src="js/queue.v1.min.js"></script>
 <script src="js/topojson.v0.min.js"></script>
+<script src="js/jquery-1.6.2.min.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+ <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 </header>
 <body>
-<h1> US Public and Private Schools</h1>
-<div id="map"></div>
-<div id="filter"></div>
+<header>
+    <div>
+        <h1 class="text-center"> US Public and Private Schools Selector</h1>
+    </div>
+</header>
 
+<div class="container-fluid">
+
+    <div id="map"></div>
+    <div id="map-sidebar">
+            <div class="filter">
+              <div><h4><span id="txtSelection" class="float_left"></span></h3></div>
+            </div>
+
+            <div class="filter">
+              <div class="float_left">Number Students:<span id="numStudents">0 - 9700 </span></div>
+              <div id="studentSlider" class = "slider"></div>
+            </div>
+            <div class="filter">
+              <div class="float_left">Free/Reduced Lunch Students Pct:<span id="lunchStudents">0 - 100 </span></div>
+              <div id="lunchStudentSlider" class = "slider"></div>
+            </div>
+            <div class="filter">
+              <div class="float_left">Max Download Speed:<span id="maxdownSpeed">0 - 11 </span></div>
+              <div id="maxdownSpeedSlider" class = "slider"></div>
+            </div>
+            <div class="filter">
+              <div class="float_left">School Type </div>
+              <div id ="type">
+                <select>
+                  <option value="0">All</option>
+                  <option value = "1">Regular</option>
+                  <option value = "2">Special Ed</option>
+                  <option value = "3">Vocational</option>
+                  <option value = "4">Other</option>
+                </select>
+              </div>
+              <div class="float_left">School Level </div>
+              <div id ="level">
+                <select>
+                  <option value="0">All</option>
+                  <option value = "1">Primary</option>
+                  <option value = "2">Middle</option>
+                  <option value = "3">High</option>
+                  <option value = "4">Other</option>
+                </select>
+              </div>
+              <div class="float_left">School Locality </div>
+              <div id ="locality">
+                <select>
+                  <option value="0">All</option>
+                  <option value = "11">City Large Size</option>
+                  <option value = "12">City Middle Size</option>
+                  <option value = "13">City Small Size</option>
+                  <option value = "21">Suburb Large Size</option>
+                  <option value = "22">Suburb Middle Size</option>
+                  <option value = "23">Suburb Small Size</option>
+                  <option value = "31">Town Fringe</option>
+                  <option value = "32">Town Distant</option>
+                  <option value = "33">Town Remote</option>
+                  <option value = "41">Rural Fringe</option>
+                  <option value = "42">Rural Distant</option>
+                  <option value = "43">Rural Remote</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+    </div>
+</div>
 
 <script>
+  $(document).ready(function() {
+       $( "#studentSlider" ).slider({
+            range: true,
+            min: 0,
+            max: 9700,
+            values: [ 0, 9700 ],
+            step: 100,
+            slide: function( event, ui ) {
+              $( "#numStudents" ).text(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+            },
+            stop:function(event,ui){change()}
+          });
+       $( "#lunchStudentSlider" ).slider({
+            range: true,
+            min: 0,
+            max: 100,
+            values: [ 0, 100],
+            step: 1,
+            slide: function( event, ui ) {
+              $( "#lunchStudents" ).text(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+            },
+            stop:function(event,ui){change()}
+          });
+        $( "#maxdownSpeedSlider" ).slider({
+            range: true,
+            min: 0,
+            max: 11,
+            values: [ 0, 11],
+            step: 1,
+            slide: function( event, ui ) {
+              $( "#maxdownSpeed" ).text(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+            },
+            stop:function(event,ui){change()}
+          });
+        $("#type select").change(function(e){change()});
+          $("#level select").change(function(e){change()});
+           $("#locality select").change(function(e){change()});
+    });
+
 //http://bl.ocks.org/mbostock/5180185
 var width = 800,
     height = 450;
@@ -50,27 +191,6 @@ var projection = d3.geo.albersUsa()
 var path = d3.geo.path()
     .projection(projection);
 
-var filterOptionsText = function(){
-            this.School_Type = "0",
-            this.School_Level = "0",
-            this.School_Locality = "0",
-            this.FreeLunch_Percent = 0,
-            this.Number_Students=0,
-            this.Max_Download_Speed="0"
-}
-
-dat.GUI.DEFAULT_WIDTH = 300;
-var filterOptions = new filterOptionsText();
-var filterGui = new dat.GUI({autoPlace:true});
-var typeController = filterGui.add(filterOptions, 'School_Type', {"All": 0, "Regular":1, "Special Ed":2,"Vocational":3,"Other":4});
-var levelController = filterGui.add(filterOptions, 'School_Level', {"All": 0, "Primary":1, "Middle":2,"High":3,"Other":4});
-var localityController = filterGui.add(filterOptions, 'School_Locality',{"All": 0, "City_Large": 11,"City_Mid-size": 12,"City_Small": 13,"Suburb_Large": 21,
-          "Suburb, Mid-size":22, "Suburb_Small": 23,"Town_Fringe": 31,"Town_Distant":32, 
-          "Town_Remote": 33,"Rural_Fringe": 41,"Rural_Distant":42, "Rural_Remote": 43});
-var numberStudentController = filterGui.add(filterOptions, 'Number_Students').min(0).max(9600).step(100);
-var freeLunchPctController = filterGui.add(filterOptions, 'FreeLunch_Percent').min(0).max(100).step(5);
-var maxdownSpeedController = filterGui.add(filterOptions, 'Max_Download_Speed', {"All": 0,"768 kbps–1.5mbps": 3,"1.5–3.0mbps":4,"3–6mbps":5,
-                                 "6–10mbps":6,"10–25mbps":7,"25–50mbps":8,"50–100mbps":9,"100mbps–1gbps":10,">1gbps":11});
 
 var canvas = d3.select("#map").append("canvas")
     .attr("width", width)
@@ -112,15 +232,7 @@ function ready(error, school,state){
   data.frlPct = data.dimension(function(d){return d.frlpct});
   data.member = data.dimension(function(d){return d.member});
    data.maxdown = data.dimension(function(d){return d.maxdown});
-  //memberMax = data.member.top(1)[0].member;
 
-
-  typeController.onChange(function(e){change()});
-  levelController.onChange(function(e){change()});
-  localityController.onChange(function(e){change()});
-  numberStudentController.onChange(function(e){change()});
-   freeLunchPctController.onChange(function(e){change()});
-   maxdownSpeedController.onChange(function(e){change()});
 
   states = topojson.object(state, state.objects.state).geometries.filter(function(d){
           return d.id != '60' && d.id != '69' && d.id != '66' && d.id != '78'});
@@ -133,17 +245,17 @@ var s = statePaths.selectAll("path")
               .append("path")
               .attr("d",path)
               .attr("class", "state");
-            
+d3.select("#txtSelection").text("0 records selected out of " + data.size());         
   change();
 }
 
   function change() {
-     var filterType = +filterOptions.School_Type;
-     var filterLevel = +filterOptions.School_Level;
-     var filterLocality = + filterOptions.School_Locality;
-     var filterNumStudent = filterOptions.Number_Students;
-     var filterFrlPct = filterOptions.FreeLunch_Percent;
-     var filterMaxdownSpeed = filterOptions.Max_Download_Speed;
+     var filterType = +$("#type select").val();
+     var filterLevel = +$("#level select").val();
+     var filterLocality = +$("#locality select").val();
+     var filterNumStudent = $( "#studentSlider" ).slider('values');
+     var filterFrlPct = $( "#lunchStudentSlider" ).slider('values');
+     var filterMaxdownSpeed = $( "#maxdownSpeedSlider" ).slider('values');;
 
 
       data.type.filterAll();
@@ -157,9 +269,9 @@ var s = statePaths.selectAll("path")
     filterType==0 ? data.type.filterAll() : data.type.filterExact(filterType);
     filterLevel==0 ? data.level.filterAll() : data.level.filterExact(filterLevel);
     filterLocality==0 ? data.locality.filterAll() : data.locality.filterExact(filterLocality);
-    filterMaxdownSpeed==0 ? data.maxdown.filterAll() : data.maxdown.filterRange([filterMaxdownSpeed,Infinity]);
-    data.member.filterRange([filterNumStudent, Infinity]);
-    data.frlPct.filterRange([filterFrlPct, Infinity]);
+    data.maxdown.filterRange([filterMaxdownSpeed[0],filterMaxdownSpeed[1]+1]);
+    data.member.filterRange([filterNumStudent[0],filterNumStudent[1]+1]);
+    data.frlPct.filterRange([filterFrlPct[0],filterFrlPct[1]+1]);
 
     context.clearRect(0,0,width,height);
 
@@ -169,6 +281,8 @@ var s = statePaths.selectAll("path")
           schools.forEach(function(d) {
               context.fillRect(d.x, d.y, 1, 1);
           });
+
+          d3.select("#txtSelection").text("0 records selected out of " + data.size());
     }
     else{
        // Render the inactive schools.
@@ -182,13 +296,10 @@ var s = statePaths.selectAll("path")
         // Render the active schools.
         context.globalAlpha = 1;
         context.fillStyle = "#f00";
-        count1=0;
         data.member.top(Infinity).forEach(function(d) {
               context.fillRect(d.x, d.y, 1, 1);
-              count1++;
-        });
-
-        console.log("count1 " + count1);
+        })
+        d3.select("#txtSelection").text(data.member.top("Infinity").length + " records selected out of " + data.size());
     }
   }
 
