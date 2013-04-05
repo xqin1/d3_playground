@@ -49,7 +49,7 @@ svg {
 <script>
  
 var svg = d3.select("body").append("svg")
-    .attr("width", 960)
+    .attr("width", 1200)
     .attr("height", 500);
 //threshold legend 
 var g1 = svg.append("g")
@@ -97,6 +97,7 @@ myLegend(c1);
 
 scale.domain([1000,1000000]);
 var formatSI = d3.format('s');
+var formatT = d3.format(',');
 var formatCurrencySI = function(d) { return '$' + formatSI(d) };
 var c2 = svg.append('g')
         .attr('transform', 'translate(500,500)');
@@ -108,11 +109,12 @@ myLegend = scaleKeyCircle()
             .orient("left"); //default
 myLegend(c2);
 
-scale.domain([0,100]);
+scale.domain([0,796]).range([0,30]);
 var c3 = svg.append('g')
         .attr('transform', 'translate(750,250)');
 myLegend = scaleKeyCircle()
             .scale(scale)
+            .tickValues([0,200,600,796])
             .orient("right"); //default
 myLegend(c3);
 
@@ -126,6 +128,15 @@ myLegend = scaleKeyCircle()
         //.tickExtend(15)
         .orient("right");
 myLegend(c4);
+
+//slider
+var s1 = svg.append('g')
+        .attr('transform', 'translate(800,250)')
+myLegend = brushSlider()
+              .xOptions([0,11],[0,240]) 
+              .numWithPercent(false)
+              .legendText("");
+myLegend(s1);
 
 function thresholdLegend(){
  
@@ -187,6 +198,38 @@ function thresholdLegend(){
  
   
   return legend;
+}
+
+function brushSlider(){
+  var legendText, numWithPercent,xDomain,xRange;
+  var x = d3.scale.linear();
+
+  function slider(g){
+        var formatPercent = d3.format(".0%"),
+        formatNumber = d3.format(".0f");
+        var xAxis = d3.svg.axis()
+          .scale(x)
+          .orient("bottom")
+          .tickSize(13)
+         // .tickValues(threshold.domain())
+          .tickFormat(function(d) { return numWithPercent ? formatPercent(d) : formatNumber(d); });
+         g.call(xAxis).append("text")
+            .attr("class", "caption")
+            .attr("y", -6)
+            .text(legendText);
+
+  }
+  slider.xOptions = function (domain,range){
+     if (!arguments.length) return x;
+     x.domain(domain), x.range(range);
+     return slider;
+  }
+  slider.numWithPercent = function(numPer){
+    numWithPercent = numPer;
+    return slider;
+  }
+
+  return slider;
 }
 
 function scaleKeyCircle() {
