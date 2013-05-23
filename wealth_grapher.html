@@ -1,0 +1,62 @@
+<!-- http://www.lutzroeder.com/html5/grapher/
+ --><!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+<title>The Wealth of Tech Companies</title>
+<script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+<script type="text/javascript">try { _gat._getTracker("UA-54146-8")._trackPageview(); } catch (e) { }</script>
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<style>
+@font-face { font-family: 'Lato'; font-style: normal; font-weight: 400; src: url(lato.ttf) format('truetype'); }
+svg { font: 9px 'Lato', Arial, sans-serif; }
+.center { margin-left: auto; margin-right: auto; width: 450px; }
+text { fill: #888; }
+
+.item circle { stroke-width: 0.5px; stroke: #444; stroke-opacity: 1; fill-opacity: 0.6; }
+.item text { fill: #000; fill-opacity: 0.2; alignment-baseline: middle; }
+
+.item:hover circle { stroke-width: 1px; stroke: #000; fill-opacity: 0.8; }
+.item:hover text { fill: #000; fill-opacity: 0.5; }
+
+.selectedItem circle, .selectedItem:hover circle { stroke: #000; stroke-width: 1.5px; fill-opacity: 1; }
+.selectedItem text, .selectedItem:hover text { fill: #000; fill-opacity: 1; }
+
+.axis path, .axis line { fill: none; stroke: #000; stroke-width: 0.25px; }
+.grid { fill: none; stroke: #777777; stroke-opacity: 0.1; stroke-width: 0.5px; }
+.origin { stroke: #AA0000; stroke-opacity: 0.4; stroke-dasharray: 4 2; stroke-width: 0.75px; }
+</style>
+</head>
+<body>
+<br/><br/>
+<div class="center" style="position: relative;">
+<svg id="chart" width="450" height="450" />
+<!-- <link rel="stylesheet" type="text/css" href="grapher.css" />
+ --><script src="js/d3.v3.min.js"></script>
+<script src="js/grapher.js"></script>
+<script>
+d3.json("data/companies.json", function(data) {
+	var chart = new Grapher.MotionChart(document.getElementById("chart"));
+	chart.dataSource = data;
+	chart.labelData = "Name";
+	chart.xData = "Annual Revenue";
+  	chart.yData = "Annual Income";
+	chart.radiusData = "Shareholder Equity";
+	chart.colorData = "Market Capitalization";
+	chart.select("Apple");
+	chart.select("Google");
+	chart.select("Microsoft");
+	// chart.yData = "Shareholder Equity";
+  	// chart.xData = "Market Capitalization";
+	// chart.colorData = "Annual Revenue";
+	// chart.radiusData = "Annual Income";
+	// chart.xScale = d3.scale.sqrt();
+	// chart.yScale = d3.scale.sqrt();
+	// chart.startTime = new Date("2001/12/31");
+	// chart.endTime = new Date("2012/12/31"); */
+	chart.draw();
+});
+</script>
+</div>
+</body>
+</html>

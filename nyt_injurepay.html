@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<style>
+
+.g-shell {
+  margin:0px;
+  font-family: sans-serif;
+  width:970px;
+  position:relative;
+}
+
+/*share tools*/
+.ledeStory .shareToolsThemeClassicHorizontal li {
+  float: none;
+  border-bottom: solid 1px hsl(0, 0%, 87%);
+  padding: 4px 0;
+}
+
+.shareToolsBox {
+  margin-right: 40px !important;
+}
+
+#main .storyHeader h1 {
+  font-size: 40px;
+  padding-top: 15px;
+  margin-bottom: 4px;
+  font-family: 'nyt-cheltenham', Georgia, Arial;
+}
+
+.g-intro {
+  font-family: "nyt-franklin", sans-serif;
+  width: 350px;
+  line-height: 1.3em;
+  font-weight: 300;
+  float: left;
+  margin:10px 20px 25px 10px;
+}
+
+.g-intro p {
+  font-size: 17px;
+}
+
+ .g-intro span {
+  font-weight: bold;
+  font-size: 17px;
+ }
+
+.g-table {
+  width: 960px;
+  margin-top: 40px;
+  margin-left: 10px;
+  display:inline-block;
+  position: relative;
+}
+
+.g-table table {
+  border-collapse:collapse;
+}
+
+.g-table table th {
+  text-transform:uppercase;
+  font-weight:normal;
+  text-align:left;
+  font-size: 9px;
+  vertical-align: bottom;
+  font-family: sans-serif;
+}
+
+.g-td {
+  padding: 15px 0 5px 0;
+  font-family: "nyt-franklin";
+  font-size: 14px;
+  font-weight: 300;
+  vertical-align: top;
+  border-top: solid 1px #ddd;
+}
+
+.g-team-name {
+  width: 180px;
+  padding-left: 5px;
+}
+
+.g-team-name img {
+  float:left;
+  width:50px;
+  margin-right:20px;
+  line-height: 1.4em;
+}
+
+.g-team-name h5 {
+  font-family: "nyt-cheltenham", georgia;
+  font-weight: normal;
+  font-size: 17px;
+  width: 100px;
+  float: left;
+  line-height: 1.4em;
+  padding-left: 75px;
+  margin-top: 5px;
+}
+
+.g-team-name button {
+  position: absolute;
+}
+
+.g-team-info-container {
+  background-repeat: no-repeat;
+  background-position: -24px -5px;
+  min-height:72px;
+}
+
+.g-num-players-dl {
+  width: 50px;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.g-team-amt {
+  width: 80px;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.g-payroll-share {
+  width: 50px;
+  text-align: right;
+  padding-right: 40px;
+}
+
+.g-barchart-td {
+  width:650px;
+  position:relative;
+}
+.g-bars-container {
+  width:650px;
+  height: 40px;
+  display:block;
+  position: relative;
+  z-index: 10;
+}
+
+.g-players-context-info {
+  /*width: 700px;*/
+  display: block;
+  margin: 8px 0 10px 0;
+}
+
+.g-team-tick {
+  position:relative;
+  width:50px;
+  padding-right:10px;
+  padding-top:10px;
+}
+
+.g-team-tick2 {
+  position: absolute;
+  width: 162px;
+  text-align: center;
+  font-size: 15px;
+  right: -11px;
+  border: 1px solid #ccc;
+  padding: 14px;
+  background-color: white;
+  top: 147px;
+  line-height: 19px;
+  font-family: "nyt-franklin";
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+}
+
+.g-team-tick2:after {
+  content: "";
+  width: 162px;
+  height: 20px;
+  position: absolute;
+  top: 90px;
+  right: -51px;
+  z-index: 10;
+  background: url("http://graphics8.nytimes.com/newsgraphics/2013/05/03/baseball-disabled-list/6903549ac38b69114258d87ebd386beb5a5a679c/images/tail.png") no-repeat 0 0;
+}
+
+.g-team-tick2 strong {
+  display: block;
+  font-size: 19px;
+  margin-top: 5px;
+}
+
+.g-bar {
+  height: 40px;
+  background-color: hsl(31, 84%, 64%);
+  background-image: linear-gradient(top, hsl(31, 84%, 64%) 10%, hsl(31, 64%, 47%) 60% );
+  background-image: -webkit-linear-gradient(top, hsl(31, 84%, 64%) 10%, hsl(31, 64%, 47%) 60% );
+  background-image: -moz-linear-gradient(top, hsl(31, 84%, 64%) 10%, hsl(31, 64%, 47%) 60% );
+  background-image: -ms-linear-gradient(top, hsl(31, 84%, 64%) 10%, hsl(31, 64%, 47%) 60% );
+  background-image: -o-linear-gradient(top, hsl(31, 84%, 64%) 10%, hsl(31, 64%, 47%) 60% );
+  float: left;
+  position:relative;
+  box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.2);
+  border-right: solid 1px hsl(0, 100%, 100%);
+}
+
+.g-bar-label {
+  padding: 4px 6px;
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: normal;
+  color: white;
+  text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.4);
+  font-family: arial;
+  opacity: 0.6;
+  pointer-events:none;
+  -webkit-transition: opacity 1s linear;
+  -moz-transition: opacity 1s linear;
+  transition: opacity 1s linear;
+}
+
+.g-details {
+  opacity: 0;
+  position: absolute;
+  top: -4px;
+  left: 0;
+  z-index: 0;
+}
+
+.g-display-toggle {
+  position: absolute;
+  top: -57px;
+  padding: 8px 12px;
+  font-size: 12px;
+  border-radius: 3px;
+  border: solid 1px hsl(206, 12%, 73%);
+  background: hsl(192, 20%, 95%);
+  /*background-image: -webkit-linear-gradient(top, hsl(192, 20%, 95%) 0%, hsl(192, 25%, 92%) 100%);*/
+  color: hsl(206, 100%, 23%);
+  cursor: pointer;
+}
+
+.g-open .g-details {
+  /*opacity: 1;*/
+}
+.g-open .g-mlb-average {
+  opacity: 0;
+}
+
+.g-open .g-bar-label {
+  opacity: 0;
+}
+
+.g-detail {
+  width: 600px;
+  height: 19px;
+  padding: 7px 0 3px;
+  border-bottom: solid 1px #f0f0f0;
+}
+
+.g-detail .g-detail-player {
+  float: left;
+  width: 200px;
+}
+
+.g-detail .g-detail-player span {
+  font-size: 11px;
+  margin-left: 12px;
+  color: #999;
+}
+
+.g-detail .g-detail-dltype {
+  float: left;
+  width: 80px;
+}
+
+.g-detail .g-detail-salary {
+  float: left;
+  width: 200px;
+}
+
+.g-mobile-container {
+  display: none;
+}
+
+.g-current-val {
+  font-weight: 200;
+  font-family: "nyt-franklin";
+  font-size: 24px;
+  text-align: right;
+  display: block;
+  margin-top: 20px;
+}
+
+.g-ordinal {
+  width: 18px;
+  display: inline-block;
+  text-align: right;
+  padding-right: 6px;
+}
+
+.g-mil-span {
+  position: absolute;
+  padding-left:4px;
+}
+
+#g-timer {
+  font-weight: bold;
+  display: block;
+  font-size: 25px;
+  padding-top:10px;
+}
+
+.g-teams-total-amt {
+  font-weight:bold;
+}
+
+#g-panel-arrows {
+  width:200px;
+  float:left;
+}
+
+.g-buttons {
+  width: 103px;
+  height: 42px;
+  margin-left: 10px;
+  position: relative;
+  border-radius: 5px;
+  background-color: #F3F3F3;
+  display: block !important;
+}
+.g-back, .g-next {
+  position: absolute;
+  font-size: 30px;
+  text-align: center;
+  cursor: pointer;
+  padding: 12px 15px 0;
+  z-index: 20;
+  background-position: 13px 12px;
+  top: 0;
+  bottom: 0;
+  width: 21px;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.g-back .g-icon {
+  width: 21px;
+  height: 17px;
+  background: url(public/_assets/icons.png) -13px -6px no-repeat;
+}
+.g-next .g-icon {
+  width: 21px;
+  height: 17px;
+  background: url(public/_assets/icons.png) -34px -6px no-repeat;
+}
+
+.g-panel-arrows {
+  float: left;
+  margin-top: -14px;
+  margin-bottom: -13px;
+}
+.g-back {
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
+}
+.g-next {
+  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
+  right: 0px;
+}
+
+.g-arod-pic {
+  position: absolute;
+  top: -108px;
+  left: 295px;
+  width: 468px;
+  z-index: 995;
+}
+
+.g-mlb-median {
+  position: absolute;
+  z-index: 1000;
+  right: -40px;
+  top: 0;
+  width: 100px;
+  text-align: right;
+  background-color: #fff;
+  padding: 5px 0;
+}
+
+.g-mlb-median-number {
+  font-weight: bold;
+}
+
+.g-hourly-rate {
+  font-size: 10px;
+  display:block;
+  text-align: right;
+  padding-top:10px;
+}
+
+.g-mlb-average {
+  top: 0px;
+  width: 0px;
+  height: 71px;
+  position: absolute;
+  border-right: 1px dashed rgba(0,0,0,0.2);
+  -webkit-transition: opacity 1s linear;
+  -moz-transition: opacity 1s linear;
+  transition: opacity 1s linear;
+}
+.g-buttons-label {
+  text-transform: uppercase;
+  padding-left: 29px;
+  padding-top: 5px;
+  font-size: 9px;
+  display: block;
+}
+
+.g-tooltip {
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #dedede;
+  box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.3);
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index:1000;
+  font-family:arial;
+}
+
+.g-bar.g-hovering {
+  box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.3);
+}
+
+.g-bar.g-hovering .g-bar-label {
+  text-shadow: 1px 1px 0px rgba(255,255,255,.3);
+  color:#000;
+}
+.g-playername-tooltip {
+  font-size:12px;
+}
+.g-salary-tooltip {
+  font-size:12px;
+}
+
+/*.insetHFullWidth {
+  margin-left: 10px;
+  margin-right: 9px;
+  border-top: 1px solid #ccc;
+  padding-top: 12px;
+}*/
+
+
+/*
+  RESPONSIVE DESKTOP VERSION
+ ************************************  */
+
+@media only screen and (max-width: 767px) {
+
+    .singleAd,
+    #searchWidget,
+    #masthead h2,
+    .navigation,
+    #mainTabs,
+    #TopAd,
+    #articleToolsTop,
+    .shareTools,
+    #editionDropDownModal,
+    #memberTools li.cColumn-TextAdsHeader,
+    #footer {
+      display: none
+    }
+
+    body {
+      width: 100%;
+    }
+
+    #shell {
+        width: 100%;
+        margin: 0;
+    }
+
+      #page {
+          width: 100%;
+          border: none;
+      }
+
+        #masthead {
+          min-height: 0;
+          padding-bottom: 3px;
+          padding-top: 4px;
+          border-bottom-width: 1px;
+        }
+
+      div#main {
+        margin-top: 7px;
+      }
+
+        #main .ledeStory .storyHeader h1 {
+            /*font-size: 22px;*/
+            margin-top: 9px;
+            font-size: 32px !important;
+        }
+
+        .ledeStory p {
+          margin-bottom: 12px !important;
+          font-size: 17px !important;
+        }
+
+        .storySummary .summary span {
+            display: inline;
+            padding-right: 5px;
+        }
+        .g-details {
+          display: none;
+        }
+        .g-display-toggle {
+          display: none;
+        }
+
+        /*custom stuff*/
+        .g-players-context-info {
+          font-size:14px;
+          padding:10px 2px 10px 5px;
+          background-color:#ffc;
+        }
+
+        .g-bars-container {
+          display:none;
+        }
+
+        .g-bars-container {
+          display:none;
+        }
+
+        br {
+          /*display:none;*/
+        }
+
+        .g-shell {
+          width:100%;
+        }
+
+        .g-table {
+          width:95%;
+        }
+
+        .g-mobile-container {
+          display:block;
+        }
+
+        .g-mlb-average {
+          display:none;
+        }
+        .g-intro {
+          float:none;
+          width:auto;
+        }
+
+        body {
+        width: 95%;
+        border: none;
+        }
+
+        .g-team-name h5 {
+          width: 100%;
+          font-size: 21px;
+          padding-left:0;
+          text-align:center;
+        }
+
+        .g-mobile-names.g-header, .g-mobile-salaries.g-header {
+          text-transform:uppercase;
+          font-weight:normal;
+          font-size:11px;
+        }
+
+        .g-players-table {
+          width:100%;
+        }
+
+        .g-current-val {
+          text-align: center;
+          font-size: 29px;
+          padding-bottom: 5px;
+        }
+        .g-hourly-rate {
+          text-align:center;
+          font-size:12px;
+        }
+
+  #preview-banner {
+    display: none;
+  }
+
+  .g-team-row {
+    border-top: 1px solid #ddd;
+    display: block;
+  }
+
+  .g-td {
+    display: block;
+    width: auto;
+    border-top: none;
+  }
+
+  .g-mobile-list {
+    width: 100%;
+  }
+
+  .g-mobile-names {
+    width:60%;
+  }
+  .g-mobile-salaries {
+    width:40%;
+  }
+  .g-arod-pic {
+    display:none;
+  }
+  .g-team-tick2 {
+    display:none;
+  }
+
+  .g-kicker-label {
+    display:block !important;
+    text-align: center;
+  }
+
+  .g-barchart-td {
+    padding-top: 0;
+  }
+
+  .g-counter-container {
+    padding:3px;
+  }
+
+  .g-mobile-dl-type {
+    font-weight: normal;
+    font-size: 10px;
+    padding-left: 10px;
+    color: #888;
+  }
+
+  .g-team-chooser {
+    width:100%;
+    display:block !important;
+  }
+
+}
+@media only screen and (max-width: 625px) {
+    #main .ledeStory .storyHeader .dateline {
+      -webkit-text-size-adjust: none;
+    }
+}
+
+/*
+  APP VERSION WITH LESS CHROME
+ ************************************  */
+
+.nytapp-true #masthead,
+.nytapp-true #memberTools,
+.nytapp-true .navigation,
+.nytapp-true #TopAd,
+.nytapp-true #footer,
+.nytapp-true .pageFooter,
+.nytapp-true #interactiveFooter,
+.nytapp-true #mainTabs,
+.nytapp-true #articleToolsTop,
+.nytapp-true .shareTools,
+.nytapp-true #editionDropDownModal,
+.nytapp-true #nytint-responsive-branding,
+.nytapp-true h6.dateline,
+.nytapp-true div#footer  {
+  display: none;
+}
+.nytapp-true #page {
+  border: none;
+}
+.nytapp-true #main {
+  padding-top: 0 !important;
+}
+
+
+.g-mobile-container {
+/*  width:350px;*/
+}
+
+.g-mobile-list {
+  padding: 3px 0;
+  display: inline-block;
+  border-bottom: 1px dashed #eee;
+}
+.g-mobile-names {
+  font-size: 14px;
+  font-weight: bold;
+  /*width: 129px;*/
+  float: left;
+}
+
+.g-mobile-salaries {
+  text-align:right;
+  float:left;
+  /*width:120px;*/
+}
+
+.g-blamo {
+  display: none;
+}
+
+.g-note {
+  margin-left: 10px;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+  margin-top: 20px;
+
+}
+
+.interactive970ShareTools {
+/*float: right;
+margin-right: 472px;
+margin-top: 0px;
+margin-bottom: 12px;*/
+}
+
+.g-shell span.byline {
+  color: #000;
+  font: normal 11px/1 Arial, Helvetica, sans-serif;
+  display: block;
+  margin-left: 10px;
+}
+
+.g-team-chooser {
+  display:none;
+}
+
+</style>
+<!--[if lte IE 8]>
+  <img src="public/_assets/fallback.png" alt="chart" class="nytg-fallback">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<script type="text/javascript">
+var isiPad = navigator.userAgent.match(/iPad/i) != null;
+if (!isiPad) {
+   document.write('<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">')
+}
+</script>
+<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
+<div class="g-tooltip" style="display:none;">
+<span class="g-playername-tooltip"></span>
+<span class="g-dltype-tooltip"></span>
+<span class="g-salary-tooltip"></span>
+</div>
+<div class="g-shell">
+<img class="g-arod-pic" src="http://graphics8.nytimes.com/newsgraphics/2013/05/03/baseball-disabled-list/6903549ac38b69114258d87ebd386beb5a5a679c/images/a-rod-hurt.png">
+<span class="byline">By <span class="name">SHAN CARTER, KEVIN QUEALY and JOE WARD</span></span>
+<div class="g-intro">
+<p>A running calculation, updated daily, of what major league baseball teams are paying players who are on the disabled list. </p>
+<p>As of <span class="g-last-updated-date"></span>, there were <span class="g-total-on-dl"></span> players on the disabled list, accounting for <span class="g-total-combined-salary"></span> in salaries, or <span class="g-share-of-payroll"></span> percent of payroll.</p>
+<select class="g-team-chooser" style="display: none;">
+<option value="none">Choose a Team</option><optgroup label="NATIONAL LEAGUE">
+<option value="ari">Arizona Diamondbacks</option>
+<option value="atl">Atlanta Braves</option>
+<option value="chc">Chicago Cubs</option>
+<option value="cin">Cincinnati Reds</option>
+<option value="col">Colorado Rockies</option>
+<option value="la">Los Angeles Dodgers</option>
+<option value="mia">Miami Marlins</option>
+<option value="mil">Milwaukee Brewers</option>
+<option value="nym">New York Mets</option>
+<option value="phi">Philadelphia Phillies</option>
+<option value="pit">Pittsburgh Pirates</option>
+<option value="sd">San Diego Padres</option>
+<option value="sf">San Francisco Giants</option>
+<option value="stl">St. Louis Cardinals</option>
+<option value="was">Washington Nationals</option></optgroup>
+<optgroup label="AMERICAN LEAGUE">
+<option value="bal">Baltimore Orioles</option>
+<option value="bos">Boston Red Sox</option>
+<option value="cws">Chicago White Sox</option>
+<option value="cle">Cleveland Indians</option>
+<option value="det">Detroit Tigers</option>
+<option value="hou">Houston Astros</option>
+<option value="kc">Kansas City Royals</option>
+<option value="ana">Los Angeles Angels of Anaheim</option>
+<option value="min">Minnesota Twins</option>
+<option value="nyy">New York Yankees</option>
+<option value="oak">Oakland Athletics</option>
+<option value="sea">Seattle Mariners</option>
+<option value="tb">Tampa Bay Rays</option>
+<option value="tex">Texas Rangers</option>
+<option value="tor">Toronto Blue Jays</option></optgroup>
+</select>
+</div>
+<div class="g-team-tick2">
+Amount paid to players on the disabled list <strong>so far today*</strong>
+</div>
+<div class="g-table">
+<button class="g-display-toggle">Show player details</button>
+</div>
+<div class="g-note">* Amounts are calculated by determining a player's salary per day of the 2013 regular season.</div>
+</div>
+<script src="http://graphics8.nytimes.com/newsgraphics/2013/05/03/baseball-disabled-list/6903549ac38b69114258d87ebd386beb5a5a679c/lib.js"></script>
+<script>(function() {
+
+  // magic numbers
+  var formatPct = d3.format(".1%"),
+      format = d3.format(",f"),
+      format2 = d3.format(",f"),
+      maxWidth = 610,
+      prefix = d3.formatPrefix(1.e6),
+      daysInRegularSeason = 182;
+
+  var displayToggle = true;
+
+  var formatNumber = d3.format(".1f"),
+  formatPct2 = function(d) { return formatNumber(d * 100); };
+
+  queue()
+      .defer(d3.csv, "http://graphics8.nytimes.com/newsgraphics/2013/05/03/baseball-disabled-list/6903549ac38b69114258d87ebd386beb5a5a679c/today.csv")
+      .defer(d3.tsv, "http://graphics8.nytimes.com/newsgraphics/2013/05/03/baseball-disabled-list/6903549ac38b69114258d87ebd386beb5a5a679c/lookup.tsv")
+      .await(ready);
+
+  function ready(err, disabled, lookup) {
+
+
+      // data munging --------------
+      teamNameByCode = d3.nest()
+        .key(function(d) { return d.teamcode})
+        // .key(function(d) { return d.teamName})
+        .map(lookup)
+
+      disabled.forEach(function(d) {
+        d.salary = +d.salary;
+      })
+
+      disabled.sort(function(a,b) {
+        return b.salary - a.salary;
+      });
+
+      lossesByTeam = d3.nest()
+          .key(function(d) { return d.teamcode; })
+          // .key(function(d) { return d.salary;})
+          .entries(disabled);
+
+      lossesByTeam.forEach(function(d) {
+          var totalForTeam = d3.sum(d.values, function(d) { return +d.salary; });
+          d.totalPaidToDisabledList = totalForTeam;
+
+          d.playersOnDl = d.values.length;
+          d.totalPayroll = teamNameByCode[d.key][0].payroll;
+          d.imgUrl = teamNameByCode[d.key][0].link;
+          d.city = teamNameByCode[d.key][0].city;
+          d.team = teamNameByCode[d.key][0].team;
+      });
+
+      lossesByTeam.sort(function(a, b) {
+        return b.totalPaidToDisabledList - a.totalPaidToDisabledList;
+      });
+
+      var mlbMedian = d3.median(lookup, function(d) { return +d.payroll});
+
+      // end data munging --------------
+
+
+      // seelctor for mobile.
+
+      var teamChooser = d3.select(".g-team-chooser")
+        .on("change", function() {
+           window.location.hash = "#" + this.value + "-row";
+        });
+
+
+      var maxDollars = d3.max(lossesByTeam, function(d) { return d.totalPaidToDisabledList}),
+          barScale = function(d) { return Math.floor(maxWidth * d / maxDollars); },
+          barHeight = 40,
+          skinnyBarHeight = 20,
+          barMargin = 10;
+
+      lossesByTeam.forEach(function(t) {
+        var cumulativeWidth = 0;
+        t.values.forEach(function(d, i) {
+          d.position = cumulativeWidth;
+          cumulativeWidth += barScale(d.salary) + 1;
+        })
+      });
+
+      var table = d3.select(".g-table").append("table").classed("g-players-table", true);
+
+      var rows = table.selectAll(".team-row")
+          .data(lossesByTeam)
+        .enter().append("tr")
+          .classed("g-team-row", true)
+          .classed("g-fifth-row", function(d,i) { return i%5 == 4; })
+          .attr("id", function(d) { return d.key + "-row"});
+
+      rows.each(function(d, i) {
+        var row = d3.select(this);
+
+        var teamName = row.append("td")
+            .attr("class", "g-td g-team-name");
+
+        var dlBar = row.append("td")
+            .attr("class", "g-td g-barchart-td");
+
+        var insideStuff = dlBar.append("div")
+            .classed("g-bars-info-container", true)
+            .style("position", "relative");
+
+        var teamContainer = teamName.append("div")
+            .classed("g-team-info-container", true)
+            .style("background-image", function (d) { return "url(http://graphics8.nytimes.com/newsgraphics/2013/05/03/baseball-disabled-list/6903549ac38b69114258d87ebd386beb5a5a679c/images/" + d.imgUrl + ")";});
+
+        teamContainer.append("h5").html(function(d) { return d.city + "<br>" + d.team; });
+
+        var barsContainer = insideStuff.append("div")
+            .attr("class", "g-bars-container")
+            .style("height", (barHeight + barMargin) + "px");
+
+        var bars = barsContainer.selectAll(".g-bar")
+            .data(function(d) { return d.values; })
+          .enter().append("div")
+            .classed("g-bar", true)
+            .style("width", function(d) {
+                return barScale(d.salary) + "px";
+            })
+            .style("height", barHeight + "px")
+            .style("position", "absolute")
+            .style("top", 0)
+            .style("left", function(d, i) { return d.position + "px"; })
+            .on("mouseover", function(d) {
+                d3.select(this).classed("g-hovering", true)
+                var playerName = d.player;
+                var salary = "$"+format2(d.salary);
+                var dltype = "("+d.dltype + ")";
+                d3.select(".g-tooltip .g-playername-tooltip").text(playerName);
+                d3.select(".g-tooltip .g-dltype-tooltip").text(dltype);
+                d3.select(".g-tooltip .g-salary-tooltip").text(salary);
+            })
+            .on("mouseout", function(d) {
+                d3.select(".g-tooltip").style("display", "none");
+                d3.select(this).classed("g-hovering", false);
+            }).on("mousemove", function(d) {
+              d3.select(".g-tooltip").style("display", "block")
+                  .style("left", (d3.event.pageX -65) + "px")
+                  .style("top", (d3.event.pageY - 50) + "px");
+            });
+
+        bars.append("h6")
+            .html(function(d) { return placeText(d).split(" ").join("<br>") })
+            .classed("g-bar-label", true);
+
+        insideStuff.append("div")
+            .classed("g-players-context-info", true)
+            .html(function(d) {
+              var totalOnDl = d.values.length;
+              var addendum = totalOnDl == 1 ? " player" : " players";
+              return '<span class="">' + totalOnDl + addendum +' </span> totaling <span class="g-teams-total-amt">$'+prefix.scale(d.totalPaidToDisabledList).toFixed(1)+' mil. </span> (<span class="">' + formatPct(d.totalPaidToDisabledList/d.totalPayroll) + '</span> of payroll)'
+            });
+
+        var leagueAverageBar = insideStuff.append("div")
+            .attr("class", "g-mlb-average")
+            .style("left", function(d) {
+              var pxWidth = Math.floor(maxWidth * mlbMedian / maxDollars).toString() + "px ";
+              return pxWidth;
+            });
+
+        var teamTick = row.append("td")
+            .attr("class", "g-td g-team-tick");
+
+        var currentCountContainer = teamTick.append("div").classed("g-counter-container", true);
+
+        currentCountContainer.append("span")
+            .attr("class", "g-kicker-label")
+            .text("Paid to these players so far today: ")
+            .style("display", "none");
+
+        currentCountContainer.append("span")
+            .attr("class", "g-current-val");
+
+        currentCountContainer.append("span")
+            .attr("class", "g-hourly-rate")
+            .text(function(d) {
+              return "$"+format2(+d.totalPaidToDisabledList/(daysInRegularSeason*24 )) + " per hour";
+            });
+
+        // this is for blamo view
+
+        var detailsContainer = insideStuff.append("div")
+            .attr("class", "g-details")
+
+        var details = detailsContainer.selectAll(".g-detail")
+            .data(function(d) { return d.values; })
+          .enter().append("div")
+            .attr("class", "g-detail");
+
+        details.append("div").attr("class", "g-detail-player").html(function(d){ return d.player + "<span>" + d.dltype + "</span>"; });
+        // details.append("div").attr("class", "g-detail-dltype").text(function(d){ return d.dltype; });
+        details.append("div").attr("class", "g-detail-salary").text(function(d){ return "$"+format2(d.salary); });
+
+
+        // this is just for mobile view. ----------
+
+        var mobileList = insideStuff.append("div")
+            .classed("g-mobile-container", true);
+
+        var headers = mobileList.append("div")
+            .classed("g-mobile-list", true);
+
+        headers.append("div").classed("g-mobile-names g-header", true).text("Player")
+
+        headers.append("div").classed("g-mobile-salaries g-header", true).text("2013 Salary")
+
+        var bars2 = mobileList.selectAll("g-mobile-list")
+            .data(function(d) { return d.values; })
+          .enter().append("div")
+            .classed("g-mobile-list", true);
+
+        var mobileNames = bars2.append("div")
+            .classed("g-mobile-names", true)
+            .text(function(d) { return d.player; });
+
+        mobileNames.append("span")
+            .classed("g-mobile-dl-type", true)
+            .text(function(d,i) { return d.dltype + (i == 0 ? " D.L." : ""); });
+
+        bars2.append("div")
+            .classed("g-mobile-salaries", true)
+            .text(function(d) { return "$"+format2(d.salary); })
+
+        //  ---------------------------------------
+
+      });
+
+      var totalInjuredSalary = d3.sum(disabled, function(d) { return d.salary; });
+      var totalMLBPayroll = d3.sum(lookup, function(d) { return d.payroll; });
+      var currentDate = "May 7";
+      var totalOnDl = disabled.length;
+      var totalDLSalary = prefix.scale(totalInjuredSalary).toFixed();
+      var pctOfTotal =  totalInjuredSalary / totalMLBPayroll;
+
+      // update the readin
+      d3.select(".g-last-updated-date").text(disabled[0].date);
+      d3.select(".g-total-on-dl").text(function(d) {
+        return disabled.length;
+      });
+      d3.select(".g-total-combined-salary").text( "$" + prefix.scale(totalInjuredSalary).toFixed() + " million");
+
+
+      d3.select(".g-share-of-payroll").text(formatPct2(pctOfTotal));
+
+      var mlbAverageLabel = d3.selectAll(".g-table tr:nth-child(3) td.g-barchart-td .g-mlb-average");
+
+      mlbAverageLabel.append("div")
+          .classed("g-mlb-median", true)
+          .html( '<span class="g-mlb-median-number">$' + prefix.scale(mlbMedian).toFixed(1) + ' mil.</span> <br>Median payroll<br>of all teams' );
+
+      // a terrible function to determine which players get labels.
+      function placeText(d) {
+        // how many pixels do you take up?
+        var pxWidth = Math.floor(maxWidth* +d.salary / maxDollars);
+        var fullName = d.player;
+        var lastName = fullName.split(" ")[1]
+        if (pxWidth >= 30) { return fullName; }
+        // if ((pxWidth > 35) && (pxWidth < 60) ) { return lastName; }
+        else {
+          return "";
+        }
+      }
+
+      // Blamo
+      var blamo = d3.select(".g-display-toggle")
+          .on("click", function(r) {
+            displayToggle = !displayToggle;
+            d3.select(this).text(displayToggle ? "Show player details" : "Hide player details");
+            rows.each(function(d, i) {
+              var row = d3.select(this),
+                  duration = i > 3 ? 0 : 600,
+                  delay = 0,
+                  barsContainer = row.select(".g-bars-container"),
+                  detailsContainer = row.select(".g-details");
+
+              row.classed("g-open", !displayToggle)
+
+              if (!displayToggle) {
+
+                detailsContainer.transition()
+                    .delay(duration ? duration : 1500)
+                    .duration(duration / 2)
+                    .style("opacity", 1);
+
+                barsContainer
+                  .transition()
+                    .delay(duration ? 0 : 1500)
+                    .duration(duration)
+                    .style("height", d.values.length * (skinnyBarHeight + barMargin) + "px");
+
+                barsContainer.selectAll(".g-bar")
+                  .transition()
+                    .delay(function(da, i) { return duration ? (d.values.length - i) * 30 : 1500; })
+                    .duration(duration)
+                    .style("height", skinnyBarHeight + "px")
+                    .style("top", function(d, i) { return i * (skinnyBarHeight + barMargin) + "px"; })
+                  .transition()
+                    .duration(duration / 2)
+                    .style("left", function(d, i) { return "330px"; });
+
+              } else {
+                detailsContainer.transition()
+                    .duration(duration / 2)
+                    .style("opacity", 0);
+
+                barsContainer
+                  .transition()
+                    .delay(duration * 2)
+                    .duration(duration)
+                    .style("height", (barHeight + barMargin) + "px");
+
+                if (duration) {
+                  barsContainer.selectAll(".g-bar")
+                    .transition()
+                      .delay(function(d, i) { return duration ? i * 60 : 1500; })
+                      .duration(duration)
+                      .style("left", function(d, i) { return d.position + "px"; })
+                    .transition().duration(duration / 2)
+                      .style("height", barHeight + "px")
+                      .style("top", "0px");
+                } else {
+                  barsContainer.selectAll(".g-bar")
+                    .transition()
+                      .duration(0)
+                      .style("left", function(d, i) { return d.position + "px"; })
+                      .style("height", barHeight + "px")
+                      .style("top", "0px");
+                }
+              }
+            });
+
+          });
+
+  }
+
+
+
+  var start = Date.now(),
+      elapsed = 0,
+      updateFrequency = 100; //in milliseconds
+
+  var timer = setInterval(tick, updateFrequency);
+
+  var today = new Date();
+   millisecondsPassed = today.getHours() * 60 * 60 * 1000 + today.getMinutes() * 60 * 1000 + today.getSeconds() * 1000 ;
+
+  function tick() {
+      var now = Date.now();
+      elapsed = now - start;
+      // document.getElementById("g-main-timer").innerHTML = secondsToString(elapsed);
+
+      d3.selectAll(".g-current-val").text(function(d) {
+
+              var msInYear = 3.15569e10;
+              var msInSeason = (daysInRegularSeason/365) * msInYear
+              var val = d.totalPaidToDisabledList * (elapsed + millisecondsPassed) / msInSeason;
+              return  "$" + format(val);
+          });
+  }
+
+  // a terrible number to string time formatter.
+  zero = d3.format("02d");
+  function secondsToString(ms)
+  {
+      seconds = ms/1000;
+      var numyears = Math.floor(seconds / 31536000);
+      var numdays = Math.floor((seconds % 31536000) / 86400);
+      var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600);
+      var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
+      var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
+      if (numhours < 1) {
+        return numminutes + ":" + zero(Math.floor(numseconds));
+      }
+      else {
+        return numhours + zero(Math.floor(numminutes)) + ":" + zero(Math.floor(numseconds));
+      }
+  }
+
+
+
+})()</script>
