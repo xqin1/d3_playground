@@ -23,11 +23,11 @@ input {
 <script src="js/d3.v3.min.js"></script>
 <script>
 //http://bl.ocks.org/mbostock/5180185
-var width = 960,
+var width = 560,
     height = 500;
 
 var projection = d3.geo.albersUsa()
-    .scale(1000)
+    .scale(750)
     .translate([width / 2, height / 2]);
 
 d3.tsv("data/school_zip.tsv", function(error, zipcodes) {
@@ -57,7 +57,7 @@ d3.tsv("data/school_zip.tsv", function(error, zipcodes) {
     var canvas0 = d3.selectAll("canvas");
 
     // Add a new canvas, initially with opacity 0, to show the new zipcodes.
-    var canvas1 = d3.select("body").insert("canvas", "input")
+    var canvas1 = d3.select("body").insert("canvas","input")
         .attr("width", width)
         .attr("height", height)
         .style("opacity", 0);
@@ -69,18 +69,23 @@ d3.tsv("data/school_zip.tsv", function(error, zipcodes) {
     // Render the inactive zipcodes.
     context.globalAlpha = .4;
     context.fillStyle = zip1 ? "#aaa" : (zip1 = "*", "#000");
+    console.log(context.fillStyle)
+    count=0;
     zipcodes.forEach(function(d) {
       for (var i = 0, n = zip1.length; i < n; ++i) {
         if (d.zip[i] !== zip1[i]) {
+          count++;
           context.fillRect(d.x, d.y, 1, 1);
           return;
         }
       }
     });
+          console.log("count " + count);
 
     // Render the active zipcodes.
     context.globalAlpha = 1;
     context.fillStyle = "#f00";
+    count1=0;
     zipcodes.forEach(function(d) {
       for (var i = 0, n = zip1.length; i < n; ++i) {
         if (d.zip[i] !== zip1[i]) {
@@ -88,7 +93,9 @@ d3.tsv("data/school_zip.tsv", function(error, zipcodes) {
         }
       }
       context.fillRect(d.x, d.y, 1, 1);
+      count1++
     });
+    console.log("count1 " + count1);
 
     // Use a transition to fade-in the new canvas.
     // When this transition finishes, remove the old canvases.
