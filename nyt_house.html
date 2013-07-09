@@ -42,7 +42,6 @@ it would be worth
 </div>
 <script src="http://graphics8.nytimes.com/newsgraphics/2013/05/28/case-shiller/2a8c44bdaf0703a2361add917782a6dd88c7d81e/lib.js"></script>
 <script>
-(function() {
 
   var nytMonths = {"Jan": "Jan.",
                    "Feb": "Feb.",
@@ -167,7 +166,7 @@ it would be worth
       .await(ready)
 
   function ready(err, lookup, data) {
-
+ d = data;
     data.forEach(function(d) {
       d.date = new Date(+d.year, +d.month -1, 1 )
       d.val = +d.val;
@@ -634,11 +633,11 @@ it would be worth
       d3.select(".g-hover-bar").attr("x", xPos - 2 );
 
       d3.selectAll(".g-change-since-selected-td")
-          .text(function(d) {
+          .html(function(d) {
             var current = d.values[d.values.length-1].val
             var compareVal = d.values[currentDateIndex].val;
             var chg = (current - compareVal ) / compareVal;
-            return formatPercentChange(chg);
+            return formatPercentChange(chg) + "<br/>something<br/>anotherthing";
           });
 
       var thisCityObj = nested.filter(function(d) { return d.key == currentCity})[0];
@@ -672,4 +671,5 @@ it would be worth
     }
   }
 
-})()</script>
+
+</script>

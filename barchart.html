@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bar Chart</title>
+    <script type="text/javascript" src="js/d3.v3.min.js"></script>
+    <style type="text/css">
+
+body {
+  font: 10px sans-serif;
+}
+
+
+.bar text.value {
+  fill: black;
+}
+
+
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+var m = [30, 10, 10, 160],
+    w = 460 - m[1] - m[3],
+    h = 130 - m[0] - m[2];
+
+var format = d3.format(",.0f");
+
+var svg = d3.select("body").append("svg")
+    .attr("width", w + m[1] + m[3])
+    .attr("height", h + m[0] + m[2])
+  .append("g")
+    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+d3.csv("data/barchart_data.csv", function(data) {
+
+
+  // Parse numbers, and sort by value.
+  data.forEach(function(d) { d.totalValue = +d.totalValue; });
+  data.sort(function(a, b) { return b.totalValue - a.totalValue; });
+
+   myChart = barChart()
+                  .data(data)
+                  .fillColor(['#9467bd', '#17becf', '#ff7f0e'])
+                  .xLinearRange([0, w-80])
+                  .yRangeRoundBands([0, h]);
+
+  myChart(svg);
+
+  // Set the scale domain.
+  // var maxTotal = d3.max(data, function(d) { return d.totalValue;});
+  // x.domain([0, d3.max(data, function(d) { return d.totalValue; })]);
+  // y.domain(data.map(function(d) { return d.domain; }));
+
+  // var bar = svg.selectAll("g.bar")
+  //     .data(data)
+  //   .enter().append("g")
+  //     .attr("class", "bar")
+  //     .attr("transform", function(d) { return "translate(0," + y(d.domain) + ")"; });
+
+  // bar.append("rect")
+  //     .attr("class", "totalValue")
+  //     .attr("width", function(d) { return x(d.totalValue); })
+  //     .attr("height", y.rangeBand());
+  // bar.append("rect")
+  //     .attr("class", "itemValue")
+  //     .attr("width", function(d) { return x(d.itemValue); })
+  //     .attr("height", y.rangeBand()/2)
+  //     .attr("x", 0)
+  //     .attr("y", y.rangeBand()-y.rangeBand()/2);
+
+  // bar.append("text")
+  //     .attr("class", "value")
+  //     .attr("x", x(maxTotal) + 10)
+  //     .attr("y", y.rangeBand() / 2)
+  //     .attr("dx", -3)
+  //     .attr("dy", ".35em")
+  //     .attr("text-anchor", "start")
+  //     .text(function(d) { return format(d.totalValue); });
+  // bar.append("text")
+  //     .attr("class", "value")
+  //     .attr("x", -5)
+  //     .attr("y", y.rangeBand() / 2)
+  //     .attr("dx", -3)
+  //     .attr("dy", ".35em")
+  //     .attr("text-anchor", "end")
+  //     .text(function(d) { return d.itemValue; });
+  // bar.append("text")
+  //     .attr("class", "value")
+  //     .attr("x", -80)
+  //     .attr("y", y.rangeBand() / 2)
+  //     .attr("dx", -3)
+  //     .attr("dy", ".35em")
+  //     .attr("text-anchor", "start")
+  //     .text(function(d) { return d.domain; });
+});
+  // svg.append("g")
+  //     .attr("class", "x axis")
+  //     .call(xAxis);
+
+  // svg.append("g")
+  //     .attr("class", "y axis")
+  //     .call(yAxis);
+function barChart(){
+  var data, fillColor, xLinearRange, yRangeRoundBands;
+  var x = d3.scale.linear()
+      y = d3.scale.ordinal();
+  function chart(g){
+    var format = d3.format(",.0f");
+
+      // Parse numbers, and sort by value.
+      data.forEach(function(d) { d.totalValue = +d.totalValue; });
+      data.sort(function(a, b) { return b.totalValue - a.totalValue; });
+
+      // Set the scale domain.
+      var maxTotal = d3.max(data, function(d) { return d.totalValue;});
+      x.domain([0, d3.max(data, function(d) { return d.totalValue; })]);
+      y.domain(data.map(function(d) { return d.domain; }));
+
+      var bar = g.selectAll("g.bar")
+          .data(data)
+        .enter().append("g")
+          .attr("class", "bar")
+          .attr("transform", function(d) { return "translate(0," + y(d.domain) + ")"; });
+
+      bar.append("rect")
+          //.attr("class", "values")
+          .style("fill", fillColor[0])
+          .attr("width", function(d) { return x(d.totalValue); })
+          .attr("height", y.rangeBand())
+          .on('mouseover', function(){d3.select(this).style('fill',fillColor[2])})
+          .on('mouseout', function(){d3.select(this).style('fill',fillColor[0])});
+
+      bar.append("rect")
+          //.attr("class", "values")
+          .style("fill", fillColor[1])
+          .attr("width", function(d) { return x(d.itemValue); })
+          .attr("height", y.rangeBand()/2)
+          .attr("x", 0)
+          .attr("y", y.rangeBand()-y.rangeBand()/2)
+          .on('mouseover', function(){d3.select(this).style('fill',fillColor[2])})
+          .on('mouseout', function(){d3.select(this).style('fill',fillColor[1])});
+
+      bar.append("text")
+          .attr("class", "value")
+          //.attr("x", function(d){return x(d.totalValue) + 10})
+          .attr("x", x(maxTotal) + 10)
+          .attr("y", y.rangeBand() / 2)
+          .attr("dx", -3)
+          .attr("dy", ".35em")
+          .attr("text-anchor", "start")
+          .text(function(d) { return format(d.totalValue); });
+      bar.append("text")
+          .attr("class", "value")
+          .attr("x", -5)
+          .attr("y", y.rangeBand() / 2)
+          .attr("dx", -3)
+          .attr("dy", ".35em")
+          .attr("text-anchor", "end")
+          .text(function(d) { return d.itemValue; });
+      bar.append("text")
+          .attr("class", "value")
+          .attr("x", -80)
+          .attr("y", y.rangeBand() / 2)
+          .attr("dx", -3)
+          .attr("dy", ".35em")
+          .attr("text-anchor", "start")
+          .text(function(d) { return d.domain; });
+    }
+
+    chart.xLinearRange = function(xRange){
+      if (!arguments.length) return xRange;
+      x.range(xRange);
+      return chart;
+    }
+
+    chart.yRangeRoundBands = function(yRangeRoundBands){
+      if (!arguments.length) return yRangeRoundBands;
+      y.rangeRoundBands(yRangeRoundBands, .1);
+      return chart;
+    }
+
+    chart.fillColor = function(fColor){
+      if (!arguments.length) return yRangeRoundBands;
+      fillColor = fColor;
+      return chart;
+    }
+
+    chart.data=function(d){
+      if (!arguments.length) return data;
+      data = d;
+      return chart;
+    }
+
+  return chart;
+}
+    </script>
+  </body>
+</html>
