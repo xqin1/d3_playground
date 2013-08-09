@@ -1,0 +1,7 @@
+bidder_name,large_bidder_flag,eligibility
+BIDDER1,Y,100
+BIDDER2,Y,200
+BIDDER3,N,300
+BIDDER4,N,200
+BIDDER5,Y,220
+BIDDER6,N,110

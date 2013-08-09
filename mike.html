@@ -17,7 +17,7 @@
 var map = L.mapbox.map('map', 'fcc.map-toolde8w')
     .setView([40, -94.50], 4);
 	queue()
-			.defer(d3.json, "data/state_seq.geojson")
+			.defer(d3.json, "https://raw.github.com/where-gov/fcc/master/cma.geojson")
 			.await(ready);
 
 	function ready(error, data){

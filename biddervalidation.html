@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>validation</title>
+        
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+</head>
+
+<body>
+
+<div id="main">
+  <h2>CSV Viewer</h2>
+ 
+  <div id="controls1">
+    <input type="file" id="uploader_bid">
+  </div>
+  <div id="controls2">
+    <input type="file" id="uploader_bidder">
+  </div>
+    <div id="controls3">
+    <input type="file" id="uploader_price">
+  </div>
+
+  <script type="text/javascript">
+
+  var reader_bid = new FileReader();
+  var reader_bidder = new FileReader();
+  var reader_price = new FileReader();
+  var biddata,bidderdata,pricedata;
+  reader_bid.onload = function(e) {
+    var contents = e.target.result;
+   biddata = d3.csv.parse(contents);
+  };
+  reader_bidder.onload = function(e) {
+    var contents = e.target.result;
+   bidderdata = d3.csv.parse(contents);
+  };
+    reader_price.onload = function(e) {
+    var contents = e.target.result;
+   pricedata = d3.csv.parse(contents);
+  };
+  
+  var uploader_bid = document.getElementById("uploader_bid");  
+  uploader_bid.addEventListener("change", handleBid, false);  
+    var uploader_bidder = document.getElementById("uploader_bidder");  
+  uploader_bidder.addEventListener("change", handleBidder, false); 
+    var uploader_price = document.getElementById("uploader_price");  
+  uploader_price.addEventListener("change", handlePrice, false);   
+  
+  function handleBid() {
+    var file = this.files[0];
+      reader_bid.readAsText(file);  
+  };
+    function handleBidder() {
+    var file = this.files[0];
+      reader_bidder.readAsText(file);  
+  };
+  function handlePrice() {
+    var file = this.files[0];
+      reader_price.readAsText(file);  
+  };
+
+  </script>
+</div>
+</body>
+</html>
