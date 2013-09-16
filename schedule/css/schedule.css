@@ -1,0 +1,162 @@
+/* =============================================================================
+   Base
+   ========================================================================== */
+p { margin-bottom: 5px;}
+
+/* =============================================================================
+   Grid Modifications
+   ========================================================================== */
+#site-content, header, header .container { width: 1655px; }
+#site-content { margin: 0 auto; padding: 10px 0 100px; }
+.container { margin-left: 0; margin-right: 0;}
+
+.row-fluid.divider { margin-bottom: 20px; }
+/*.span6 { width: 495px; }
+.span11 { border-left: 2px solid #CCC; padding-left: 20px }*/
+
+#scenarioData .col { float: left; margin-right: 25px; }
+
+.navbar-inner { border-radius: 0; }
+
+/* =============================================================================
+   Headings
+   ========================================================================== */
+h3 { margin-bottom: 5px; }
+.hd-scenarioInfo { font-weight: bold; margin-bottom: 5px; }
+#scenarioInfo h4 { font-size: 13px; margin: 0; }
+
+
+/* =============================================================================
+   Lists
+   ========================================================================== */
+.dl-horizontal-right { text-align: right; }
+.dl-horizontal-small dd { margin-left: 150px; }
+.dl-horizontal-small2 dd { margin-left: 125px; }
+.dl-configInfo dl, .dl-outSummary dl { margin-top: 0; }
+.dl-configInfo .col1 dd { margin-left: 120px; width: auto; }
+.dl-configInfo .col2 dd { margin-left: 139px; width: 50px; }
+.dl-configInfo .col3 dd { margin-left: 190px; width: 35px; }
+.dl-configInfo .col4 dd { margin-left: 110px; width: 90px }
+
+.dl-outSummary .col1 dd { margin-left: 195px; width: 35px; }
+.dl-outSummary .col2 dd { margin-left: 240px; width: 35px; }
+.dl-outSummary .col3 dd { margin-left: 145px; width: 50px; }
+
+#scenarioInfo dl { margin: 0 0 10px; }
+#scenarioData dt { font-weight: normal; margin-bottom: 2px; }
+#scenarioData dd { font-size: 13px; margin-bottom: 2px; }
+
+/* =============================================================================
+   Tables
+   ========================================================================== */
+.table th, .table td { padding: 4px; }
+.table thead th { background-color: #E4E4E4; line-height: normal; }
+.table .text-right { text-align: right; }
+.table .text-center { text-align: center; }
+.table .col-highlight, .table-striped tbody tr td.col-highlight { background-color: #F6F6F6; }
+
+.table-cellBorder th, .table-cellBorder td { border-left: 1px solid #EEE; border-right: 1px solid #EEE; }
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th { background-color: #FFF1AD; cursor: pointer; }
+.tablesorter { border-bottom: none; }
+
+.tbl-hbar { width: 470px; }
+.tbl-hbar .th-col1 { text-align: left; width: 100px; }
+.tbl-hbar .th-col2 { text-align: right; white-space: nowrap; width: 65px; }
+.tbl-hbar .th-colBar { width: 100px; }
+.tbl-hbar .th-col3 { width: 100px; }
+.tbl-hbar .th-col4 { width: 100px; white-space: nowrap; }
+.tbl-barBidPrice { margin-left: 30px; width: 250px; }
+/*.tbl-hbar th, .tbl-barBidPrice th { text-align: left; }*/
+
+.tbl-hbar td:last-child div, .tbl-hbar .col-total { text-align: right; width: 35px; }
+.tbl-hbar .indent { padding-left: 10px; }
+.tbl-hbar tbody th { text-transform: capitalize; white-space: nowrap; }
+.tbl-hbar tbody th span { text-transform: uppercase; }
+
+#inputSummary .th-col1 { width: 90px; }
+.tbl-inputDefault td:last-child { text-align: left; }
+
+#scenarioInfo table { border: none; margin: 0; }
+#scenarioInfo .tbl-scenarioInfo { margin: 0 5px 0; }
+#scenarioInfo th { border: none; }
+#scenarioInfo td { border: none; padding: 8px 20px 8px 0; vertical-align: top; }
+
+#outputSummary .tbl-hbar { width: 826px; }
+#outputSummary .th-col1 { width: 125px; }
+#outputSummary .th-col2 { width: 85px; }
+
+#stationContent .dataTable, #dmaContents .dataTable { margin-bottom: 0; }
+#stationContents th { white-space: nowrap; }
+#stationContents td { word-wrap: break-word; }
+.stationTableNum { color:#B24C01; font-weight:normal; font-size: 14px; }
+
+#tbl-recordDetailsDMA .tablerowselected td, #tbl-recordDetails .tablerowselected td { background-color: #FFF1AD; }
+
+.g-station-summary-table th, .g-station-summary-table td { text-align: center; }
+
+
+/* =============================================================================
+   Horizontal Bar Graph
+   ========================================================================== */
+.bar-container, .bar-container1, .bar-container2 { background-color: #fbd843; height: 10px; padding-top: 5px; }
+.bar-inner { background-color: #FF6D06; height: 10px; }
+
+#outputSummary .bar-container1, #outputSummary .bar-container2 { background-color: #D1DDF2; }
+#outputSummary .bar-inner { background-color: #0078C6; }
+
+.tbl-barBidPrice .bar-container { background-color: #E8E2B5; height: 15px; padding-top: 0; }
+.tbl-barBidPrice .bar-inner { background-color: #CBB521; height: 15px; margin-left: 20px; width: 5px; }
+
+/* =============================================================================
+   Panels and Collapsible
+   ========================================================================== */
+.panel { height: 85px; width: 300px; }
+#scenarioInfo { background-color: #F9F9F9; border: 1px solid #CCC; border-radius: 6px; padding: 10px 0 0 10px; }
+
+/* =============================================================================
+   Map
+   ========================================================================== */
+#stationMap { width:645px; height:450px; }
+.dmaBoundaryOnStation { fill: white; fill-opacity:0; stroke: #ff9896; stroke-width:0.1px; cursor:pointer; }
+.stationCircleOnStationMap { fill:#d6616b; fill-opacity: 0.8; stroke:black; stroke-width:1px; cursor:pointer; }
+.stationCircleOnStationMap:hover { fill:red; fill-opacity:1; stroke:red; stroke-width:2px; cursor:pointer; }
+.pulse_circle { fill:none; fill-opacity: 1; stroke:white; stroke-width:2px; }
+
+#dmaMap { width:645px; height:450px; }
+.dmaPathOnDMA { fill: white; fill-opacity:0.8; stroke: #ff9896; stroke-width:1px; cursor:pointer; }
+.dmaPathOnDMA:hover { fill:red; fill-opacity:1; stroke:red; stroke-width:2px; cursor:pointer; }
+.dmaBoundaryOnDMA { fill: white; fill-opacity:0; stroke: #ff9896; stroke-width:0.5px; cursor:pointer; }
+
+
+/* =============================================================================
+   Tooltip
+   ========================================================================== */
+.tooltip { position: absolute; top: 100px; left: 100px; -moz-border-radius:5px; border-radius: 5px; border: 2px solid #000; /* background: #222222; */
+    background: #fff; opacity: .9; /* color: #eeeeee; */
+    color: black; padding: 10px; width: 300px; font-size: 12px; z-index: 10; }
+.tooltip .title { font-size: 13px; }
+.tooltip .name { font-weight:normal; }
+.tooltip .value { font-weight:bold; }
+.tooltip .separator { font-weight:bold; color:red; }
+
+#offairCircle { background: #d6616b; width: 15px; height: 15px; border-radius: 50%; border:1px solid #f00; float:left; margin-right:3px; }
+#changebandCircle { background: yellow; width: 15px; height: 15px; border-radius: 50%; border:1px solid #f00; float:left; margin-right:3px; }
+.btn-resetFilter { margin: 10px 0 0 20px; }
+
+/* =============================================================================
+   jQuery UI Slider
+   ========================================================================== */
+.slider { margin: 3px 0 0 8px; }
+
+#map-body {
+   height: 300px;
+   width: auto;
+}
+.gmnoprint img { max-width: none; }
+
+.controls.chkbox {
+height: 150px;
+overflow: auto;
+}
+
+#scheduleVis{visibility: hidden;}

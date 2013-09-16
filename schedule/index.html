@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Schedule Optimizer</title>
+<meta name="description" content="Schedule Optimizer">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" ype="text/css" media="all" href="css/bootstrap.css">
+
+<link rel="stylesheet" ype="text/css" media="all" href="css/daterangepicker-bs2.css"/>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/schedule.css">
+<link rel="stylesheet" href="css/mapbox.css">
+<link rel="stylesheet" href="css/chosen.css" type="text/css">
+<!-- <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css' rel='stylesheet' /> -->
+<!--[if lte IE 8]>
+    <link href='//api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.ie.css' rel='stylesheet' />
+  <![endif]-->
+<script src="js/libs/modernizr-2.6.1.custom.js"></script>
+</head>
+<body>
+<!-- Main header -->
+<header>
+    <div id="skip"> <a class="skipLink visuallyhidden focusable" href="#skiptarget1" id="skip-main">Skip to main content</a> <a class="skipLink visuallyhidden focusable" href="#skiptarget2" id="skip-side">Skip to supporting information</a> <a class="skipLink visuallyhidden focusable" href="#skiptarget3" id="skip-foot">Skip to footer and contact information</a> </div>
+    <div id="banner" class="container" style="margin-left: 0; margin-right: 0;"> 
+        <h1>Schedule Optimization</h1>
+    </div>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav" id="myTab">
+                <li class='active'><a href="#scheduleContent" data-toggle="tab">View Schedule</a></li>
+                <li ><a href="#newScheduleContent" data-toggle="tab">Create Schedule</a></li>
+                <li><a href="#newOperationContent" data-toggle="tab">Create Operation</a></li>
+
+
+  
+            </ul>
+            <!--<form class="navbar-search pull-right">
+                <label for="srchDMA" style="display: inline; padding-right: 5px;">Search by DMA:</label>
+                <input id="srchDMA" type="text" class="search-query">
+            </form>-->
+        </div>
+    </div>
+</header>
+<!-- Skip target for main content --> 
+<a class="visuallyhidden" id="skiptarget1" name="skiptarget1" tabindex="0"></a>
+<div id="schedule-content"><div class="container-fluid">
+    <div class="tab-content">
+        <div id="scheduleContent" class="tab-pane active">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="scenarioInfo">
+<!--                         <h3 class="hd-scenarioInfo"><a class="collapsible collapsed" href="#scenarioData" data-toggle="collapse">Schedule List: <span class="profile-name">&nbsp;</span> <span class="visuallyhidden">Section is expanded. Click to collapse.</span></a></h3>
+                        <div id="scenarioData" class ="collapse in">  -->
+                        <label class="control-label" for="sel-scheduleList">Schedule List:</label>                   
+<!--                        <select id = "sel-scheduleList" data-placeholder="" class="chzn-select" multiple>
+                        </select>   -->    
+                         <select id = "sel-scheduleList">
+                        </select>                                
+                        <button id="btn-showSchedule" type="button" class="btn btn-primary btn-medium" role="button" style="float:left;margin-right:10px">Show Schedule</button> 
+                   <!--    </div> -->
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div id="scheduleVis">
+                <h3>schedule Filters</h3>
+                <div class="row-fluid divider">
+                    <div class="span2"> <span class="slider-label">Station Channel:</span> <span id="channelNum" class="slider-range"></span>
+                        <div id="channelSlider" class="slider"></div>
+                    </div>
+                    <div class="span2"> <span class="slider-label">Result Channel:</span> <span id="resultChannelNum" class="slider-range"></span>
+                        <div id="resultChannelSlider" class="slider"></div>
+                    </div>
+                    <div class="span2"> <span class="slider-label">DMA Rank:</span> <span id="dmaRankNum" class="slider-range"></span>
+                        <div id="dmaRankSlider" class="slider"></div>
+                    </div>
+                    <div class="span2"> <span class="slider-label">Population:</span> <span id="populationNum" class="slider-range"></span>
+                        <div id="populationSlider" class="slider"></div>
+                    </div>
+                    <div class="span2"> <a id="btn-stationReset" class="btn-resetFilter btn btn-small" href="#void">Reset Filters</a> </div>
+                </div>
+                <br>
+                <h3 id="numStations">Number of Stations</h3>
+                <div class="row-fluid divider">
+                    <div class="span12">
+                        <table class="table table-cellBorder table-striped g-station-summary-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">&nbsp;</th>
+                                    <th class="text-center" scope="col" colspan="3">Off Air</th>
+                                    <th class="text-center" scope="col" colspan="3">LVHF</th>
+                                    <th class="text-center" scope="col" colspan="3">UVHF</th>
+                                    <th class="text-center" scope="col" colspan="3">UHF</th>
+                                    <th class="text-center" scope="col" colspan="3">Total</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">&nbsp;</th>
+                                    <th scope="col">Stations</th>
+                                    <th scope="col">Cost</th>
+                                    <th scope="col">Overpay</th>
+                                    <th scope="col">Stations</th>
+                                    <th scope="col">Cost</th>
+                                    <th scope="col">Overpay</th>
+                                    <th scope="col">Stations</th>
+                                    <th scope="col">Cost</th>
+                                    <th scope="col">Overpay</th>
+                                    <th scope="col">Stations</th>
+                                    <th scope="col">Cost</th>
+                                    <th scope="col">Overpay</th>
+                                    <th scope="col">Stations</th>
+                                    <th scope="col">Cost</th>
+                                    <th scope="col">Overpay</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="stationDetailSection">
+                    <div class="row-fluid">
+                        <div class="span7">
+                            <h3>Off Air and Change Band Stations</h3>
+                            <p>Click a table row and the map will zoom to the selected station location.</p>
+                            <div id="stationContents"></div>
+                        </div>
+                        <div class="span5">
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <h3>Off Air and Change Band Stations Map</h3>
+                                </div>
+                                <div class="span6">
+                                    <div class="pull-right">
+                                        <div style="float:left;margin-right:10px">
+                                            <div id="offairCircle"></div>
+                                            Off Air</div>
+                                        <div style="float:left">
+                                            <div id="changebandCircle"></div>
+                                            Change Band</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="stationMap"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="newOperationContent" class="tab-pane active">
+            <div class="row">
+                <div class="span8">
+                    <h3>Create New Event Schedule</h3>
+                    <div class="well">
+                        <form id="frm-runScheduler" class="form-horizontal" action="dummy.html" method="post" enctype="multipart/form-data" target="submitResults">
+                            <fieldset>
+                                <div class="control-group">
+                                    <label class="control-label" for="eventName">Event Name:</label>
+                                    <div class="controls">
+                                        <input type="text" style="width: 200px" name="eventName" id="eventName" value="" />                                       
+                                    </div>
+                                    <br>                                    
+                                    <label class="control-label" for="latitude">Latitude:</label>
+                                    <div class="controls">
+                                        <input type="text" style="width: 100px" name="latitude" id="latitude" value="" />                                       
+                                    </div>
+                                    <br>
+                                    <label class="control-label" for="latitude">Longitude:</label>
+                                    <div class="controls">
+                                        <input type="text" style="width: 100px" name="longitude" id="longitude" value="" />                              
+                                        <button id="btn-verifyAddress" type="button" class="btn btn-primary btn-mini" role="button" data-toggle="modal" data-target="#dlg-verifyAddr">Verify Event Location</button>                                     
+                                    </div>
+                                    <br>
+                                    <label class="control-label" for="scheduleDates">Schedule dates:</label>
+                                    <div class="controls">
+                                        <div class="input-prepend">
+                                             <span class="add-on"><i class="glyphicon glyphicon-calendar icon-calendar"></i></span><input type="text" style="width: 200px" name="scheduleDates" id="scheduleDates" value="" /> 
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <label class="control-label" for="latitude">Number of Staff:</label>
+                                    <div class="controls">
+                                        <input type="text" style="width: 100px" name="staffNum" id="staffNum" value="" />                                       
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                        <button id="btn-runScheduler" type="button" class="btn btn-primary btn-medium" role="button">Create Operation</button> 
+                        <div id="dlg-verifyAddr" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="hd-dlgVerifyAddr" aria-hidden="true">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 id="hd-dlgVerifyAddr">New Event</h3>
+                                <div id="locInfo"></div>
+                            </div>
+                            <div class="modal-body">
+                                <div id="map-body"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="newScheduleContent" class="tab-pane active">
+            <div class="row">
+                <div class="span8">
+                    <h3>Create Operation Schedule</h3>
+                        <div class="well">
+                            <form id="frm-runCurrentScheduler" class="form-horizontal" action="dummy.html" method="post" enctype="multipart/form-data" target="submitResults">
+                                <fieldset>
+                                    <div class="control-group">
+                                        <label class="control-label" for="sel-operations">Existing Operatons:</label>
+                                        <div class="controls">
+                                            <select id = "sel-operations" data-placeholder="" class="chzn-select" multiple>
+                                            </select>                                    
+                                        </div>
+                                        <br>
+                                        <label class="control-label" for="">OptimizationType:</label>
+                                        <div class="controls">
+                                            <input type="radio" name="optimizationType" value="Minimum Cost" checked='checked'> Minimum Cost<br>
+                                            <input type="radio" name="optimizationType" value="Minimum Deviation"> Minimum Deviation<br>
+                                        </div>
+                                        <br>
+                                        <h4>Constrains</h4>
+                                        <label class="control-label" for="maxOrganizationNum">Max Org. Allocation:</label>
+                                        <div class="controls">
+                                            <input type="text" style="width: 100px" name="maxOrganizationNum" id="maxOrganizationNum" value="" />                                      
+                                        </div>
+                                        <br>
+                                        <label class="control-label" for="maxOrganizationNum">Demand Multiplier:</label>
+                                        <div class="controls">
+                                            <input type="text" style="width: 100px" name="demandMultiplier" id="demandMultilier" value="" />                                      
+                                        </div>
+                                        <br>
+                                        <label class="control-label" for="sel-excludedOrg">Exlude Organization:</label>
+                                        <div class="controls">
+                                            <select id = "sel-excludedOrg" data-placeholder="" class="chzn-select" multiple>
+                                            </select>                                    
+                                        </div>
+
+                                        <input type="text" style="width: 100px; display:none" name="excludedOrg" id="excludedOrg" value="" />
+
+                                            <input type="text" style="width: 100px; display:none" name="operations" id="operations" value="" />
+                                        </div>
+                                </fieldset>
+                            </form>
+                        <div>
+                        <button id="btn-runCurrentScheduler" type="button" class="btn btn-primary btn-medium" role="button">Run Schecule Optimizer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div></div>
+<footer role="contentinfo"> <a tabindex="-1" class="visuallyhidden" id="skiptarget3"></a>
+</footer>
+<iframe name="submitResults" id="submitResults" style="display: none;"></iframe>
+<iframe name="submitCurrentResults" id="submitCurrentResults" style="display: none;"></iframe>
+<!-- <script src="../data/data_test.js"></script>  -->
+<script src="js/libs/jquery-1.8.3.min.js"></script> 
+<script src='js/libs/mapbox.js'></script> 
+<script src="js/libs/bootstrap.js"></script> 
+<script src="js/libs/jquery-ui.js"></script>  
+<script src="js/libs/d3.v3.min.js"></script> 
+<script src="js/libs/queue.v1.min.js"></script> 
+<script src="js/libs/crossfilter.min.js"></script>  
+<script src="js/libs/jquery.dataTables.min.js"></script> 
+<script src="js/libs/CustomTooltip.js"></script> 
+<script type="text/javascript" src="js/libs/moment.js"></script>
+<script type="text/javascript" src="js/libs/daterangepicker.js"></script>
+<script src="js/libs/chosen.jquery.js"></script> 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="js/app.js"></script>  
+
+<script>
+	$(document).ready(function(e) {
+		
+		$(window).resize(function() {
+			if ($(window).width() > 1655) {
+				$('header, header .container').css('width' , $(window).width() + 'px');	
+			} else {
+				$('header, header .container').css('width' , $('#site-content').width());	
+			}			
+	    });
+		
+		$(window).resize();
+		
+		$("#btn-stationReset").on("click", function(e){ e.preventDefault(); reset("station"); });
+        $("#btn-dmaReset").on("click", function(e){ e.preventDefault(); reset("dma"); });
+		
+		// resize #stationContent datatable when Stations tab is clicked
+		$('a[data-toggle="tab"]').on('shown', function (e) {
+			var tabHref = $(e.target).attr('href');
+			if (tabHref == '#stationContent' || tabHref == '#dmaContent') { 
+				var oTable = $('.dataTables_scrollBody>.table:visible').dataTable();
+				oTable.fnAdjustColumnSizing();	
+			}
+		});
+
+      $('#scheduleDates').daterangepicker();
+      $('#btn-runScheduler').click(function(e) {
+        e.preventDefault();
+        //$('.biddingPanel').find('input').prop('disabled', false);                   
+        $('#frm-runScheduler').submit();                  
+      });
+      $('#frm-runScheduler').submit(function(e) {
+                    alert("Schedule data sent to Solver. Results will be available shortly. " + 
+                        "<br> parameters: " + $('#frm-runScheduler').serialize());
+                    //enable this section after integration
+                    // $("#submitResults").load(function(){
+                    //     var resultsStatus = $.parseJSON($('#submitResults').contents().find('pre').text());
+                    //     if (resultsStats != null){
+                    //         if (resultsStatus.status == 200) {
+                    //             //location.href='results.html';   
+                    //         } else {
+                    //             alert("Unable to run solver. Please try again");
+                    //             location.reload(true);  
+                    //         }
+                    //     }else {
+                    //         alert("Unable to run solver. Please try again");
+                    //     }
+                    // });
+
+                        
+		});
+    $('#btn-runCurrentScheduler').click(function(e) {
+        e.preventDefault();
+        //$('.biddingPanel').find('input').prop('disabled', false);                   
+        $('#frm-runCurrentScheduler').submit();                  
+      });
+      $('#frm-runCurrentScheduler').submit(function(e) {
+                    alert("Schedule data sent to Solver. Results will be available shortly. " + 
+                        "<br> parameters: " + $('#frm-runCurrentScheduler').serialize());
+                    //enable this section after integration
+                    // $("#submitResults").load(function(){
+                    //     var resultsStatus = $.parseJSON($('#submitResults').contents().find('pre').text());
+                    //     if (resultsStats != null){
+                    //         if (resultsStatus.status == 200) {
+                    //             //location.href='results.html';   
+                    //         } else {
+                    //             alert("Unable to run solver. Please try again");
+                    //             location.reload(true);  
+                    //         }
+                    //     }else {
+                    //         alert("Unable to run solver. Please try again");
+                    //     }
+                    // });
+
+                        
+        });
+       //$('#newOperationContent').removeClass("active");
+        //$('#scheduleContent').removeClass("active");
+       // $('#dmaContent').removeClass("active");
+    $('#btn-verifyAddress').click(function(e){
+        showEventLocation($("#latitude").val(),$("#longitude").val(),$("#eventName").val());
+    });
+    $('#btn-showSchedule').click(function(e){
+        var scheduleid = $("#sel-scheduleList").val();
+        $("#scheduleVis").css('visibility', 'visible');
+        showSchedule(scheduleid);
+    })
+
+});
+
+</script> 
+
+</body>
+</html>
