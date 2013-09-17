@@ -37,14 +37,12 @@
                 <li class='active'><a href="#scheduleContent" data-toggle="tab">View Schedule</a></li>
                 <li ><a href="#newScheduleContent" data-toggle="tab">Create Schedule</a></li>
                 <li><a href="#newOperationContent" data-toggle="tab">Create Operation</a></li>
-
-
-  
             </ul>
             <!--<form class="navbar-search pull-right">
                 <label for="srchDMA" style="display: inline; padding-right: 5px;">Search by DMA:</label>
                 <input id="srchDMA" type="text" class="search-query">
             </form>-->
+            <a id="refresh_link" class="btn btn-small btn-primary pull-right" href="">Refresh</a>
         </div>
     </div>
 </header>
@@ -72,8 +70,8 @@
             <div id="scheduleVis">
                 <h3>schedule Filters</h3>
                 <div class="row-fluid divider">
-                    <div class="span2"> <span class="slider-label">Station Channel:</span> <span id="channelNum" class="slider-range"></span>
-                        <div id="channelSlider" class="slider"></div>
+                    <div class="span3"> <span class="slider-label">Operations:</span>
+                        <div><select id="sel-filter-operations"></select></div>
                     </div>
                     <div class="span2"> <span class="slider-label">Result Channel:</span> <span id="resultChannelNum" class="slider-range"></span>
                         <div id="resultChannelSlider" class="slider"></div>
@@ -86,56 +84,20 @@
                     </div>
                     <div class="span2"> <a id="btn-stationReset" class="btn-resetFilter btn btn-small" href="#void">Reset Filters</a> </div>
                 </div>
-                <br>
                 <h3 id="numStations">Number of Stations</h3>
                 <div class="row-fluid divider">
-                    <div class="span12">
-                        <table class="table table-cellBorder table-striped g-station-summary-table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">&nbsp;</th>
-                                    <th class="text-center" scope="col" colspan="3">Off Air</th>
-                                    <th class="text-center" scope="col" colspan="3">LVHF</th>
-                                    <th class="text-center" scope="col" colspan="3">UVHF</th>
-                                    <th class="text-center" scope="col" colspan="3">UHF</th>
-                                    <th class="text-center" scope="col" colspan="3">Total</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">&nbsp;</th>
-                                    <th scope="col">Stations</th>
-                                    <th scope="col">Cost</th>
-                                    <th scope="col">Overpay</th>
-                                    <th scope="col">Stations</th>
-                                    <th scope="col">Cost</th>
-                                    <th scope="col">Overpay</th>
-                                    <th scope="col">Stations</th>
-                                    <th scope="col">Cost</th>
-                                    <th scope="col">Overpay</th>
-                                    <th scope="col">Stations</th>
-                                    <th scope="col">Cost</th>
-                                    <th scope="col">Overpay</th>
-                                    <th scope="col">Stations</th>
-                                    <th scope="col">Cost</th>
-                                    <th scope="col">Overpay</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
-                <div id="stationDetailSection">
+                <div id="staffDetailSection">
                     <div class="row-fluid">
-                        <div class="span7">
-                            <h3>Off Air and Change Band Stations</h3>
-                            <p>Click a table row and the map will zoom to the selected station location.</p>
-                            <div id="stationContents"></div>
+                        <div class="span6">
+                            <h3>Staff</h3>
+<!--                             <p>Click a table row and the map will zoom to the selected  location.</p> -->
+                            <div id="staffContents"></div>
                         </div>
-                        <div class="span5">
+                        <div class="span6">
                             <div class="row-fluid">
                                 <div class="span6">
-                                    <h3>Off Air and Change Band Stations Map</h3>
+                                    <h3>Operation and Organization Map</h3>
                                 </div>
                                 <div class="span6">
                                     <div class="pull-right">
@@ -148,7 +110,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="stationMap"></div>
+                            <div id="staffMap"></div>
                         </div>
                     </div>
                 </div>
@@ -185,9 +147,29 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <label class="control-label" for="latitude">Number of Staff:</label>
+                                    <label class="control-label" for="latitude">PSS Staff:</label>
                                     <div class="controls">
-                                        <input type="text" style="width: 100px" name="staffNum" id="staffNum" value="" />                                       
+                                        <input type="text" style="width: 100px" name="pssStaffNum" id="pssStaffNum" value="" />                                       
+                                    </div>
+                                    <br>
+                                    <label class="control-label" for="latitude">Lead Advance Staff:</label>
+                                    <div class="controls">
+                                        <input type="text" style="width: 100px" name="leadAdvanceStaffNum" id="leadAdvanceStaffNum" value="" />                                       
+                                    </div>
+                                    <br>
+                                    <label class="control-label" for="latitude">PHYS SEC LEAD Staff:</label>
+                                    <div class="controls">
+                                        <input type="text" style="width: 100px" name="physSecLeadStaffNum" id="physSecLeadStaffNum" value="" />                                       
+                                    </div>
+                                    <br>
+                                    <label class="control-label" for="latitude">INT Staff:</label>
+                                    <div class="controls">
+                                        <input type="text" style="width: 100px" name="intStaffNum" id="intStaffNum" value="" />                                       
+                                    </div>
+                                    <br>
+                                    <label class="control-label" for="latitude">RADIO Staff:</label>
+                                    <div class="controls">
+                                        <input type="text" style="width: 100px" name="radioStaffNum" id="radioStaffNum" value="" />                                       
                                     </div>
                                 </div>
                             </fieldset>
@@ -275,10 +257,12 @@
 <script src="js/libs/crossfilter.min.js"></script>  
 <script src="js/libs/jquery.dataTables.min.js"></script> 
 <script src="js/libs/CustomTooltip.js"></script> 
+<script src="js/libs/topojson.v1.min.js"></script> 
 <script type="text/javascript" src="js/libs/moment.js"></script>
 <script type="text/javascript" src="js/libs/daterangepicker.js"></script>
 <script src="js/libs/chosen.jquery.js"></script> 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="js/gmapapp.js"></script>  
 <script src="js/app.js"></script>  
 
 <script>
@@ -357,8 +341,7 @@
 
                         
         });
-       //$('#newOperationContent').removeClass("active");
-        //$('#scheduleContent').removeClass("active");
+
        // $('#dmaContent').removeClass("active");
     $('#btn-verifyAddress').click(function(e){
         showEventLocation($("#latitude").val(),$("#longitude").val(),$("#eventName").val());
@@ -367,6 +350,9 @@
         var scheduleid = $("#sel-scheduleList").val();
         $("#scheduleVis").css('visibility', 'visible');
         showSchedule(scheduleid);
+    });
+    $('#refresh_link').click(function(e){
+        location.reload();
     })
 
 });

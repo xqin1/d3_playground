@@ -1,11 +1,12 @@
-operationid,name
-1,ope1
-2,ope2,
-3,dfere
-4,efjdk
-5,dkjjfd
-6,dkjfdfjd
-7,dkfjdkf
-8,sdkjfdi
-9,uhdf
-10,jjdfd
+operationid,operationdesc,operationcampaign,operationcity,operationlatitude,operationlongitude,operationstartdate,operationenddate,quantity_pss,quantity_lead_advance,quantity_int,Quantity_phys_sec_lead,quantity_radio
+1,"Atlanta, GA (10/05/2013 - 10/08/2013) ",Summer 2013,Atlanta,33.749,-84.38798,2013-10-05 04:00:00.000,2013-10-09 03:59:59.000,50,0,0,0,0
+2,"Heidelberg, Germany (10/01/2013 - 10/31/2013) ",Summer 2013/2014,Heidelberg,49.39875,8.67243,2013-10-01 04:00:00.000,2013-11-01 03:59:59.000,2,5,0,2,0
+3,"Miami, FL (10/05/2013 - 10/08/2013) ",MickeyMOTUS Domestic,Miami,25.78897,-80.22644,2013-10-05 04:00:00.000,2013-10-09 03:59:59.000,55,0,0,0,0
+4,Airport (09/03/2013 - 09/27/2013),UN Fixed Sites,New York,40.64377,-73.78199,2013-09-03 04:00:00.000,2013-09-28 03:59:59.000,50,0,0,0,0
+5,Hotel 1 (09/03/2013 - 09/27/2013),UN Fixed Sites,New York,40.64377,-73.78199,2013-09-03 04:00:00.000,2013-09-28 03:59:59.000,75,0,0,0,0
+6,Hotel 2 (09/03/2013 - 09/27/2013),UN Fixed Sites,New York,40.64377,-73.78199,2013-09-03 04:00:00.000,2013-09-28 03:59:59.000,20,0,0,0,0
+7,UN (09/03/2013 - 09/27/2013),UN Fixed Sites,New York,40.64377,-73.78199,2013-09-03 04:00:00.000,2013-09-28 03:59:59.000,150,0,0,0,0
+8,"Omaha, NE (05/07/2013)",Midwest Trip,Omaha,41.25236,-95.99799,2013-05-07 04:00:00.000,2013-05-08 03:59:59.000,0,0,4,0,0
+9,"Raleigh, NC (05/01/2013 - 05/04/2013)",North Carolina Swing,Raleigh,35.77959,-78.63818,2013-05-01 04:00:00.000,2013-05-05 03:59:59.000,2,0,0,0,0
+10,"Tampa, FL (05/06/2013 - 05/08/2013)",Florida Trip,Tampa,27.95058,-82.45718,2013-05-06 04:00:00.000,2013-05-09 03:59:59.000,5,0,0,0,0
+11,"Tampa, FL (10/05/2013 - 10/08/2013) ",Florida Trip,Tampa,27.95058,-82.45718,2013-10-05 04:00:00.000,2013-10-08 03:59:59.000,0,0,0,0,10

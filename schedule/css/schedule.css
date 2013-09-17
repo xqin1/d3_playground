@@ -85,14 +85,15 @@ h3 { margin-bottom: 5px; }
 #outputSummary .th-col1 { width: 125px; }
 #outputSummary .th-col2 { width: 85px; }
 
-#stationContent .dataTable, #dmaContents .dataTable { margin-bottom: 0; }
-#stationContents th { white-space: nowrap; }
-#stationContents td { word-wrap: break-word; }
-.stationTableNum { color:#B24C01; font-weight:normal; font-size: 14px; }
+#staffContent .dataTable, #dmaContents .dataTable { margin-bottom: 0; }
+#staffContents th { white-space: nowrap; }
+#staffContents td { word-wrap: break-word; }
+.staffTableNum { color:#B24C01; font-weight:normal; font-size: 14px; }
+#staffContents {height:600px;}
 
 #tbl-recordDetailsDMA .tablerowselected td, #tbl-recordDetails .tablerowselected td { background-color: #FFF1AD; }
 
-.g-station-summary-table th, .g-station-summary-table td { text-align: center; }
+.g-staff-summary-table th, .g-staff-summary-table td { text-align: center; }
 
 
 /* =============================================================================
@@ -116,10 +117,10 @@ h3 { margin-bottom: 5px; }
 /* =============================================================================
    Map
    ========================================================================== */
-#stationMap { width:645px; height:450px; }
-.dmaBoundaryOnStation { fill: white; fill-opacity:0; stroke: #ff9896; stroke-width:0.1px; cursor:pointer; }
-.stationCircleOnStationMap { fill:#d6616b; fill-opacity: 0.8; stroke:black; stroke-width:1px; cursor:pointer; }
-.stationCircleOnStationMap:hover { fill:red; fill-opacity:1; stroke:red; stroke-width:2px; cursor:pointer; }
+#staffMap { width:645px; height:450px; }
+.dmaBoundaryOnstaff { fill: white; fill-opacity:0; stroke: #ff9896; stroke-width:0.1px; cursor:pointer; }
+.staffCircleOnstaffMap { fill:#d6616b; fill-opacity: 0.8; stroke:black; stroke-width:1px; cursor:pointer; }
+.staffCircleOnstaffMap:hover { fill:red; fill-opacity:1; stroke:red; stroke-width:2px; cursor:pointer; }
 .pulse_circle { fill:none; fill-opacity: 1; stroke:white; stroke-width:2px; }
 
 #dmaMap { width:645px; height:450px; }

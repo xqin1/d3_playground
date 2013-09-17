@@ -1,5 +1,101 @@
-organizationid,name
-1,seattle
-2,dc
-3,new york
-4,somewhere
+organizationid,organizationcity,latitude,longitude
+1," New York, New York ",40.71455,-74.007124
+2," Los Angeles, California ",34.05349,-118.245319
+3," Chicago, Illinois ",41.88415,-87.632409
+4," Houston, Texas ",29.76045,-95.369784
+5," Philadelphia, Pennsylvania ",39.95228,-75.162454
+6," Phoenix, Arizona ",33.44826,-112.075774
+7," San Diego, California ",32.715695,-117.161719
+8," San Antonio, Texas ",29.42449,-98.494619
+9," Dallas, Texas ",32.778155,-96.795404
+10," Detroit, Michigan ",42.331685,-83.047924
+11," San Jose, California ",37.338475,-121.885794
+12," Indianapolis, Indiana ",39.76691,-86.149964
+13," Jacksonville, Florida ",30.33147,-81.656219
+14," San Francisco, California ",37.777125,-122.419644
+15," Columbus, Ohio ",39.96196,-83.002984
+16," Austin, Texas ",30.267605,-97.742984
+17," Memphis, Tennessee ",35.149766,-90.049259
+18," Baltimore, Maryland ",39.290585,-76.609264
+19," Charlotte, North Carolina ",35.22269,-80.837764
+20," Fort Worth, Texas ",32.748855,-97.329389
+21," Boston, Massachusetts ",42.358635,-71.056699
+22," Milwaukee, Wisconsin ",43.04181,-87.906844
+23," El Paso, Texas ",31.759165,-106.487494
+24," Washington, District of Columbia ",38.89037,-77.031959
+25," Nashville-Davidson, Tennessee ",36.167782,-86.778358
+26," Seattle, Washington ",47.60356,-122.329439
+27," Denver, Colorado ",39.74001,-104.992259
+28," Las Vegas, Nevada ",36.171915,-115.139974
+29," Portland, Oregon ",45.511795,-122.675629
+30," Oklahoma City, Oklahoma ",35.472015,-97.520354
+31," Tucson, Arizona ",32.221553,-110.969754
+32," Albuquerque, New Mexico ",35.08418,-106.648639
+33," Atlanta, Georgia ",33.748315,-84.391109
+34," Long Beach, California ",33.766725,-118.192399
+35," Kansas City, Missouri ",39.10296,-94.583062
+36," Fresno, California ",36.740685,-119.785734
+37," New Orleans, Louisiana ",29.9537,-90.077749
+38," Cleveland, Ohio ",41.50438,-81.690434
+39," Sacramento, California ",38.579065,-121.491014
+40," Mesa, Arizona ",33.417045,-111.831459
+41," Virginia Beach, Virginia ",36.75502,-76.059204
+42," Omaha, Nebraska ",41.260675,-95.940469
+43," Colorado Springs, Colorado ",38.83345,-104.821814
+44," Oakland, California ",37.805065,-122.273024
+45," Miami, Florida ",25.728985,-80.237419
+46," Tulsa, Oklahoma ",36.149745,-95.993334
+47," Minneapolis, Minnesota ",44.979035,-93.264929
+48," Honolulu, Hawaii ",21.30477,-157.857614
+49," Arlington, Texas ",32.7356,-97.107719
+50," Wichita, Kansas ",37.68698,-97.335579
+51," St. Louis, Missouri ",38.62774,-90.199514
+52," Raleigh, North Carolina ",35.78551,-78.642669
+53," Santa Ana, California ",33.749588,-117.874307
+54," Cincinnati, Ohio ",39.106614,-84.504552
+55," Anaheim, California ",33.83276,-117.915719
+56," Tampa, Florida ",27.94653,-82.459269
+57," Toledo, Ohio ",41.65381,-83.536259
+58," Pittsburgh, Pennsylvania ",40.438335,-79.997459
+59," Aurora, Colorado ",39.70871,-104.812652
+60," Bakersfield, California ",35.36697,-119.018863
+61," Riverside, California ",33.98163,-117.373879
+62," Stockton, California ",37.95368,-121.290754
+63," Corpus Christi, Texas ",27.79641,-97.403564
+64," Lexington-Fayette, Kentucky ",38.048592,-84.50032
+65," Buffalo, New York ",42.88544,-78.878464
+66," St. Paul, Minnesota ",44.943829,-93.093326
+67," Anchorage, Alaska ",61.21755,-149.858384
+68," Newark, New Jersey ",40.73197,-74.174184
+69," Plano, Texas ",33.020795,-96.699214
+70," Fort Wayne, Indiana ",41.08026,-85.138314
+71," St. Petersburg, Florida ",27.77119,-82.638764
+72," Glendale, Arizona ",33.53858,-112.186279
+73," Lincoln, Nebraska ",40.81362,-96.707739
+74," Norfolk, Virginia ",36.846825,-76.285069
+75," Jersey City, New Jersey ",40.7174,-74.043234
+76," Greensboro, North Carolina ",36.068994,-79.794704
+77," Chandler, Arizona ",33.303385,-111.840829
+78," Birmingham, Alabama ",33.520295,-86.811504
+79," Henderson, Nevada ",36.03082,-114.981094
+80," Scottsdale, Arizona ",33.494,-111.920694
+81," North Hempstead, New York ",40.796148,-73.699178
+82," Madison, Wisconsin ",43.07295,-89.386694
+83," Hialeah, Florida ",25.826745,-80.281494
+84," Baton Rouge, Louisiana ",30.443345,-91.186994
+85," Chesapeake, Virginia ",36.714295,-76.247847
+86," Orlando, Florida ",28.538235,-81.377389
+87," Lubbock, Texas ",33.58451,-101.845009
+88," Garland, Texas ",32.913865,-96.636554
+89," Akron, Ohio ",41.084195,-81.514059
+90," Rochester, New York ",43.1555,-77.616033
+91," Chula Vista, California ",32.6409,-117.084279
+92," Reno, Nevada ",39.527385,-119.813439
+93," Laredo, Texas ",27.53092,-99.502009
+94," Durham, North Carolina ",35.995275,-78.896014
+95," Modesto, California ",37.6383,-120.999589
+96," Huntington, New York ",40.871954,-73.429984
+97," Montgomery, Alabama ",32.38012,-86.300629
+98," Boise, Idaho ",43.60698,-116.193409
+99," Arlington, Virginia ",38.89051,-77.086294
+100," San Bernardino, California ",34.105245,-117.294124
