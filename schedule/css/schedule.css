@@ -167,3 +167,5 @@ overflow: auto;
   stroke: red;
   stroke-width: 3px;
 }
+
+#resourceTypeChart svg {width: 350px; height: 120px;   min-width: 200px; min-height: 200px;}

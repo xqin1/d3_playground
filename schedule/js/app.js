@@ -14,6 +14,8 @@ var route = {
 var routeFeatureOnMap=null;
 var routePath;
 var regularRateRange = [], operationDateRange = [];
+var resourceTypeChart;
+
 
 var staffMap = L.mapbox.map('staffMap', 'https://a.tiles.mapbox.com/v3/fcc.map-toolde8w.json?secure')
 //'examples.map-4l7djmvo')
@@ -182,6 +184,32 @@ function scheduleReady(error, schedule){
      $('#regularRateSlider').slider('setValue', regularRateRange);
      $( "#regularRateNum" ).text(commaNumFormat(regularRateRange[0]) + " - " + commaNumFormat(regularRateRange[1]));
 
+//add resource type chart
+     nv.addGraph(function() {  
+		   resourceTypeChart = nv.models.discreteBarChart();
+		  // resourceTypeChart.margin({left:20, bottom:20})
+		   resourceTypeChart.x(function(d) { return d.label })
+		   resourceTypeChart.y(function(d) { return d.value })
+		   resourceTypeChart.color(function(d){return 'steelblue'})
+
+  			resourceTypeChart.yAxis.tickFormat(d3.format(',f0'));
+  			resourceTypeChart.yAxis.axisLabel("Count");
+		   resourceTypeChart.staggerLabels(true)
+		      //.staggerLabels(historicalBarChart[0].values.length > 8)
+		      resourceTypeChart.tooltips(true)
+		    //  resourceTypeChart.showValues(true)
+		      resourceTypeChart.transitionDuration(250)
+		      ;
+
+		  d3.select('#resourceTypeChart svg')
+		      .datum(resourceTypeData)
+		      .call(resourceTypeChart);
+
+		  nv.utils.windowResize(resourceTypeChart.update);
+
+		  return resourceTypeChart;
+});
+
     change();
 }
 
@@ -228,6 +256,11 @@ function getResourceData(){
 	})
 	drawStaffTable(resource);
 
+	//reset chart data
+		resourceTypeData[0].values.forEach(function(s){
+        		s.value=0;
+    	})
+
 	if (resource.length>0){
 		mapdata=[];
 		 mapdata= d3.nest()
@@ -249,6 +282,18 @@ function getResourceData(){
 	    obj.longitude = +operationByID[operationid][0].operationlongitude;
 	    mapdata.push(obj);
 	    drawStaffMap(mapdata);
+
+//update chart data
+	    resource.forEach(function(d){
+    		resourceTypeData[0].values.forEach(function(s){
+        		if (s.name == d.resourcetype){s.value++}
+    		})
+		})
+		resourceTypeChart.update();
+
+		$("#staffChartSection").show();
+	}else{
+		$("#staffChartSection").hide();
 	}
 
 
@@ -506,5 +551,6 @@ function resetFilter(){
 	$('#regularRateSlider').slider('setValue', regularRateRange);
 	change();
 }
+
 
 refreshData();

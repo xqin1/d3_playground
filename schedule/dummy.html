@@ -1,3 +1,112 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US">
-</html>
+<meta charset="utf-8">
+
+<link href="css/nv.d3.css" rel="stylesheet" type="text/css">
+
+<style>
+
+body {
+  overflow-y:scroll;
+}
+
+text {
+  font: 12px sans-serif;
+}
+
+svg {
+  display: block;
+}
+
+#chart1 svg{
+  height: 200px;
+  width:300px;
+  min-width: 100px;
+  min-height: 100px;
+/*
+  margin: 10px;
+  Minimum height and width is a good idea to prevent negative SVG dimensions...
+  For example width should be =< margin.left + margin.right + 1,
+  of course 1 pixel for the entire chart would not be very useful, BUT should not have errors
+*/
+}
+
+</style>
+<body>
+
+  <div id="chart1">
+    <svg></svg>
+  </div>
+
+<script src="js/libs/d3.v3.min.js"></script>
+<script src="js/libs/nv.d3.min.js"></script>
+<script>
+
+
+
+var chart;
+
+historicalBarChart = [ 
+  {
+    key: "Cumulative Return",
+    values: [
+      { 
+        "label" : "A" ,
+        "value" : 29.765957771107
+      } , 
+      { 
+        "label" : "B" , 
+        "value" : 0
+      } , 
+      { 
+        "label" : "C" , 
+        "value" : 32.807804682612
+      } , 
+      { 
+        "label" : "D" , 
+        "value" : 196.45946739256
+      } , 
+      { 
+        "label" : "E" ,
+        "value" : 0.19434030906893
+      } , 
+      { 
+        "label" : "F" , 
+        "value" : 98.079782601442
+      } , 
+      { 
+        "label" : "G" , 
+        "value" : 13.925743130903
+      } , 
+      { 
+        "label" : "H" , 
+        "value" : 5.1387322875705
+      }
+    ]
+  }
+];
+
+
+
+
+nv.addGraph(function() {  
+   chart = nv.models.discreteBarChart();
+   chart.x(function(d) { return d.label })
+      chart.y(function(d) { return d.value })
+      chart.staggerLabels(true)
+      //.staggerLabels(historicalBarChart[0].values.length > 8)
+      chart.tooltips(true)
+      chart.showValues(true)
+      chart.transitionDuration(250)
+      ;
+
+  d3.select('#chart1 svg')
+      .datum(historicalBarChart)
+      .call(chart);
+
+  nv.utils.windowResize(chart.update);
+
+  return chart;
+});
+
+
+</script>
