@@ -13,6 +13,7 @@ var route = {
       coordinates: []};
 var routeFeatureOnMap=null;
 var routePath;
+var regularRateRange = [], operationDateRange = [];
 
 var staffMap = L.mapbox.map('staffMap', 'https://a.tiles.mapbox.com/v3/fcc.map-toolde8w.json?secure')
 //'examples.map-4l7djmvo')
@@ -119,11 +120,19 @@ function scheduleReady(error, schedule){
 		d.cost_regular_sunday = + d.cost_regular_sunday;
 		d.cost_overtime_night = +d.cost_overtime_night;
 		d.cost_overtime_sunday_night = +d.cost_overtime_sunday_night;
+		d.resourcetype = resourceByID[d.resourceid][0].resourcetypeabbr;
+		d.regularrate = +resourceByID[d.resourceid][0].rate_regular;
+		d.organization_city = organizationByID[resourceByID[d.resourceid][0].resourceorganization][0].organizationcity;
 	});
 
 	data = crossfilter(schedule);
 	data.operation = data.dimension(function(d){return d.operation});
 	data.groupByOperation = data.operation.group();
+	data.organization = data.dimension(function(d){return d.organization_city});
+	data.groupByOrganization = data.organization.group();
+	data.stafftype = data.dimension(function(d){return d.resourcetype});
+	data.groupByStaffType = data.stafftype.group();
+	data.regularrate = data.dimension(function(d){return d.regularrate});
 
 	var operationData = data.groupByOperation.top(Infinity).sort(function(a, b){ return d3.ascending(a.key, b.key)});
 	d3.select("#sel-filter-operations").selectAll("option").remove();
@@ -135,20 +144,67 @@ function scheduleReady(error, schedule){
                           .attr("value", function(d){return d.key})
                           .text(function(d){return d.key});
 
+    var organizationData = data.groupByOrganization.top(Infinity).sort(function(a, b){ return d3.ascending(a.key, b.key)});
+	d3.select("#sel-filter-organizations").selectAll("option").remove();
+	d3.select("#sel-filter-organizations").on("change", function(e){change();})
+                      .selectAll("option")
+                        .data(organizationData)
+                        .enter()
+                        .append("option")
+                          .attr("value", function(d){return d.key})
+                          .text(function(d){return d.key});
+    $("#sel-filter-organizations").prepend('<option value="0">Select All</option>');
+
+    var staffTypeData = data.groupByStaffType.top(Infinity).sort(function(a, b){ return d3.ascending(a.key, b.key)});
+	d3.select("#sel-filter-stafftype").selectAll("option").remove();
+	d3.select("#sel-filter-stafftype").on("change", function(e){change();})
+                      .selectAll("option")
+                        .data(staffTypeData)
+                        .enter()
+                        .append("option")
+                          .attr("value", function(d){return d.key})
+                          .text(function(d){return d.key});
+     $("#sel-filter-stafftype").prepend('<option value="0">Select All</option>');
+
+     regularrate=[];
+     regularRateRange = d3.extent(data.regularrate.top(Infinity),function(d){return d.regularrate;});
+      $("#regularRateSlider").slider({
+     	min:regularRateRange[0],
+     	max:regularRateRange[1],
+     	step:1,
+     	value: regularRateRange,
+     	tooltip:'hide'
+     })
+     .on('slide', function(ui){
+     	$( "#regularRateNum" ).text(commaNumFormat(ui.value[ 0 ]) + " - " + commaNumFormat(ui.value[ 1 ]) );
+     })
+     .on('slideStop', function(ui){change()});
+     $('#regularRateSlider').slider('setValue', regularRateRange);
+     $( "#regularRateNum" ).text(commaNumFormat(regularRateRange[0]) + " - " + commaNumFormat(regularRateRange[1]));
+
     change();
 }
 
 function change(){
 		 var filterOperation = $("#sel-filter-operations").val();
+		 var filterOrganization = $("#sel-filter-organizations").val();
+		 var filterStaffType = $("#sel-filter-stafftype").val();
+		 var filterRegularRate = $("#regularRateSlider").data('slider').getValue();
 
 		 data.operation.filterAll();
 		 data.operation.filterExact(filterOperation);
+		 data.organization.filterAll();
+		 filterOrganization == 0 ? data.organization.filterAll() : data.organization.filterExact(filterOrganization);
+		 data.stafftype.filterAll();
+		 filterStaffType == 0 ? data.stafftype.filterAll() : data.stafftype.filterExact(filterStaffType);
+		 data.regularrate.filterAll();
+		 data.regularrate.filterRange([filterRegularRate[0], filterRegularRate[1]+0.01]);
 
 		 getResourceData(); //draw table
 }
 
 function getResourceData(){
-	var resource = d3.nest()
+	 resource = d3.nest()
 	           .key(function(d){return d.resourceid})
 	           .entries(data.operation.top(Infinity));
 	resource.forEach(function(d){
@@ -164,36 +220,40 @@ function getResourceData(){
 	    d.cost_overtime_sunday_night = d3.sum(d.values, function(s){return s.cost_overtime_sunday_night})
 	    d.overtimesum = d.cost_overtime + d.cost_overtime_night + d.cost_overtime_sunday_night;
 	    d.organizationid=resourceByID[d.key][0].resourceorganization;
-	  	d.organization_city = organizationByID[resourceByID[d.key][0].resourceorganization][0].organizationcity;
+	  	d.organization_city = d.values[0].organization_city;
 	  	d.latitude = +organizationByID[resourceByID[d.key][0].resourceorganization][0].latitude;
 	  	d.longitude = +organizationByID[resourceByID[d.key][0].resourceorganization][0].longitude;
-	    d.resourcetype = resourceByID[d.key][0].resourcetypeabbr;
+	    d.resourcetype = d.values[0].resourcetype;
     	d.resourcename = resourceByID[d.key][0].resourcename;
 	})
-		drawStaffTable(resource);
-	mapdata=[];
-	 mapdata= d3.nest()
-                .key(function(d){return d.organization_city})
-                .entries(resource);
-    mapdata.forEach(function(d){
-        d.type = "organization";
-        d.name = d.key;
-        d.latitude = d.values[0].latitude;
-        d.longitude = d.values[0].longitude;
-        d.numOfStaff = d.values.length;
-    })
-    organizationScale.domain([d3.min(mapdata,function(d){return d.numOfStaff}), d3.max(mapdata,function(d){return d.numOfStaff})]);
-    var operationid = data.operation.top(1)[0].operationid;
-    var obj={};
-    obj.type="operation";
-    obj.name = operationByID[operationid][0].operationdesc;
-    obj.latitude = +operationByID[operationid][0].operationlatitude;
-    obj.longitude = +operationByID[operationid][0].operationlongitude;
-    mapdata.push(obj);
-    drawStaffMap(mapdata);
+	drawStaffTable(resource);
+
+	if (resource.length>0){
+		mapdata=[];
+		 mapdata= d3.nest()
+	                .key(function(d){return d.organization_city})
+	                .entries(resource);
+	    mapdata.forEach(function(d){
+	        d.type = "organization";
+	        d.name = d.key;
+	        d.latitude = d.values[0].latitude;
+	        d.longitude = d.values[0].longitude;
+	        d.numOfStaff = d.values.length;
+	    })
+	    organizationScale.domain([d3.min(mapdata,function(d){return d.numOfStaff}), d3.max(mapdata,function(d){return d.numOfStaff})]);
+	    var operationid = data.operation.top(1)[0].operationid;
+	    var obj={};
+	    obj.type="operation";
+	    obj.name = operationByID[operationid][0].operationdesc;
+	    obj.latitude = +operationByID[operationid][0].operationlatitude;
+	    obj.longitude = +operationByID[operationid][0].operationlongitude;
+	    mapdata.push(obj);
+	    drawStaffMap(mapdata);
+	}
+
 
       d3.selectAll(".pulse_circle").remove();
-  d3.selectAll(".route").remove();
+  	  d3.selectAll(".route").remove();
 
 
 }
@@ -363,7 +423,6 @@ function showStaffDetail(d){
 
   }
   
-
   // content += "<span class='name'>Action: </span><span class='value'>" + d.action + "</span>";
   // content += "<span class='separator'>&nbsp;|&nbsp;</span>";
   // content += "<span class='name'>Cost: </span><span class='value'>" + formatMoney(d.result_payment) + "</span>";
@@ -435,5 +494,17 @@ function pulse() {
   };
 }
 
+function resetFilter(){
+	data.operation.filterAll();
+	data.organization.filterAll();
+	data.stafftype.filterAll();
+	data.regularrate.filterAll();
+	var od = data.groupByOperation.top(Infinity).sort(function(a, b){ return d3.ascending(a.key, b.key)});
+	$("#sel-filter-operations").val(data.groupByOperation.top(1).key);
+	$("#sel-filter-organizations").val(0);
+	 $("#sel-filter-stafftype").val(0);
+	$('#regularRateSlider').slider('setValue', regularRateRange);
+	change();
+}
 
 refreshData();
