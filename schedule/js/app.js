@@ -5,6 +5,14 @@ var formateDate = d3.time.format("%m/%d/%Y");
 var formateTime = d3.time.format("%I%p");
 var commaNumFormat = d3.format(",f0");
 var bounds,mapdata=[];
+var organizationScale = d3.scale.linear().range([4,10]);
+var  staffToolTip = CustomTooltip("station_tooltip", 200);
+var stationTableRowSelected=false;
+var route = {
+      type: "LineString",
+      coordinates: []};
+var routeFeatureOnMap=null;
+var routePath;
 
 var staffMap = L.mapbox.map('staffMap', 'https://a.tiles.mapbox.com/v3/fcc.map-toolde8w.json?secure')
 //'examples.map-4l7djmvo')
@@ -79,6 +87,7 @@ function refreshReady(error,operation, organization,scheduleprofile, resource,wo
      //hack for dialoge box
 
      bounds = d3.geo.bounds(topojson.feature(world,world.objects.countries));
+     routePath = d3.geo.path().projection(projectStaff);
      setTimeout(function(){
      	     $('#newOperationContent').removeClass("active");
      		 $('#newScheduleContent').removeClass("active");
@@ -162,8 +171,8 @@ function getResourceData(){
     	d.resourcename = resourceByID[d.key][0].resourcename;
 	})
 		drawStaffTable(resource);
-		
-	var mapdata= d3.nest()
+	mapdata=[];
+	 mapdata= d3.nest()
                 .key(function(d){return d.organization_city})
                 .entries(resource);
     mapdata.forEach(function(d){
@@ -173,6 +182,7 @@ function getResourceData(){
         d.longitude = d.values[0].longitude;
         d.numOfStaff = d.values.length;
     })
+    organizationScale.domain([d3.min(mapdata,function(d){return d.numOfStaff}), d3.max(mapdata,function(d){return d.numOfStaff})]);
     var operationid = data.operation.top(1)[0].operationid;
     var obj={};
     obj.type="operation";
@@ -181,6 +191,9 @@ function getResourceData(){
     obj.longitude = +operationByID[operationid][0].operationlongitude;
     mapdata.push(obj);
     drawStaffMap(mapdata);
+
+      d3.selectAll(".pulse_circle").remove();
+  d3.selectAll(".route").remove();
 
 
 }
@@ -209,16 +222,16 @@ function drawStaffTable(d){
 	    $("#staffContents").html(content);
 	     initTblSort();
 
-	    // d3.selectAll("#tbl-recordDetails tbody tr")
-     //    	.on("click", function(){
-     //    		stationTableRowSelected = false;
-     //        	if (d3.select(this).classed('tablerowselected')){
-     //         		stationTableRowSelected = true;
-     //        	}
-     //         	d3.selectAll("#tbl-recordDetails tbody tr").classed('tablerowselected',false);
-     //        	highlight(d3.select(this));
-     //      	})
-     // //drawLMap(d);
+	    d3.selectAll("#tbl-recordDetails tbody tr")
+        	.on("click", function(){
+        		staffTableRowSelected = false;
+            	if (d3.select(this).classed('tablerowselected')){
+             		staffTableRowSelected = true;
+            	}
+             	d3.selectAll("#tbl-recordDetails tbody tr").classed('tablerowselected',false);
+            	highlight(d3.select(this));
+          	})
+     //drawLMap(d);
 	}
 	else{
 		$("#staffDetailSection").hide();
@@ -264,17 +277,16 @@ function drawStaffMap(d){
                             var x = c[0], y = c[1];
                             return "translate(" + x + "," + y + ")";
                           })
-            //.attr("r", function(d){return populationScale(d.population)})
             .attr("r",1e-6)
-           // .on("mouseover", function(d){showStationDetail(d)})
-           // .on("mouseout", function(d){hideStationDetail()});
+           .on("mouseover", function(d){showStaffDetail(d)})
+            .on("mouseout", function(d){hideStaffDetail()});
 
 //update
   staffCircleOnStaffMap
   	  		.attr("class", "staffCircleOnStaffMap")
   			.style("fill",function(d){return d.type == "operation" ? "#d6616b" : "yellow"})
-  			//.on("mouseover", function(d){showStationDetail(d)})
-  			//.on("mouseout", function(d){hideStationDetail(d)})
+  			.on("mouseover", function(d){showStaffDetail(d)})
+  			.on("mouseout", function(d){hideStaffDetail(d)})
         .transition()
           .duration(750)
           .attr("transform", function(d){
@@ -282,8 +294,8 @@ function drawStaffMap(d){
                 var x = c[0], y = c[1];
                 return "translate(" + x + "," + y + ")";
               })
-          .attr("r", 5)
-         // .attr("r", function(d){return populationScale(d.population)})
+          //.attr("r", 5)
+          .attr("r", function(d){return d.type=="organization" ? organizationScale(d.numOfStaff) : 10})
          // .on("mouseover", function(d){showStationDetail(d,this)});
 
   //exit
@@ -318,8 +330,6 @@ function resetStaffMap(){
 
     if(staffCircleOnStaffMap != null){
         d3.transition(staffCircleOnStaffMap)
-     //                      .attr("class", "stationCircleOnStationMap")
-  			// .style("fill",function(d){return d.action == "OFF_AIR" ? "#d6616b" : "yellow"})
                         .attr("transform", function(d) {
                               var c = projectStaff([d.longitude,d.latitude])
                               x = c[0];
@@ -328,15 +338,101 @@ function resetStaffMap(){
                         })
     }
 
-    // stationOverlayMap.selectAll(".pulse_circle")
-    //                 .attr("class", "pulse_circle")
-    //                 .attr("transform", function(d) {
-    //                       var centroid = projectStation(d)
-    //                       x = centroid[0];
-    //                       y = centroid[1];
-    //                       return "translate(" + x + "," + y + ")";
-    //                 })
+    staffOverlayMap.selectAll(".pulse_circle")
+                    .attr("class", "pulse_circle")
+                    .attr("transform", function(d) {
+                          var centroid = projectStaff(d)
+                          x = centroid[0];
+                          y = centroid[1];
+                          return "translate(" + x + "," + y + ")";
+                    })
+    if (routeFeatureOnMap != null){
+          routeFeatureOnMap.attr("d", routePath);
+        }
+
    
+}
+
+function showStaffDetail(d){
+  var content = "";
+  if (d.type == "organization"){
+    content += "<span class='name'>Organization: </span><span class='value'>" + d.name + "</span></br>";
+    content += "<span class='name'>Number of Staff: </span><span class='value'>" + d.numOfStaff + "</span><br/>";
+  }else{
+        content += "<span class='name'>Operation: </span><span class='value'>" + d.name + "</span></br>";
+
+  }
+  
+
+  // content += "<span class='name'>Action: </span><span class='value'>" + d.action + "</span>";
+  // content += "<span class='separator'>&nbsp;|&nbsp;</span>";
+  // content += "<span class='name'>Cost: </span><span class='value'>" + formatMoney(d.result_payment) + "</span>";
+  staffToolTip.showTooltip(content,d3.event);
+}
+
+function hideStaffDetail(){
+  staffToolTip.hideTooltip();
+}
+
+//highligh selected station
+function highlight(selectedRow){
+  var lat = +selectedRow.attr("data-lat"), lon = +selectedRow.attr("data-lon");
+  var coord=[lon,lat];
+  var endcoord =[];
+  endcoord.push(mapdata[mapdata.length-1].longitude);
+  endcoord.push(mapdata[mapdata.length-1].latitude);
+  route.coordinates=[];
+  route.coordinates.push(coord), route.coordinates.push(endcoord);
+
+  d3.selectAll(".pulse_circle").remove();
+  d3.selectAll(".route").remove();
+  if (staffTableRowSelected){
+    staffMap.setView([39.5, -98.5], 4);
+  }
+  else{
+      selectedRow.classed('tablerowselected', true);
+      staffOverlayMap.selectAll(".pulse_circle").data([coord])
+                .enter().append("circle")
+                    .attr("class", "pulse_circle")
+                    .attr("transform", function(d) {
+                          var centroid = projectStaff(d)
+                          x = centroid[0];
+                          y = centroid[1];
+                          return "translate(" + x + "," + y + ")";
+                    })
+                    .each(pulse()); 
+      // routeFeatureOnMap = staffOverlayMap.selectAll(".route").datum(route)
+      //         .enter().append("path")
+      //         .attr("class", "route")
+      //         .attr("d", routePath);
+            routeFeatureOnMap = staffOverlayMap.append("path").datum(route)
+              //.enter().append("path")
+              .attr("class", "route")
+              //.attr("d", routePath);
+    //staffMap.setView([lat, lon], 10);
+    resetStaffMap();
+  }
+
+}
+
+function unhighlight(){
+  d3.selectAll(".pulse_circle").remove();
+  d3.selectAll(".route").remove();
+}
+
+function pulse() {
+  return function(d, i, j) {
+      //the stuff before transition() resets the
+      //attributes of the pulser when this function is
+      //called again
+      d3.select(this).attr("r", 15).style("stroke-opacity", 1.0)
+      .transition()
+      .ease("linear") //appears a lot more smoother
+      .duration(1000)
+      .attr("r",25)
+      .style("stroke-opacity", 0.0)
+      .each("end", pulse()); //lather rinse repeat
+  };
 }
 
 
