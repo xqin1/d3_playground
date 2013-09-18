@@ -85,7 +85,8 @@ var resourceTitleData = [
         "label" : "Serg./T",
         "value" : 0
       } 
-  }
+     ]
+   }
 ];
 
 var rateCategoryData = [ 
@@ -142,6 +143,7 @@ var rateCategoryData = [
         "label" : "LE-11",
         "value" : 0
       } 
+    ]
   }
 ];
 
@@ -189,6 +191,7 @@ var totalCostByRateData = [
         "label" : "OT_s_n", 
         "value" : 0
       }
+    ]
   }
 ];
 
