@@ -234,7 +234,8 @@ function scheduleReady(error, schedule){
 			  		.x(function(d) { return d.key })
 			  		 .y(function(d) { return d.y })
         			.color(d3.scale.category10().range())
-        			.showLegend(false);
+        			.showLegend(false)
+        			//.labelSunbeamLayout(true);
 
 		      d3.select("#costCategoryChart svg")
 		          .datum(costByCategoryData)
