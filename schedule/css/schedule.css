@@ -142,7 +142,7 @@ h3 { margin-bottom: 5px; }
 
 #operationCircle { background: #d6616b; width: 10px; height: 10px; border-radius: 50%; border:1px solid #f00; float:left; margin-right:3px; }
 #organizationCircle { background: yellow; width: 10px; height: 10px; border-radius: 50%; border:1px solid #f00; float:left; margin-right:3px; }
-.btn-resetFilter { margin: 10px 0 0 20px; }
+.btn-resetFilter { margin: 0px 0 0 0px; }
 
 /* =============================================================================
    jQuery UI Slider
@@ -170,3 +170,7 @@ overflow: auto;
 
 #resourceTypeChart svg {width: 350px; height: 220px;   min-width: 200px; min-height: 100px;}
 #costCategoryChart svg {width: 350px; height: 220px;   min-width: 200px; min-height: 100px;}
+
+.container-fluid {
+    padding: 0px;
+}
