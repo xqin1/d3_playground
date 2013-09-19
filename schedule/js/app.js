@@ -4,7 +4,8 @@ var resourceByID, operationByID, organizationByID;
 var formateDate = d3.time.format("%m/%d/%Y");
 var formateTime = d3.time.format("%I%p");
 var commaNumFormat = d3.format(",f0");
-var bounds,mapdata=[];
+var pctFormat = d3.format(".0%");
+var bounds,mapdata=[],lbonds;
 var organizationScale = d3.scale.linear().range([4,10]);
 var  staffToolTip = CustomTooltip("station_tooltip", 200);
 var stationTableRowSelected=false;
@@ -13,7 +14,7 @@ var route = {
       coordinates: []};
 var routeFeatureOnMap=null;
 var routePath;
-var regularRateRange = [], operationDateRange = [];
+var operationDateRange = [];
 var resourceTypeChart;
 
 
@@ -108,23 +109,23 @@ function showSchedule(scheduleid){
 function scheduleReady(error, schedule){
 	if (error) throw error;
 	schedule.forEach(function(d){
-		var dd = new Date(d.shiftstart);
-		d.date = formateDate(dd);
+		//var dd = new Date(d.shiftstart);
+		//d.date = formateDate(dd);
 		d.operation = operationByID[d.operationid][0].operationdesc;
-		d.shifttime = formateTime(dd);
-		d.shiftnum = d.shifttime=='08AM' ? "1st" :
-						d.shifttime=='04PM' ? "2nd" : "3rd";
+		//d.shiftid = formateTime(dd);
+		d.shiftid = d.shiftid;
 		d.costtravel = +d.costtravel;
 		d.costlabor = +d.costlabor;
 		d.cost_regular = +d.cost_regular;
 		d.cost_overtime = +d.cost_overtime;
 		d.cost_regular_night = +d.cost_regular_night;
-		d.cost_regular_sunday = + d.cost_regular_sunday;
+		d.cost_regular_sunday = +d.cost_regular_sunday;
 		d.cost_overtime_night = +d.cost_overtime_night;
 		d.cost_overtime_sunday_night = +d.cost_overtime_sunday_night;
 		d.resourcetype = resourceByID[d.resourceid][0].resourcetypeabbr;
 		d.regularrate = +resourceByID[d.resourceid][0].rate_regular;
 		d.organization_city = organizationByID[resourceByID[d.resourceid][0].resourceorganization][0].organizationcity;
+		d.resourcename = resourceByID[d.resourceid][0].resourcename;
 	});
 
 	data = crossfilter(schedule);
@@ -134,7 +135,8 @@ function scheduleReady(error, schedule){
 	data.groupByOrganization = data.organization.group();
 	data.stafftype = data.dimension(function(d){return d.resourcetype});
 	data.groupByStaffType = data.stafftype.group();
-	data.regularrate = data.dimension(function(d){return d.regularrate});
+	data.staff = data.dimension(function(d){return d.resourcename});
+	data.groupByStaff = data.staff.group();
 
 	var operationData = data.groupByOperation.top(Infinity).sort(function(a, b){ return d3.ascending(a.key, b.key)});
 	d3.select("#sel-filter-operations").selectAll("option").remove();
@@ -168,21 +170,33 @@ function scheduleReady(error, schedule){
                           .text(function(d){return d.key});
      $("#sel-filter-stafftype").prepend('<option value="0">Select All</option>');
 
-     regularrate=[];
-     regularRateRange = d3.extent(data.regularrate.top(Infinity),function(d){return d.regularrate;});
-      $("#regularRateSlider").slider({
-     	min:regularRateRange[0],
-     	max:regularRateRange[1],
-     	step:1,
-     	value: regularRateRange,
+     var staffData = data.groupByStaff.top(Infinity).sort(function(a, b){ return d3.ascending(a.key, b.key)});
+     $("#sel-filter-staff").val('').trigger("liszt:updated");
+	d3.select("#sel-filter-staff").selectAll("option").remove();
+	d3.select("#sel-filter-staff")
+                      .selectAll("option")
+                        .data(staffData)
+                        .enter()
+                        .append("option")
+                          .attr("value", function(d){return d.key})
+                          .text(function(d){return d.key});
+    $("#sel-filter-staff").chosen({max_selected_options:10});
+    $("#sel-filter-staff").chosen().change(function () {change()});
+	//$("#sel-filter-staff").val() != null ?  $("#operations").val($("#sel-operations").val().join(','));
+
+    $("#overtimeSlider").slider({
+     	min:0,
+     	max:1,
+     	step:0.01,
+     	value: [0,1],
      	tooltip:'hide'
      })
      .on('slide', function(ui){
-     	$( "#regularRateNum" ).text(commaNumFormat(ui.value[ 0 ]) + " - " + commaNumFormat(ui.value[ 1 ]) );
+     	$( "#overtimeNum" ).text(pctFormat(ui.value[ 0 ]) + " - " + pctFormat(ui.value[ 1 ]) );
      })
      .on('slideStop', function(ui){change()});
-     $('#regularRateSlider').slider('setValue', regularRateRange);
-     $( "#regularRateNum" ).text(commaNumFormat(regularRateRange[0]) + " - " + commaNumFormat(regularRateRange[1]));
+     $( "#overtimeNum" ).text("0%" + " - " + "100%");
+     $("#overtimeSlider").slider('setValue',[0,1]);
 
 //add resource type chart
      nv.addGraph(function() {  
@@ -196,7 +210,7 @@ function scheduleReady(error, schedule){
   			resourceTypeChart.yAxis.axisLabel("Count");
 		   resourceTypeChart.staggerLabels(true)
 		      //.staggerLabels(historicalBarChart[0].values.length > 8)
-		      resourceTypeChart.tooltips(true)
+		      //resourceTypeChart.tooltips(true)
 		    //  resourceTypeChart.showValues(true)
 		      resourceTypeChart.transitionDuration(250)
 		      ;
@@ -210,6 +224,28 @@ function scheduleReady(error, schedule){
 		  return resourceTypeChart;
 });
 
+// nv.addGraph(function() {  
+// 		   resourceTitleChart = nv.models.discreteBarChart();
+// 		  // resourceTypeChart.margin({left:20, bottom:20})
+// 		   resourceTitleChart.x(function(d) { return d.label })
+// 		   					.y(function(d) { return d.value })
+// 		   					.color(function(d){return 'steelblue'});
+
+//   			resourceTitleChart.yAxis.tickFormat(d3.format(',f0'));
+// 		   	resourceTitleChart.staggerLabels(true)
+// 		      //.staggerLabels(historicalBarChart[0].values.length > 8)
+// 		      //resourceTypeChart.tooltips(true)
+// 		    //  resourceTypeChart.showValues(true)
+// 		      resourceTitleChart.transitionDuration(250)
+// 		      ;
+
+// 		  d3.select('#resourceTitleChart svg')
+// 		      .datum(resourceTitleData)
+// 		      .call(resourceTitleChart);
+// 		  nv.utils.windowResize(resourceTitleChart.update);
+
+// 		  return resourceTitleChart;
+// });
     change();
 }
 
@@ -217,7 +253,8 @@ function change(){
 		 var filterOperation = $("#sel-filter-operations").val();
 		 var filterOrganization = $("#sel-filter-organizations").val();
 		 var filterStaffType = $("#sel-filter-stafftype").val();
-		 var filterRegularRate = $("#regularRateSlider").data('slider').getValue();
+		 var filterStaff =  $("#sel-filter-staff").val();
+		 //console.log(filterStaff)
 
 		 data.operation.filterAll();
 		 data.operation.filterExact(filterOperation);
@@ -225,9 +262,8 @@ function change(){
 		 filterOrganization == 0 ? data.organization.filterAll() : data.organization.filterExact(filterOrganization);
 		 data.stafftype.filterAll();
 		 filterStaffType == 0 ? data.stafftype.filterAll() : data.stafftype.filterExact(filterStaffType);
-		 data.regularrate.filterAll();
-		 data.regularrate.filterRange([filterRegularRate[0], filterRegularRate[1]+0.01]);
-
+		 data.staff.filterAll();
+		 filterStaff == null ? data.staff.filterAll() : data.staff.filterFunction(function(d){return filterStaff.indexOf(d)>-1;})
 		 getResourceData(); //draw table
 }
 
@@ -253,7 +289,11 @@ function getResourceData(){
 	  	d.longitude = +organizationByID[resourceByID[d.key][0].resourceorganization][0].longitude;
 	    d.resourcetype = d.values[0].resourcetype;
     	d.resourcename = resourceByID[d.key][0].resourcename;
+    	d.overtime_pct = d.costlabor==0 ? 0 : d.overtimesum/d.costlabor;
 	})
+
+	var filterOvertimeRate = $("#overtimeSlider").data('slider').getValue();
+	resource = resource.filter(function(d){return d.overtime_pct >= filterOvertimeRate[0] && d.overtime_pct <= filterOvertimeRate[1]});
 	drawStaffTable(resource);
 
 	//reset chart data
@@ -283,12 +323,21 @@ function getResourceData(){
 	    mapdata.push(obj);
 	    drawStaffMap(mapdata);
 
+		var latlon=[];
+		mapdata.forEach(function(d){
+		    var b = new L.LatLng(+d.latitude,+d.longitude);
+		    latlon.push(b);
+		})
+ 		lbounds= new L.LatLngBounds(latlon);
+  		staffMap.fitBounds(lbounds);
+  		staffMap.zoomOut();
+
 //update chart data
 	    resource.forEach(function(d){
     		resourceTypeData[0].values.forEach(function(s){
         		if (s.name == d.resourcetype){s.value++}
-    		})
-		})
+    		});
+		});
 		resourceTypeChart.update();
 
 		$("#staffChartSection").show();
@@ -543,12 +592,14 @@ function resetFilter(){
 	data.operation.filterAll();
 	data.organization.filterAll();
 	data.stafftype.filterAll();
-	data.regularrate.filterAll();
+	data.staff.filterAll();
 	var od = data.groupByOperation.top(Infinity).sort(function(a, b){ return d3.ascending(a.key, b.key)});
 	$("#sel-filter-operations").val(data.groupByOperation.top(1).key);
 	$("#sel-filter-organizations").val(0);
 	 $("#sel-filter-stafftype").val(0);
-	$('#regularRateSlider').slider('setValue', regularRateRange);
+	$('#overtimeSlider').slider('setValue', [0,1]);
+	$( "#overtimeNum" ).text("0%" + " - " + "100%");
+	$("#sel-filter-staff").val('').trigger("liszt:updated");
 	change();
 }
 

@@ -1,0 +1,2 @@
+scheduleid,resourceid,operationid,shiftstart,shiftid,costtravel,costlabor,cost_regular,cost_regular_night,cost_regular_sunday,cost_regular_sunday_night,cost_overtime,cost_overtime_night,cost_overtime_sunday_night
+3,955-57-7429,8,2013-05-07,3,660,426.56,0,426.56,0,0,0,0,200
