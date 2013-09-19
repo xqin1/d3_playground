@@ -358,9 +358,9 @@ function getResourceData(){
 			costCategoryChart.update();
 		}
 
-		$("#staffChartSection").show();
+		$("#staffChartSection").css("visibility", "visible");
 	}else{
-		$("#staffChartSection").hide();
+		$("#staffChartSection").css("visibility", "hidden");
 	}
 
 
@@ -374,7 +374,7 @@ function drawStaffTable(d){
   d3.select("#staffContents").html("");
   var content = "", ids=[];
   if (d.length>0){
-  	$("#staffDetailSection").show();
+  	$("#staffDetailSection").css("visibility", "visible");
 	  content += "<table id='tbl-recordDetails' class='table table-cellBorder table-hover table-striped tablesorter'><thead><tr><th><div class='sort-wrapper'>Name &nbsp;<span class='sort'></span></div></th><th><div class='sort-wrapper'>Organization &nbsp;<span class='sort'></span></div></th><th><div class='sort-wrapper'>Type &nbsp;<span class='sort'></span></div></th><th><div class='sort-wrapper'>Travel &nbsp;<span class='sort'></span></div></th><th><div class='sort-wrapper'>Labor &nbsp;<span class='sort'></span></div></th><th><div class='sort-wrapper'>Regular &nbsp;<span class='sort'></span></div></th><th class='text-right' style='padding-right: 20px'><div class='sort-wrapper'>Overtime &nbsp;<span class='sort'></span></div></th></tr></thead>";
 
 	    content += "<tbody>";
@@ -406,7 +406,7 @@ function drawStaffTable(d){
      //drawLMap(d);
 	}
 	else{
-		$("#staffDetailSection").hide();
+		$("#staffDetailSection").css("visibility", "hidden");
 	}
 }
 
