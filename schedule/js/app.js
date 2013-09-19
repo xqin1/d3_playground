@@ -15,7 +15,7 @@ var route = {
 var routeFeatureOnMap=null;
 var routePath;
 var operationDateRange = [];
-var resourceTypeChart;
+var resourceTypeChart, costCategoryChart;
 
 
 var staffMap = L.mapbox.map('staffMap', 'https://a.tiles.mapbox.com/v3/fcc.map-toolde8w.json?secure')
@@ -120,6 +120,7 @@ function scheduleReady(error, schedule){
 		d.cost_overtime = +d.cost_overtime;
 		d.cost_regular_night = +d.cost_regular_night;
 		d.cost_regular_sunday = +d.cost_regular_sunday;
+		d.cost_regular_sunday_night = +d.cost_regular_sunday_night;
 		d.cost_overtime_night = +d.cost_overtime_night;
 		d.cost_overtime_sunday_night = +d.cost_overtime_sunday_night;
 		d.resourcetype = resourceByID[d.resourceid][0].resourcetypeabbr;
@@ -224,28 +225,25 @@ function scheduleReady(error, schedule){
 		  return resourceTypeChart;
 });
 
-// nv.addGraph(function() {  
-// 		   resourceTitleChart = nv.models.discreteBarChart();
-// 		  // resourceTypeChart.margin({left:20, bottom:20})
-// 		   resourceTitleChart.x(function(d) { return d.label })
-// 		   					.y(function(d) { return d.value })
-// 		   					.color(function(d){return 'steelblue'});
+	nv.addGraph(function() {  
+			   costCategoryChart = nv.models.pieChart();
+			  costCategoryChart        
+			  		.x(function(d) { return d.key })
+			  		 .y(function(d) { return d.y })
+        			.color(d3.scale.category10().range())
+        			.showLegend(false);
 
-//   			resourceTitleChart.yAxis.tickFormat(d3.format(',f0'));
-// 		   	resourceTitleChart.staggerLabels(true)
-// 		      //.staggerLabels(historicalBarChart[0].values.length > 8)
-// 		      //resourceTypeChart.tooltips(true)
-// 		    //  resourceTypeChart.showValues(true)
-// 		      resourceTitleChart.transitionDuration(250)
-// 		      ;
+		      d3.select("#costCategoryChart svg")
+		          .datum(costByCategoryData)
+		        .transition().duration(1200)
+		          .attr('width', 350)
+		          .attr('height', 220)
+		          .call(costCategoryChart);
 
-// 		  d3.select('#resourceTitleChart svg')
-// 		      .datum(resourceTitleData)
-// 		      .call(resourceTitleChart);
-// 		  nv.utils.windowResize(resourceTitleChart.update);
+			  nv.utils.windowResize(costCategoryChart.update);
 
-// 		  return resourceTitleChart;
-// });
+			  return costCategoryChart;
+	});
     change();
 }
 
@@ -277,8 +275,9 @@ function getResourceData(){
 	    d.costlabor = d3.sum(d.values, function(s){return s.costlabor})
 	    d.cost_regular = d3.sum(d.values, function(s){return s.cost_regular})
 	    d.cost_regular_night = d3.sum(d.values, function(s){return s.cost_regular_night})
+	    d.cost_regular_sunday = d3.sum(d.values, function(s){return s.cost_regular_sundy})
 	    d.cost_regular_sunday_night = d3.sum(d.values, function(s){return s.cost_regular_sunday_night})
-	    d.regularsum = d.cost_regular + d.cost_regular_night + d.cost_regular_sunday_night;
+	    d.regularsum = d.cost_regular + d.cost_regular_night + d.cost_regular_sunday_night + d.cost_regular_sunday;
 	    d.cost_overtime = d3.sum(d.values, function(s){return s.cost_overtime})
 	    d.cost_overtime_night = d3.sum(d.values, function(s){return s.cost_overtime_night})
 	    d.cost_overtime_sunday_night = d3.sum(d.values, function(s){return s.cost_overtime_sunday_night})
@@ -299,6 +298,10 @@ function getResourceData(){
 	//reset chart data
 		resourceTypeData[0].values.forEach(function(s){
         		s.value=0;
+    	});
+	//reset chart data
+		costByCategoryData.forEach(function(s){
+        		s.y=0;
     	})
 
 	if (resource.length>0){
@@ -332,13 +335,24 @@ function getResourceData(){
   		staffMap.fitBounds(lbounds);
   		staffMap.zoomOut();
 
-//update chart data
+//update bar chart data
 	    resource.forEach(function(d){
     		resourceTypeData[0].values.forEach(function(s){
         		if (s.name == d.resourcetype){s.value++}
     		});
 		});
-		resourceTypeChart.update();
+		if (typeof resourceTypeChart !== "undefined"){
+		resourceTypeChart.update();}
+
+		//update bar
+		resource.forEach(function(d){
+    			costByCategoryData.forEach(function(c){
+        		c.y += d[c.name];
+    		})
+		});
+		if (typeof costCategoryChart != 'undefined'){
+			costCategoryChart.update();
+		}
 
 		$("#staffChartSection").show();
 	}else{

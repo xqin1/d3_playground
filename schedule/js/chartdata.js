@@ -147,6 +147,7 @@ var rateCategoryData = [
   }
 ];
 
+
 var totalCostByRateData = [ 
   {
     key: "Total Cost By Rate",
@@ -195,4 +196,49 @@ var totalCostByRateData = [
   }
 ];
 
+
+var costByCategoryData = [
+	{
+		"y" : 0,
+		"key" : "Regular",
+		"values" : [],
+		"name" : "cost_regular"
+	},
+	{
+		"y" : 0,
+		"key" : "Regular N",
+		"values" : [],
+		"name" : "cost_regular_night"
+	},
+		{
+			"y" : 0,
+		"key" : "Regular S",
+		"values" : [],
+		"name" : "cost_regular_sunday"
+	},
+	{
+		"y" : 0,
+		"key" : "Regular SN",
+		"values" : [],
+		"name" : "cost_regular_sunday_night"
+	},
+	{
+		"y" : 0,
+		"key" : "OT",
+		"values" : [],
+		"name" : "cost_overtime"
+	},
+	{
+		"y" : 0,
+		"key" : "OT N",
+		"values" : [],
+		"name" : "cost_overtime_night"
+	},
+	{
+		"y" : 0,
+		"key" : "OT SN",
+		"values" : [],
+		"name" : "cost_overtime_sunday_night"
+	}
+];
 

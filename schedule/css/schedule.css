@@ -168,4 +168,5 @@ overflow: auto;
   stroke-width: 3px;
 }
 
-#resourceTypeChart svg {width: 350px; height: 120px;   min-width: 200px; min-height: 200px;}
+#resourceTypeChart svg {width: 350px; height: 220px;   min-width: 200px; min-height: 100px;}
+#costCategoryChart svg {width: 350px; height: 220px;   min-width: 200px; min-height: 100px;}

@@ -8,8 +8,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>Schedule Optimizer</title>
-<meta name="description" content="Schedule Optimizer">
-<meta name="author" content="">
+<meta name="description" content="Resource Optimizer">
+<meta name="author" content="emprata">
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" ype="text/css" media="all" href="css/bootstrap.css">
 <link href="css/nv.d3.css" rel="stylesheet" type="text/css">
@@ -31,13 +31,16 @@
 <header>
     <div id="skip"> <a class="skipLink visuallyhidden focusable" href="#skiptarget1" id="skip-main">Skip to main content</a> <a class="skipLink visuallyhidden focusable" href="#skiptarget2" id="skip-side">Skip to supporting information</a> <a class="skipLink visuallyhidden focusable" href="#skiptarget3" id="skip-foot">Skip to footer and contact information</a> </div>
     <div id="banner" class="container" style="margin-left: 0; margin-right: 0;"> 
-        <h1>Schedule Optimization</h1>
+        <h1>Resource Optimizer</h1>
+        <a class="fcc-logo pull-right" href="http://www.emprata.com"> <img src="img/emprata_logo_low.png" style="margin-right: 20px;
+margin-top: 20px;
+height: 35px;" alt="Go to Emprata LLC homepage at www.emprata.com" title="Go to the Emprata LLC homepage at www.emprata.com"> </a>
     </div>
     <div class="navbar">
         <div class="navbar-inner">
             <ul class="nav" id="myTab">
                 <li class='active'><a href="#scheduleContent" data-toggle="tab">View Schedule</a></li>
-                <li ><a href="#newScheduleContent" data-toggle="tab">Create Schedule</a></li>
+                <li ><a href="#newScheduleContent" data-toggle="tab">Generate Schedule</a></li>
                 <li><a href="#newOperationContent" data-toggle="tab">Create Operation</a></li>
             </ul>
             <!--<form class="navbar-search pull-right">
@@ -70,7 +73,7 @@
             </div>
             <br>
             <div id="scheduleVis">
-                <h3>schedule Filters</h3>
+                <h3>Schedule Filters</h3>
                 <div class="row-fluid divider">
                         <div class="span3"> <span class="slider-label">Operations:</span>
                             <div><select id="sel-filter-operations"></select></div>
@@ -78,10 +81,10 @@
                         <div class="span2"> <span class="slider-label">Organizations:</span>
                             <div><select id="sel-filter-organizations"></select></div>
                         </div>
-                        <div class="span2"> <span class="slider-label">Staff Name:</span>
-                            <div><select id="sel-filter-staff" class="chzn-select" multiple></select></div>
+                        <div class="span2"> <span class="slider-label">Resource Name:</span>
+                            <div><select id="sel-filter-staff" data-placeholder="Select Resource Name" class="chzn-select" multiple></select></div>
                         </div>
-                        <div class="span2"> <span class="slider-label">Staff Type:</span>
+                        <div class="span2"> <span class="slider-label">Resource Type:</span>
                             <div><select id="sel-filter-stafftype"></select></div>
                         </div>
                         <div class="span2"> <span class="slider-label">Overtime Pct:</span> <span id="overtimeNum" class="slider-range"></span>
@@ -95,12 +98,15 @@
                              <div id="resourceTypeChart" class="span3"> <span class="slider-label">Resource Type:</span>
                                 <svg></svg>
                             </div>
+                            <div id="costCategoryChart" class="span3"> <span class="slider-label">Cost Category:</span>
+                                <svg></svg>
+                            </div>
                     </div>
                 </div>
                 <div id="staffDetailSection">
                     <div class="row-fluid">
                         <div class="span6">
-                            <h3>Staff</h3>
+                            <h3>Resource List</h3>
 <!--                             <p>Click a table row and the map will zoom to the selected  location.</p> -->
                             <div id="staffContents"></div>
                         </div>
@@ -129,7 +135,7 @@
         <div id="newOperationContent" class="tab-pane active">
             <div class="row">
                 <div class="span8">
-                    <h3>Create New Event Schedule</h3>
+                    <h3>Create A New Operation</h3>
                     <div class="well">
                         <form id="frm-runScheduler" class="form-horizontal" action="dummy.html" method="post" enctype="multipart/form-data" target="submitResults">
                             <fieldset>
@@ -150,7 +156,7 @@
                                         <button id="btn-verifyAddress" type="button" class="btn btn-primary btn-mini" role="button" data-toggle="modal" data-target="#dlg-verifyAddr">Verify Event Location</button>                                     
                                     </div>
                                     <br>
-                                    <label class="control-label" for="scheduleDates">Schedule dates:</label>
+                                    <label class="control-label" for="scheduleDates">Schedule Dates:</label>
                                     <div class="controls">
                                         <div class="input-prepend">
                                              <span class="add-on"><i class="glyphicon glyphicon-calendar icon-calendar"></i></span><input type="text" style="width: 200px" name="scheduleDates" id="scheduleDates" value="" /> 
@@ -188,7 +194,7 @@
                         <div id="dlg-verifyAddr" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="hd-dlgVerifyAddr" aria-hidden="true">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h3 id="hd-dlgVerifyAddr">New Event</h3>
+                                <h3 id="hd-dlgVerifyAddr">New Operation</h3>
                                 <div id="locInfo"></div>
                             </div>
                             <div class="modal-body">
@@ -205,14 +211,14 @@
         <div id="newScheduleContent" class="tab-pane active">
             <div class="row">
                 <div class="span8">
-                    <h3>Create Operation Schedule</h3>
+                    <h3>Generate Schedule</h3>
                         <div class="well">
                             <form id="frm-runCurrentScheduler" class="form-horizontal" action="dummy.html" method="post" enctype="multipart/form-data" target="submitResults">
                                 <fieldset>
                                     <div class="control-group">
                                         <label class="control-label" for="sel-operations">Existing Operatons:</label>
                                         <div class="controls">
-                                            <select id = "sel-operations" data-placeholder="" class="chzn-select" multiple>
+                                            <select id = "sel-operations" data-placeholder="Select Operations" class="chzn-select" multiple>
                                             </select>                                    
                                         </div>
                                         <br>
@@ -222,7 +228,7 @@
                                             <input type="radio" name="optimizationType" value="Minimum Deviation"> Minimum Deviation<br>
                                         </div>
                                         <br>
-                                        <h4>Constrains</h4>
+                                        <h4>Constraints</h4>
                                         <label class="control-label" for="maxOrganizationNum">Max Org. Allocation:</label>
                                         <div class="controls">
                                             <input type="text" style="width: 100px" name="maxOrganizationNum" id="maxOrganizationNum" value="" />                                      
@@ -233,10 +239,25 @@
                                             <input type="text" style="width: 100px" name="demandMultiplier" id="demandMultilier" value="" />                                      
                                         </div>
                                         <br>
-                                        <label class="control-label" for="sel-excludedOrg">Exlude Organization:</label>
+                                        <label class="control-label" for="sel-excludedOrg">Organization to Exclude:</label>
                                         <div class="controls">
-                                            <select id = "sel-excludedOrg" data-placeholder="" class="chzn-select" multiple>
+                                            <select id = "sel-excludedOrg" data-placeholder="Select Organizations" class="chzn-select" multiple>
                                             </select>                                    
+                                        </div>
+                                        <br>
+                                        <label class="control-label" for="6pmTo2pm">6 AM - 2 PM(%):</label>
+                                        <div class="controls">
+                                            <input type="text" style="width: 100px" name="6pmTo2pm" id="6pmTo2pm" value="" />                                      
+                                        </div>
+                                        <br>
+                                        <label class="control-label" for="2pmTo10pm">2 PM - 10 PM(%):</label>
+                                        <div class="controls">
+                                            <input type="text" style="width: 100px" name="2pmTo10pm" id="2pmTo10pm" value="" />                                      
+                                        </div>
+                                        <br>
+                                        <label class="control-label" for="10pmTo6am">10 PM - 6 AM(%):</label>
+                                        <div class="controls">
+                                            <input type="text" style="width: 100px" name="10pmTo6pm" id="10pmTo6pm" value="" />                                      
                                         </div>
 
                                         <input type="text" style="width: 100px; display:none" name="excludedOrg" id="excludedOrg" value="" />
@@ -246,14 +267,19 @@
                                 </fieldset>
                             </form>
                         <div>
-                        <button id="btn-runCurrentScheduler" type="button" class="btn btn-primary btn-medium" role="button">Run Schecule Optimizer</button>
+                        <button id="btn-runCurrentScheduler" type="button" class="btn btn-primary btn-medium" role="button">Run Schedule Optimizer</button>
 
                 </div>
             </div>
         </div>
     </div>
 </div></div>
+</div>
+</div>
 <footer role="contentinfo"> <a tabindex="-1" class="visuallyhidden" id="skiptarget3"></a>
+    <div class="container" style="margin-left: 20px; margin-right: 0;">
+        <div id=""> &copy; 2013, Copyright Emprata LLC, All rights reserved.</div>
+    </div>
 </footer>
 <iframe name="submitResults" id="submitResults" style="display: none;"></iframe>
 <iframe name="submitCurrentResults" id="submitCurrentResults" style="display: none;"></iframe>
@@ -263,7 +289,7 @@
 <script src="js/libs/bootstrap.js"></script> 
 <script src="js/libs/jquery-ui.js"></script>  
 <script src="js/libs/d3.v3.min.js"></script> 
-<script src="js/libs/nv.d3.min.js"></script>
+<script src="js/libs/nv.d3.js"></script>
 <script src="js/libs/queue.v1.min.js"></script> 
 <script src="js/libs/crossfilter.min.js"></script>  
 <script src="js/libs/jquery.dataTables.min.js"></script> 
@@ -309,7 +335,7 @@
         $('#frm-runScheduler').submit();                  
       });
       $('#frm-runScheduler').submit(function(e) {
-                    alert("Schedule data sent to Solver. Results will be available shortly. " + 
+                    console.log("Schedule data sent to Solver. Results will be available shortly. " + 
                         "<br> parameters: " + $('#frm-runScheduler').serialize());
                     //enable this section after integration
                     // $("#submitResults").load(function(){
@@ -334,7 +360,7 @@
         $('#frm-runCurrentScheduler').submit();                  
       });
       $('#frm-runCurrentScheduler').submit(function(e) {
-                    alert("Schedule data sent to Solver. Results will be available shortly. " + 
+                    console.log("Schedule data sent to Solver. Results will be available shortly. " + 
                         "<br> parameters: " + $('#frm-runCurrentScheduler').serialize());
                     //enable this section after integration
                     // $("#submitResults").load(function(){

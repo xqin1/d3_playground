@@ -1,3 +1,131 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US">
-</html>
+<meta charset="utf-8">
+
+<link href="css/nv.d3.css" rel="stylesheet" type="text/css">
+
+<style>
+
+body {
+  overflow-y:scroll;
+  margin: 0;
+  padding: 0;
+}
+
+svg {
+  overflow: hidden;
+}
+
+div {
+  border: 0;
+  margin: 0;
+}
+
+/*
+#offsetDiv {
+  margin-left: 100px;
+  margin-top: 100px;
+}
+*/
+
+
+#test1 {
+  margin: 0;
+}
+
+#test1 svg {
+  height: 500px;
+  width:200px;
+}
+
+</style>
+
+<body>
+
+<div id="offsetDiv">
+  <div id="test1" class='with-3d-shadow with-transitions'>
+    <svg></svg>
+  </div>
+</div>
+
+<script src="js/libs/d3.v3.min.js"></script>
+<!--<script src="../lib/fisheye.js"></script>-->
+<script src="js/libs/nv.d3.min.js"></script>
+
+<script>
+
+data = [
+	{
+	"key":"regugar",
+	"values":[{'series':0,'shape':"circle",'size':0.9912488760892302,'x':'10-01-2013','y':2},
+			{'series':0,'shape':"circle",'size':0.9912488760892302,'x':'10-01-2013','y':1}]
+	 },
+	{
+	"key": "regugar overtime",
+	"values":[{'series': 1,'shape': "circle",'size': 0.9912488760892302,'x': '10-02-2013','y': 2}]
+	}
+];
+var dateFormat = d3.time.format("%m-%d-%Y");
+data.forEach(function(d){
+	d.values.forEach(function(v){
+		v.x = dateFormat.parse(v.x).getTime();
+	})
+})
+//Format A
+var chart;
+nv.addGraph(function() {
+  chart = nv.models.scatterChart()
+                //.showDistX(true)
+                //.showDistY(true)
+                .useVoronoi(true)
+                .color(d3.scale.category10().range())
+                .transitionDuration(300)
+                ;
+
+  //chart.xAxis.tickFormat(d3.format('.02f'));
+    chart.xAxis
+      .tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) });
+  chart.yAxis.tickFormat(d3.format('.02f'));
+  chart.tooltipContent(function(key) {
+      return '<h2>' + key + '</h2>';
+  });
+
+  d3.select('#test1 svg')
+      .datum(data)
+      .call(chart);
+
+  nv.utils.windowResize(chart.update);
+
+  chart.dispatch.on('stateChange', function(e) { ('New State:', JSON.stringify(e)); });
+
+  return chart;
+});
+
+
+
+function randomData(groups, points) { //# groups,# points per group
+  var data = [],
+      shapes = ['circle', 'cross', 'triangle-up', 'triangle-down', 'diamond', 'square'],
+      random = d3.random.normal();
+
+  for (i = 0; i < groups; i++) {
+    data.push({
+      key: 'Group ' + i,
+      values: []
+    });
+
+    for (j = 0; j < points; j++) {
+      data[i].values.push({
+        x: random(), 
+        y: random(), 
+        size: Math.random(), 
+        shape: shapes[j % 6]
+      });
+    }
+  }
+console.log(data);
+  return data;
+}
+
+
+
+</script>
