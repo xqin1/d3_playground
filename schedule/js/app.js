@@ -172,8 +172,10 @@ function scheduleReady(error, schedule){
      $("#sel-filter-stafftype").prepend('<option value="0">Select All</option>');
 
      var staffData = data.groupByStaff.top(Infinity).sort(function(a, b){ return d3.ascending(a.key, b.key)});
-     $("#sel-filter-staff").val('').trigger("liszt:updated");
-	d3.select("#sel-filter-staff").selectAll("option").remove();
+          $("#sel-filter-staff").val('').trigger("liszt:updated");
+     d3.select("#sel-filter-staff").selectAll("option").remove();
+
+
 	d3.select("#sel-filter-staff")
                       .selectAll("option")
                         .data(staffData)
@@ -183,6 +185,7 @@ function scheduleReady(error, schedule){
                           .text(function(d){return d.key});
     $("#sel-filter-staff").chosen({max_selected_options:10});
     $("#sel-filter-staff").chosen().change(function () {change()});
+     $("#sel-filter-staff").val('').trigger("liszt:updated");
 	//$("#sel-filter-staff").val() != null ?  $("#operations").val($("#sel-operations").val().join(','));
 
     $("#overtimeSlider").slider({
@@ -236,8 +239,8 @@ function scheduleReady(error, schedule){
 		      d3.select("#costCategoryChart svg")
 		          .datum(costByCategoryData)
 		        .transition().duration(1200)
-		          .attr('width', 350)
-		          .attr('height', 220)
+		          //.attr('width', 350)
+		          //.attr('height', 220)
 		          .call(costCategoryChart);
 
 			  nv.utils.windowResize(costCategoryChart.update);
@@ -554,7 +557,8 @@ function highlight(selectedRow){
   d3.selectAll(".pulse_circle").remove();
   d3.selectAll(".route").remove();
   if (staffTableRowSelected){
-    staffMap.setView([39.5, -98.5], 4);
+      		staffMap.fitBounds(lbounds);
+  		//staffMap.zoomOut();
   }
   else{
       selectedRow.classed('tablerowselected', true);
