@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<div id="interactiveFreeFormMain">
+<style type="text/css">
+
+#interactiveAB h1,
+#interactiveABC h1 {
+  margin-top: 20px;
+}
+
+</style>
+<!--[if lte IE 8]>
+<img src="http://graphics8.nytimes.com/newsgraphics/2013/09/24/health-care-premiums/fa87fdc4145b4667df3cf9db68a19325f19a884d/fallback.png" width="970" height="844" style="margin:40px 0 20px 0;">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<style>
+
+.g-table {
+  margin: 6px 10px 20px 10px;
+  font: 11px/15px sans-serif;
+  -webkit-text-size-adjust: none;
+}
+
+.g-table-head {
+  font: 13px/17px sans-serif;
+}
+
+.g-table-head .g-table-cell {
+  height: 70px;
+  cursor: pointer;
+}
+
+.g-table-row:after {
+  display: block;
+  content: "";
+  clear: left;
+}
+
+.g-table-body {
+  margin-top: 6px;
+  position: relative;
+}
+
+.g-table-head,
+.g-table-body {
+  padding-bottom: 6px;
+  border-bottom: solid 1px #ccc;
+}
+
+.g-table-body .g-table-row {
+  position: absolute;
+  width: 100%;
+}
+
+.g-table-cell {
+  float: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.g-table-bar,
+.g-table-label {
+  -webkit-transition: width .5s ease;
+  -moz-transition: width .5s ease;
+  -ms-transition: width .5s ease;
+  -o-transition: width .5s ease;
+  transition: width .5s ease;
+}
+
+.g-table-body .g-table-cell {
+  height: 19px;
+  line-height: 19px;
+}
+
+.g-table-body .g-table-row {
+  -webkit-transition: top .5s ease;
+  -moz-transition: top .5s ease;
+  -ms-transition: top .5s ease;
+  -o-transition: top .5s ease;
+  transition: top .5s ease;
+}
+
+.g-table-bar {
+  position: absolute;
+  height: 100%;
+  background: rgba(120,120,120,.5);
+}
+
+.g-table-label {
+  position: absolute;
+  right: 6px;
+}
+
+.g-table-cell-familyAfter .g-table-label,
+.g-table-cell-individualAfter .g-table-label {
+  right: -4px;
+  width: 0;
+  color: #999;
+}
+
+.g-table-body .g-table-row:hover .g-table-bar {
+  height: 18px;
+  border-bottom: solid 1px rgba(0,0,0,.4);
+}
+
+.g-table-body .g-table-row:hover,
+.g-table-body .g-table-row:hover .g-table-cell-state,
+.g-table-body .g-table-row:hover .g-table-label,
+.g-table-body-average,
+.g-table-body-average .g-table-label {
+  font-weight: bold;
+  color: #000;
+}
+
+.g-table-body:not(:last-of-type) {
+  border-bottom: dashed 1px #ccc;
+}
+
+.g-table-column-ascending:after,
+.g-table-column-descending:after {
+  padding-left: 4px;
+}
+
+.g-table-column-ascending:after {
+  content: "\0025B2";
+}
+
+.g-table-column-descending:after {
+  content: "\0025BC";
+}
+
+.g-table-cell {
+  width: 140px;
+}
+
+.g-table-cell-state {
+  font-size: 12px;
+  width: 210px;
+}
+
+.g-table-cell-familyBefore {
+  width: 320px;
+}
+
+.g-table-cell-individualBefore .g-table-bar,
+.g-table-cell-familyBefore .g-table-bar {
+  background: rgba(185,185,185,.5);
+}
+
+.g-instruction {
+  margin: 34px 10px 0 0;
+  font: oblique 11px sans-serif;
+  color: #aaa;
+  text-align: right;
+}
+
+</style>
+<div class="g-graphic">
+<div class="g-instruction">
+Click a column header to sort.
+</div>
+<div class="g-table">
+<div class="g-table-head">
+<div class="g-table-row">
+<div data-key="state" class="g-table-cell" style="width:210px;">
+<div class="g-table-column" style="position:absolute;bottom:0;">State</div>
+</div>
+<div data-key="familyBefore" class="g-table-cell" style="width:450px;border-top:solid 1px #000;margin-right:10px;">
+<div class="g-table-column" style="font-size:13px;line-height:32px;">Monthly premiums for a <b>family of four</b> with an income of &hellip;</div>
+<div style="width:320px;float:left;"><b>&hellip; more than $94,200 a year</b>,<br/>ineligible for subsidies</div>
+<div><b>$50,000 a year</b><br/>and getting subsidies</div>
+</div>
+<div data-key="individualBefore" class="g-table-cell" style="width:280px;border-top:solid 1px #000;">
+<div class="g-table-column" style="font-size:13px;line-height:32px;">A <b>27-year-old individual</b> who makes &hellip;</div>
+<div style="width:140px;float:left;"><b>&hellip; more than<br>$45,960 a year</b></div>
+<div><b>$25,000 a year</b><br>and getting subsidies</div>
+</div>
+</div>
+</div>
+<div class="g-table-body g-table-body-average"></div>
+<div class="g-table-body g-table-body-states"></div>
+</div>
+</div>
+
+<script src="js/d3.v3.3.5.min.js"></script>
+<script>
+
+var rowHeight = 20;
+
+var columns = [
+  "familyBefore",
+  "familyAfter",
+  "individualBefore",
+  "individualAfter"
+];
+
+var sortKey = "familyBefore",
+    sortOrder = d3.ascending;
+
+var formatCurrency = d3.format("$,.0f"),
+    formatNumber = d3.format(",.0f");
+
+var x = d3.scale.linear()
+    .domain([0, 1300])
+    .range([0, 320]);
+
+//d3.tsv("http://graphics8.nytimes.com/newsgraphics/2013/09/24/health-care-premiums/fa87fdc4145b4667df3cf9db68a19325f19a884d/data.tsv", type, function(error, states) {
+  d3.tsv("data/nyt_healthcare.tsv", type, function(error, states) {
+
+  var averageRow = d3.select(".g-table-body-average")
+      .style("height", rowHeight + "px")
+    .append("div")
+      .datum(states.pop())
+      .attr("class", "g-table-row");
+
+  var stateRow = d3.select(".g-table-body-states")
+      .style("height", states.length * rowHeight + "px")
+    .selectAll(".g-table-row")
+      .data(states.sort(function(a, b) { return sortOrder(a[sortKey], b[sortKey]); }))
+    .enter().append("div")
+      .attr("class", "g-table-row")
+      .style("top", function(d, i) { return i * rowHeight + "px"; });
+
+  var row = d3.selectAll(".g-table-body .g-table-row");
+
+  row.append("div")
+      .attr("class", "g-table-cell g-table-cell-state")
+      .text(function(d) { return d.state; });
+
+  columns.forEach(function(c) {
+    row.append("div")
+        .attr("class", "g-table-cell g-table-cell-" + c)
+      .append("div")
+        .datum(function(d) { return d[c]; })
+        .attr("class", "g-table-bar")
+      .append("div")
+        .attr("class", "g-table-label")
+        .text(function(d, i) { return (i ? formatNumber : formatCurrency)(d); });
+  });
+
+  var bar = row.selectAll(".g-table-bar")
+      .style("width", 0);
+
+  row.transition()
+      .delay(function(d, i) { return i * 8; })
+    .selectAll(".g-table-bar")
+      .each("start", function(d) { this.style.width = x(d) + "px"; });
+
+  var columnLabel = d3.selectAll(".g-table-head .g-table-cell")
+      .datum(function() { return this.getAttribute("data-key"); })
+      .on("click", clicked)
+    .select(".g-table-column")
+      .classed("g-table-column-" + (sortOrder === d3.ascending ? "ascending" : "descending"), function(d) { return d === sortKey; });
+
+  function clicked(key) {
+    d3.event.preventDefault();
+
+    columnLabel
+        .classed("g-table-column-" + (sortOrder === d3.ascending ? "ascending" : "descending"), false);
+
+    if (sortKey === key) sortOrder = sortOrder === d3.ascending ? d3.descending : d3.ascending;
+    else sortKey = key;
+
+    states
+        .sort(function(a, b) { return sortOrder(a[sortKey], b[sortKey]); })
+        .forEach(function(d, i) { d.index = i; });
+
+    columnLabel
+        .classed("g-table-column-" + (sortOrder === d3.ascending ? "ascending" : "descending"), function(d) { return d === sortKey; });
+
+    stateRow.transition()
+        .delay(function(d) { return d.index * 8; })
+        .each("start", function(d) { return this.style.top = d.index * rowHeight + "px"; });
+  }
+});
+
+function type(d) {
+  d.familyBefore = +d.familyBefore;
+  d.familyAfter = +d.familyAfter;
+  d.individualBefore = +d.individualBefore;
+  d.individualAfter = +d.individualAfter;
+  return d;
+}
+
+</script>
